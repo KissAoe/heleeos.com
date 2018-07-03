@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.heleeos.blog.dao.BlogTypeMapper">
+
+  <sql id="Base_Column_List">id, type_module, type_name, type_count</sql>
+    
+  <insert id="insert" parameterType="com.heleeos.blog.dto.BlogType" keyProperty="id">
+    insert into t_blog_type (type_module, type_name, type_count)
+    values (#{typeModule}, #{typeName}, #{typeCount})
+  </insert>
+  
+  <update id="update" parameterType="com.heleeos.blog.dto.BlogType">
+    update t_blog_type set type_module = #{typeModule}, type_name   = #{typeName}, type_count  = #{typeCount} where id = #{id}
+  </update>
+  
+  <select id="get" resultType="com.heleeos.blog.dto.BlogType">
+    select  <include refid="Base_Column_List" /> from t_blog_type where id = #{id} limit 1
+  </select>
+  
+  <select id="getList" resultType="com.heleeos.blog.dto.BlogType">
+    select  <include refid="Base_Column_List" /> from t_blog_type
+    <if test="filterZero">
+      where type_count > 0 order by type_count desc
+    </if>
+  </select>
+</mapper>
