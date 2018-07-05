@@ -108,20 +108,7 @@
                 </Row>
                 <Row>
                     <Card :padding="0">
-                        <p slot="title" class="card-title">
-                            <Icon type="map"></Icon>
-                            今日服务调用地理分布
-                        </p>
-                        <div class="map-con">
-                            <Col span="10">
-                                <map-data-table :cityData="cityData" height="281" :style-obj="{margin: '12px 0 0 11px'}"></map-data-table>
-                            </Col>
-                            <Col span="14" class="map-incon">
-                                <Row type="flex" justify="center" align="middle">
-                                    <home-map :city-data="cityData"></home-map>
-                                </Row>
-                            </Col>
-                        </div>
+                        <Table border :columns="blogColumns" :data="blogData" :loading="blogLoading"></Table>
                     </Card>
                 </Row>
             </Col>
@@ -193,30 +180,21 @@ export default {
         return {
             toDoList: [
                 {
-                    title: '去iView官网学习完整的iView组件'
-                },
-                {
-                    title: '去iView官网学习完整的iView组件'
-                },
-                {
-                    title: '去iView官网学习完整的iView组件'
-                },
-                {
-                    title: '去iView官网学习完整的iView组件'
-                },
-                {
-                    title: '去iView官网学习完整的iView组件'
+                    title: '待做事项'
                 }
             ],
             count: {
-                createUser: 496,
-                visit: 3264,
-                collection: 24389305,
-                transfer: 39503498
+                createUser: 123,
+                visit: 567,
+                collection: 456,
+                transfer: 890
             },
             cityData: cityData,
             showAddNewTodo: false,
-            newToDoItemValue: ''
+            newToDoItemValue: '',
+            blogLoading: true,
+            blogData: [],
+            blogColumns: []
         };
     },
     computed: {

@@ -1,6 +1,6 @@
 <style lang="less">
-    @import '../../../styles/common.less';
-    @import './work-flow.less';
+    @import '../../styles/common.less';
+    @import './blog-flow.less';
 </style>
 
 <template>

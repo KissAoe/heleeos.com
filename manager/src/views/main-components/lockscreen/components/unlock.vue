@@ -51,7 +51,7 @@ export default {
     },
     methods: {
         validator () {
-            return true; // 你可以在这里写密码验证方式，如发起ajax请求将用户输入的密码this.password与数据库用户密码对比
+            return this.password == '123456';
         },
         handleClickAvator () {
             this.avatorLeft = '-180px';
@@ -59,14 +59,16 @@ export default {
             this.$refs.inputEle.focus();
         },
         handleUnlock () {
-            if (this.validator()) {
+            if(this.password.length == 0) {
+                this.$Message.error('请输入密码，解锁密码等同于登录密码');
+            } else if (this.validator()) {
                 this.avatorLeft = '0px';
                 this.inputLeft = '400px';
                 this.password = '';
                 Cookies.set('locking', '0');
                 this.$emit('on-unlock');
             } else {
-                this.$Message.error('密码错误,请重新输入。如果忘了密码，清除浏览器缓存重新登录即可，这里没有做后端验证');
+                this.$Message.error('密码错误,请重新输入。');
             }
         },
         unlockMousedown () {

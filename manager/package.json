@@ -1,5 +1,5 @@
 {
-  "name": "网站管理端",
+  "name": "manager",
   "description": "基于iView编写的管理端",
   "main": "index.js",
   "scripts": {
@@ -27,6 +27,7 @@
     "iview-area": "^1.5.16",
     "js-cookie": "^2.2.0",
     "rasterizehtml": "^1.2.4",
+    "showdown": "^1.8.6",
     "simplemde": "^1.11.2",
     "sortablejs": "^1.7.0",
     "tinymce": "^4.7.4",
@@ -73,7 +74,6 @@
     "url-loader": "^0.6.2",
     "vue-hot-reload-api": "^2.2.4",
     "vue-html-loader": "^1.2.3",
-    "vue-i18n": "^5.0.3",
     "vue-loader": "^13.7.0",
     "vue-style-loader": "^3.0.3",
     "vue-template-compiler": "^2.5.13",
