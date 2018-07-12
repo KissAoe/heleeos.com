@@ -2,77 +2,119 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.heleeos.blog.dao.BlogMapper">
     <sql id="blog_base_column_list">
-        id, blog_title, display_url, blog_summary, create_time, update_time, manager_id,
-        blog_type, read_count, blog_tags, content_type, blog_state, sort_index
+        id, blog_title, display_url, blog_summary, create_time, update_time, manager_id, blog_type, read_count, blog_tags, content_type, blog_state, sort_index
     </sql>
-    
     <sql id="blog_all_column_list">
-         <include refid="blog_base_column_list"/>, blog_content
+        <include refid="blog_base_column_list"/>, blog_content
     </sql>
-
-    <insert id="insert" parameterType="com.heleeos.blog.dto.Blog" keyProperty="id">
-        insert into t_blog (blog_title, display_url, blog_summary, create_time, update_time, manager_id, blog_type, read_count, blog_tags, content_type, blog_state, sort_index, blog_content)
-        values (#{blogTitle}, #{displayURL}, #{blogSummary}, #{createTime}, #{updateTime}, #{managerId}, #{blogType}, #{readCount}, #{blogTags}, #{contentType}, #{blogState}, #{sortIndex}, #{blogContent})
+    <insert id="insert" parameterType="com.heleeos.blog.dto.Blog">
+        insert into t_blog (id,           blog_title,   display_url,
+                            blog_summary, create_time,  update_time,
+                            manager_id,   blog_type,    read_count,
+                            blog_tags,    content_type, blog_state,
+                            sort_index,   blog_content)
+        values (#{id,jdbcType=INTEGER},          #{blogTitle,jdbcType=VARCHAR},   #{displayUrl,jdbcType=VARCHAR},
+                #{blogSummary,jdbcType=VARCHAR}, CURRENT_TIMESTAMP,               CURRENT_TIMESTAMP,
+                #{managerId,jdbcType=INTEGER},   #{blogType,jdbcType=INTEGER},    #{readCount,jdbcType=INTEGER},
+                #{blogTags,jdbcType=VARCHAR},    #{contentType,jdbcType=TINYINT}, #{blogState,jdbcType=TINYINT},
+                #{sortIndex,jdbcType=TINYINT},   #{blogContent,jdbcType=LONGVARCHAR})
     </insert>
-    
     <update id="update" parameterType="com.heleeos.blog.dto.Blog">
-        update t_blog set
-        blog_title = #{blogTitle}, display_url = #{displayURL}, blog_summary = #{blogSummary}, create_time = #{createTime},
-        update_time = #{updateTime}, manager_id = #{managerId}, blog_type = #{blogType}, read_count = #{readCount},
-        blog_tags = #{blogTags}, content_type = #{contentType}, blog_state = #{blogState}, sort_index = #{sortIndex},
-        blog_content = #{blogContent} where id = #{id}
+        update t_blog
+        <set>
+            <if test="blogTitle != null">
+                blog_title = #{blogTitle,jdbcType=VARCHAR},
+            </if>
+            <if test="displayUrl != null">
+                display_url = #{displayUrl,jdbcType=VARCHAR},
+            </if>
+            <if test="blogSummary != null">
+                blog_summary = #{blogSummary,jdbcType=VARCHAR},
+            </if>
+            <if test="managerId != null">
+                manager_id = #{managerId,jdbcType=INTEGER},
+            </if>
+            <if test="blogType != null">
+                blog_type = #{blogType,jdbcType=INTEGER},
+            </if>
+            <if test="readCount != null">
+                read_count = #{readCount,jdbcType=INTEGER},
+            </if>
+            <if test="blogTags != null">
+                blog_tags = #{blogTags,jdbcType=VARCHAR},
+            </if>
+            <if test="contentType != null">
+                content_type = #{contentType,jdbcType=TINYINT},
+            </if>
+            <if test="blogState != null">
+                blog_state = #{blogState,jdbcType=TINYINT},
+            </if>
+            <if test="sortIndex != null">
+                sort_index = #{sortIndex,jdbcType=TINYINT},
+            </if>
+            <if test="blogContent != null">
+                blog_content = #{blogContent,jdbcType=LONGVARCHAR},
+            </if>
+            <if test="true">
+                update_time = CURRENT_TIMESTAMP,
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
     </update>
-    
+    <update id="addCountByUrl" parameterType="com.heleeos.blog.dto.Blog">
+        update t_blog set read_count = read_count + 1, update_time = CURRENT_TIMESTAMP
+        where display_url = #{displayUrl,jdbcType=VARCHAR}
+    </update>
     <select id="get" resultType="com.heleeos.blog.dto.Blog">
-        select <include refid="blog_all_column_list" /> from t_blog where id = #{id} limit 1
+        select <include refid="blog_all_column_list" /> from t_blog
+        <where>
+            <if test="id != null">
+                AND id = #{id,jdbcType=INTEGER}
+            </if>
+            <if test="blogTitle != null">
+                AND blog_title = #{blogTitle,jdbcType=VARCHAR}
+            </if>
+            <if test="displayUrl != null">
+                AND display_url = #{displayUrl,jdbcType=VARCHAR}
+            </if>
+            <if test="managerId != null">
+                AND manager_id = #{managerId,jdbcType=INTEGER}
+            </if>
+            <if test="blogType != null">
+                AND blog_type = #{blogType,jdbcType=INTEGER}
+            </if>
+            <if test="blogState != null">
+                AND blog_state = #{blogState,jdbcType=TINYINT}
+            </if>
+        </where> limit 1
     </select>
-    
-    <select id="getByURL" resultType="com.heleeos.blog.dto.Blog">
-        select <include refid="blog_all_column_list" /> from t_blog where display_url = #{url} limit 1
-    </select>
-    
     <select id="getList" resultType="com.heleeos.blog.dto.Blog">
         select <include refid="blog_base_column_list" /> from t_blog
-        where 1=1
-            <if test="type != null">
-                and blog_type = #{type}
+        <where>
+            <if test="blog.managerId != null">
+                AND manager_id = #{blog.managerId,jdbcType=INTEGER}
             </if>
-            <if test="state != null">
-                and blog_state = #{state}
+            <if test="blog.blogType != null">
+                AND blog_type = #{blog.blogType,jdbcType=INTEGER}
             </if>
-            <if test="tags != null">
-                and blog_tags like "%${tags}%"
+            <if test="blog.blogState != null">
+                AND blog_state = #{blog.blogState,jdbcType=TINYINT}
             </if>
+        </where>
         order by sort_index desc, create_time desc limit #{index}, #{rows}
     </select>
-    
     <select id="getCount" resultType="java.lang.Integer">
-        select count(0) from t_blog 
-        where 1=1
-            <if test="type != null">
-                and blog_type = #{type}
+        select count(0) from t_blog
+        <where>
+            <if test="managerId != null">
+                AND manager_id = #{managerId,jdbcType=INTEGER}
             </if>
-            <if test="state != null">
-                and blog_state = #{state}
+            <if test="blogType != null">
+                AND blog_type = #{blogType,jdbcType=INTEGER}
             </if>
-            <if test="tags != null">
-                and blog_tags like "%${tags}%"
+            <if test="blogState != null">
+                AND blog_state = #{blogState,jdbcType=TINYINT}
             </if>
+        </where>
     </select>
-    
-    <update id="changeIndex">
-        update t_blog set sort_index = #{index} where id = #{id}
-    </update>
-    
-    <update id="changeState">
-        update t_blog set blog_state = #{state} where id = #{id}
-    </update>
-    
-    <update id="addCount">
-        update t_blog set read_count = read_count + 1 where id = #{id}
-    </update>
-    
-    <update id="addCountByUrl">
-        update t_blog set read_count = read_count + 1 where display_url = #{url}
-    </update>
 </mapper>

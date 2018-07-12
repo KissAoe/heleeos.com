@@ -1,8 +1,6 @@
 package com.heleeos.blog.bean;
 
 import java.io.Serializable;
-import java.util.HashMap;
-import java.util.Map;
 import com.google.gson.Gson;
 
 /**

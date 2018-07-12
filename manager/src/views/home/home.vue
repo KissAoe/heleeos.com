@@ -18,8 +18,8 @@
                                 <Col span="16" style="padding-left:6px;">
                                     <Row class-name="made-child-con-middle" type="flex" align="middle">
                                         <div>
-                                            <b class="card-user-infor-name">Admin</b>
-                                            <p>super admin</p>
+                                            <b class="card-user-infor-name">李瑜</b>
+                                            <p>Kiss</p>
                                         </div>
                                     </Row>
                                 </Col>
@@ -27,11 +27,11 @@
                             <div class="line-gray"></div>
                             <Row class="margin-top-8">
                                 <Col span="8"><p class="notwrap">上次登录时间:</p></Col>
-                                <Col span="16" class="padding-left-8">2017.09.12-13:32:20</Col>
+                                <Col span="16" class="padding-left-8">2018年07月11日19:50:36</Col>
                             </Row>
                             <Row class="margin-top-8">
-                                <Col span="8"><p class="notwrap">上次登录地点:</p></Col>
-                                <Col span="16" class="padding-left-8">北京</Col>
+                                <Col span="8"><p class="notwrap">上次登录IP:</p></Col>
+                                <Col span="16" class="padding-left-8">127.0.0.1</Col>
                             </Row>
                         </Card>
                     </Col>
@@ -68,7 +68,7 @@
             </Col>
             <Col :md="24" :lg="16">
                 <Row :gutter="5">
-                    <Col :xs="24" :sm="12" :md="6" :style="{marginBottom: '10px'}">
+                    <Col :xs="24" :sm="12" :md="12" :style="{marginBottom: '10px'}">
                         <infor-card
                             id-name="user_created_count"
                             :end-val="count.createUser"
@@ -77,7 +77,7 @@
                             intro-text="今日新增用户"
                         ></infor-card>
                     </Col>
-                    <Col :xs="24" :sm="12" :md="6" :style="{marginBottom: '10px'}">
+                    <Col :xs="24" :sm="12" :md="12" :style="{marginBottom: '10px'}">
                         <infor-card
                             id-name="visit_count"
                             :end-val="count.visit"
@@ -85,24 +85,6 @@
                             color="#64d572"
                             :iconSize="50"
                             intro-text="今日浏览量"
-                        ></infor-card>
-                    </Col>
-                    <Col :xs="24" :sm="12" :md="6" :style="{marginBottom: '10px'}">
-                        <infor-card
-                            id-name="collection_count"
-                            :end-val="count.collection"
-                            iconType="upload"
-                            color="#ffd572"
-                            intro-text="今日数据采集量"
-                        ></infor-card>
-                    </Col>
-                    <Col :xs="24" :sm="12" :md="6" :style="{marginBottom: '10px'}">
-                        <infor-card
-                            id-name="transfer_count"
-                            :end-val="count.transfer"
-                            iconType="shuffle"
-                            color="#f25e43"
-                            intro-text="今日服务调用量"
                         ></infor-card>
                     </Col>
                 </Row>
@@ -152,7 +134,7 @@
 </template>
 
 <script>
-import cityData from './map-data/get-city-value.js';
+// import cityData from './map-data/get-city-value.js';
 import homeMap from './components/map.vue';
 import dataSourcePie from './components/dataSourcePie.vue';
 import visiteVolume from './components/visiteVolume.vue';
@@ -162,18 +144,15 @@ import countUp from './components/countUp.vue';
 import inforCard from './components/inforCard.vue';
 import mapDataTable from './components/mapDataTable.vue';
 import toDoListItem from './components/toDoListItem.vue';
+import axios from 'axios';
 
 export default {
     name: 'home',
     components: {
-        homeMap,
         dataSourcePie,
         visiteVolume,
-        serviceRequests,
         userFlow,
-        countUp,
         inforCard,
-        mapDataTable,
         toDoListItem
     },
     data () {
@@ -185,16 +164,73 @@ export default {
             ],
             count: {
                 createUser: 123,
-                visit: 567,
-                collection: 456,
-                transfer: 890
+                visit: 567
             },
-            cityData: cityData,
             showAddNewTodo: false,
             newToDoItemValue: '',
             blogLoading: true,
             blogData: [],
-            blogColumns: []
+            blogColumns: [{
+                        title: '文章ID',
+                        key: 'id'
+                    },
+                    {
+                        title: '文章标题',
+                        key: 'blogTitle',
+                        ellipsis: true
+                    },
+                    {
+                        title: '显示URL',
+                        key: 'displayURL',
+                        ellipsis: true
+                    },
+                    {
+                        title: '创建时间',
+                        key: 'createTime'
+                    },
+                    {
+                        title: '更新时间',
+                        key: 'updateTime'
+                    }, 
+                    {
+                        title: '操作',
+                        key: 'action',
+                        width: 150,
+                        align: 'center',
+                        render: (h, params) => {
+                            return h('div', [
+                                h('Button', {
+                                    props: {
+                                        type: 'primary',
+                                        size: 'small'
+                                    },
+                                    style: {
+                                        marginRight: '5px'
+                                    },
+                                    on: {
+                                        click: () => {
+                                            let query = {blog_id : params.row.id};
+                                            this.$router.push({
+                                                name: 'blog-publish',
+                                                query: query
+                                            });
+                                        }
+                                    }
+                                }, '编辑'),
+                                h('Button', {
+                                    props: {
+                                        type: 'error',
+                                        size: 'small'
+                                    },
+                                    on: {
+                                        click: () => {
+                                            this.remove(params.index)
+                                        }
+                                    }
+                                }, '删除')
+                            ]);
+                        }
+                    }]
         };
     },
     computed: {
@@ -222,7 +258,25 @@ export default {
         cancelAdd () {
             this.showAddNewTodo = false;
             this.newToDoItemValue = '';
+        },
+        init() {
+            var self = this;
+            axios.get("http://127.0.0.1:8080/ajax/blog/list.json?rows=6&state=20").then((response) => {
+                var result = response.data;
+                if(result.code == 200) {
+                    self.blogData = result.data.beans;
+                } else {
+                    self.$Message.error('加载列表失败' + result.message);
+                }
+                self.blogLoading = false;
+            }).catch(function (error) {
+                console.log(error);
+                self.blogLoading = false;
+            });
         }
+    },
+    mounted() {
+        this.init();
     }
 };
 </script>

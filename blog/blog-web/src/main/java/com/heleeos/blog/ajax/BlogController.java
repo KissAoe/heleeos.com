@@ -7,6 +7,8 @@ import com.heleeos.blog.common.BlogState;
 import com.heleeos.blog.util.ResultUtil;
 import org.apache.commons.lang.math.NumberUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -21,6 +23,7 @@ import com.heleeos.blog.service.BlogTypeService;
  */
 @RestController
 @RequestMapping("/ajax/blog")
+@CrossOrigin(origins = "*")
 public class BlogController {
 
     @Autowired
@@ -29,22 +32,23 @@ public class BlogController {
     @Autowired
     private BlogTypeService blogTypeService;
 
-    @RequestMapping(value = "list.json")
+    @GetMapping(value = "list.json")
     public Result<PageInfo<Blog>> getList(HttpServletRequest request) {
         int page = NumberUtils.toInt(request.getParameter("page"), 1);
         int rows = NumberUtils.toInt(request.getParameter("rows"), 5);
         int type = NumberUtils.toInt(request.getParameter("type"), 0);
-        byte state = (byte) NumberUtils.toInt(request.getParameter("state"), BlogState.NORMAL.getState());
+        byte state = (byte) NumberUtils.toInt(request.getParameter("state"), -1);
         String tags = request.getParameter("tags");
 
-        int count = blogService.getCount(type, tags, state);
+        Byte blogState = state == -1 ? null : state;
+        int count = blogService.getCount(type, tags, blogState);
         int max = count / rows + (count % rows == 0 ? 0 : 1);//余数不为0,要加一
 
         //合法验证
         if(page > max) page = max;
         if(page < 1) page = 1;
 
-        return ResultUtil.SUCCESS(blogService.getList(type, tags, state, page, rows));
+        return ResultUtil.SUCCESS(blogService.getList(type, tags, blogState, page, rows));
     }
 
 //    public Re

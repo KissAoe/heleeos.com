@@ -1,8 +1,5 @@
 package com.heleeos.blog.dto;
 
-import com.heleeos.blog.common.BlogState;
-import com.heleeos.blog.common.ContentType;
-
 import java.util.Date;
 
 /**
@@ -19,7 +16,7 @@ public class Blog {
     /** 标题 */
     private String blogTitle;
     /** 显示的URL */
-    private String displayURL;
+    private String displayUrl;
     /** 摘要信息 */
     private String blogSummary;
     /** 创建时间 */
@@ -29,7 +26,7 @@ public class Blog {
     /** 管理者ID */
     private Integer managerId;
     /** 博客分类 */
-    private String blogType;
+    private Integer blogType;
     /** 查看次数 */
     private Integer readCount;
     /** 标签 */
@@ -42,16 +39,6 @@ public class Blog {
     private Byte blogState;
     /** 显示顺序 */
     private Byte sortIndex;
-
-    public Blog() {
-        setId(0);
-        setReadCount(0);
-        setCreateTime(new Date());
-        setUpdateTime(new Date());
-        setBlogState(BlogState.NORMAL.getState());
-        setSortIndex(new Byte("0"));
-        setContentType(ContentType.HTML.getType());
-    }
 
     public Integer getId() {
         return id;
@@ -69,12 +56,12 @@ public class Blog {
         this.blogTitle = blogTitle;
     }
 
-    public String getDisplayURL() {
-        return displayURL;
+    public String getDisplayUrl() {
+        return displayUrl;
     }
 
-    public void setDisplayURL(String displayURL) {
-        this.displayURL = displayURL;
+    public void setDisplayUrl(String displayUrl) {
+        this.displayUrl = displayUrl;
     }
 
     public String getBlogSummary() {
@@ -109,11 +96,11 @@ public class Blog {
         this.managerId = managerId;
     }
 
-    public String getBlogType() {
+    public Integer getBlogType() {
         return blogType;
     }
 
-    public void setBlogType(String blogType) {
+    public void setBlogType(Integer blogType) {
         this.blogType = blogType;
     }
 

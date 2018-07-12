@@ -2,9 +2,12 @@
     @import '../../styles/common.less';
     @import './blog-publish.less';
 </style>
-
+<!--
+1. 根据ID进行本地保存
+2. 优化文件
+3. 离开提醒
+-->
 <template>
-
     <div>
         <Row>
             <Col span="18">
@@ -112,6 +115,70 @@ export default {
         };
     },
     methods: {
+        init () {
+            tinymce.init({
+                selector: '#articleEditor',
+                branding: false,
+                elementpath: false,
+                height: 600,
+                menubar: 'edit insert view format table tools',
+                theme: 'modern',
+                plugins: [
+                    'advlist autolink lists link image charmap print preview hr anchor pagebreak imagetools',
+                    'searchreplace visualblocks visualchars code fullscreen fullpage',
+                    'insertdatetime media nonbreaking save table contextmenu directionality',
+                    'emoticons paste textcolor colorpicker textpattern imagetools codesample'
+                ],
+                toolbar1: ' newnote print fullscreen preview | undo redo | insert | styleselect | forecolor backcolor bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image emoticons media codesample',
+                autosave_interval: '20s',
+                image_advtab: true,
+                table_default_styles: {
+                    width: '100%',
+                    borderCollapse: 'collapse'
+                }
+            });
+
+            this.simplemde = new SimpleMDE({
+                element: document.getElementById('markdownEditor'),
+                toolbar: ['bold', 'italic', 'strikethrough', 'heading', 'heading-smaller', 'heading-bigger', 'heading-1', 'heading-2', 'heading-3', '|', 'code', 'quote', 'unordered-list', 'clean-block', '|', 'link', 'image', 'table', 'horizontal-rule', '|', 'preview']
+            });
+
+            if(localStorage.blog != undefined && localStorage.blog.length != 0) {
+                var temp = JSON.parse(localStorage.blog);
+                this.$Modal.confirm({
+                    title: '是否使用本地缓存?',
+                    content: '<h2>标题为《' + temp.title + '》</h2><h2>路径为"' + temp.path + '"</h2>',
+                    okText: '使用',
+                    cancelText: '不使用',
+                    onOk: () => {
+                        this.blog = temp;
+                        if(temp.blogType == 'HTML') {
+                            tinymce.activeEditor.setContent(temp.info);
+                        } else {
+                            this.simplemde.value(temp.info);
+                        }
+                        this.$Message.info('读取缓存成功');
+                    }
+                });
+            }
+            this.timeSaveCache();
+
+            if(this.$route.query.blog_id != undefined) {
+                //根据ID加载
+                // axios.get("http://127.0.0.1:8080/ajax/blog/list.json?rows=6&state=20").then((response) => {
+                //     var result = response.data;
+                //     if(result.code == 200) {
+                //         self.blogData = result.data.beans;
+                //     } else {
+                //         self.$Message.error('加载列表失败' + result.message);
+                //     }
+                //     self.blogLoading = false;
+                // }).catch(function (error) {
+                //     console.log(error);
+                //     self.blogLoading = false;
+                // });
+            }
+        },
         handleBlogBlur () {
             if (this.blog.title.length == 0) {
                 this.$Message.error('文章标题不可为空');
@@ -203,52 +270,7 @@ export default {
         }
     },
     mounted () {
-        tinymce.init({
-            selector: '#articleEditor',
-            branding: false,
-            elementpath: false,
-            height: 600,
-            menubar: 'edit insert view format table tools',
-            theme: 'modern',
-            plugins: [
-                'advlist autolink lists link image charmap print preview hr anchor pagebreak imagetools',
-                'searchreplace visualblocks visualchars code fullscreen fullpage',
-                'insertdatetime media nonbreaking save table contextmenu directionality',
-                'emoticons paste textcolor colorpicker textpattern imagetools codesample'
-            ],
-            toolbar1: ' newnote print fullscreen preview | undo redo | insert | styleselect | forecolor backcolor bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image emoticons media codesample',
-            autosave_interval: '20s',
-            image_advtab: true,
-            table_default_styles: {
-                width: '100%',
-                borderCollapse: 'collapse'
-            }
-        });
-
-        this.simplemde = new SimpleMDE({
-            element: document.getElementById('markdownEditor'),
-            toolbar: ['bold', 'italic', 'strikethrough', 'heading', 'heading-smaller', 'heading-bigger', 'heading-1', 'heading-2', 'heading-3', '|', 'code', 'quote', 'unordered-list', 'clean-block', '|', 'link', 'image', 'table', 'horizontal-rule', '|', 'preview']
-        });
-
-        if(localStorage.blog.length != 0) {
-            var temp = JSON.parse(localStorage.blog);
-            this.$Modal.confirm({
-                title: '是否使用本地缓存?',
-                content: '<h2>标题为《' + temp.title + '》</h2><h2>路径为"' + temp.path + '"</h2>',
-                okText: '使用',
-                cancelText: '不使用',
-                onOk: () => {
-                    this.blog = temp;
-                    if(temp.blogType == 'HTML') {
-                        tinymce.activeEditor.setContent(temp.info);
-                    } else {
-                        this.simplemde.value(temp.info);
-                    }
-                    this.$Message.info('读取缓存成功');
-                }
-            });
-        }
-        this.timeSaveCache();
+        this.init();
     },
     destroyed () {
         tinymce.get('articleEditor').destroy();

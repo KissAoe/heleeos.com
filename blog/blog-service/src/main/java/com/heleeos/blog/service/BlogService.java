@@ -23,15 +23,15 @@ import com.heleeos.blog.dao.BlogMapper;
  */
 @Service
 public class BlogService {
-    
+
     private Logger logger = LoggerFactory.getLogger(getClass());
-    
+
     @Autowired
     private BlogMapper blogMapper;
-    
+
     /**
      * 保存文章.
-     * 
+     *
      * @param bean 文章
      */
     public boolean save(Blog bean) {
@@ -50,37 +50,41 @@ public class BlogService {
 
     /**
      * 获取文章.
-     * 
+     *
      * @param id 文章ID
      */
     public Blog get(Integer id) {
         if(id == null || id == 0) return null;
         try {
-            return blogMapper.get(id);
+            Blog blog = new Blog();
+            blog.setId(id);
+            return blogMapper.get(blog);
         } catch (Exception e) {
             logger.error(String.format("获取[博客文章]异常,原因:%s", e.getMessage()), e);
             return null;
         }
     }
-    
+
     /**
      * 根据URL获取文章.
-     * 
+     *
      * @param url 文章显示的URL.
      */
     public Blog getByURL(String url) {
         if(StringUtils.trimToNull(url) == null) return null;
         try {
-            return blogMapper.getByURL(url);
+            Blog blog = new Blog();
+            blog.setDisplayUrl(url);
+            return blogMapper.get(blog);
         } catch (Exception e) {
             logger.error(String.format("获取[博客文章(URL)]异常,原因:%s", e.getMessage()), e);
             return null;
         }
     }
-    
+
     /**
      * 查询文章.
-     * 
+     *
      * @param type 分类
      * @param tags 标签
      * @param state 状态
@@ -90,46 +94,58 @@ public class BlogService {
     public PageInfo<Blog> getList(Integer type, String tags, Byte state, Integer page, Integer rows) {
         int index = (page - 1) * rows;
         if(index < 0) index = 0;
+        if(rows < 0) rows = 5;
         if(type == null || type == 0) type = null;
         if(StringUtils.trim(tags) == null) tags = null;
         try {
-            int count = getCount(type, tags, state);
-            List<Blog> blogList = blogMapper.getList(type, tags, state, index, rows);
+            Blog blog = new Blog();
+            blog.setBlogType(type);
+            blog.setBlogState(state);
+            blog.setBlogTags(tags);
+            int count = blogMapper.getCount(blog);
+            List<Blog> blogList = blogMapper.getList(blog, index, rows);
             return new PageInfo<>(page, rows,count, blogList);
         } catch (Exception e) {
             logger.error(String.format("获取[博客文章列表]异常,原因:%s", e.getMessage()), e);
             return null;
         }
     }
-    
+
     /**
      * 获取文章个数.
-     * 
+     *
      * @param type 分类
      * @param tags 标签
      * @param state 状态
      */
     public int getCount(Integer type, String tags, Byte state) {
         if(type == null || type == 0) type = null;
-        if(StringUtils.trim(tags) == null) tags = null;        
+        if(StringUtils.trim(tags) == null) tags = null;
         try {
-            return blogMapper.getCount(type, tags, state);
+            Blog blog = new Blog();
+            blog.setBlogType(type);
+            blog.setBlogState(state);
+            blog.setBlogTags(tags);
+            return blogMapper.getCount(blog);
         } catch (Exception e) {
             logger.error(String.format("获取[博客文章个数]异常,原因:%s", e.getMessage()), e);
             return 0;
         }
     }
-    
+
     /**
      * 修改显示顺序.
-     * 
+     *
      * @param id 博客的ID
      * @param newIndex 显示的顺序
-     * 
+     *
      */
     public boolean changeIndex(Integer id, Byte newIndex) {
         try {
-            return blogMapper.changeIndex(id, newIndex) == 1;
+            Blog blog = new Blog();
+            blog.setId(id);
+            blog.setSortIndex(newIndex);
+            return blogMapper.update(blog) > 0;
         } catch (Exception e) {
             logger.error(String.format("修改[博客显示顺序]异常,原因:%s", e.getMessage()), e);
             return false;
@@ -141,20 +157,22 @@ public class BlogService {
      *
      * @param id 文章ID
      */
-    public boolean changeState(Integer id, BlogState newState) {
+    public boolean changeState(Integer id, byte newState) {
         if(id == null || id == 0) return false;
         try {
-            blogMapper.changeState(id, newState.getState());
-            return true;
+            Blog blog = new Blog();
+            blog.setId(id);
+            blog.setBlogState(newState);
+            return blogMapper.update(blog) > 0;
         } catch (Exception e) {
             logger.error(String.format("删除[博客文章]异常,原因:%s", e.getMessage()), e);
             return false;
         }
     }
-    
+
     /**
      * 新增阅读次数.
-     * 
+     *
      * @param url 博客的显示URL
      */
     public boolean addCountByUrl(String url) {

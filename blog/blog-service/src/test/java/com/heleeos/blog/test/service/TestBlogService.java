@@ -32,11 +32,11 @@ public class TestBlogService extends TestConfig {
         logger.info("Count:" + count);
         toLogger(logger, blogService.getList(null, null, null, 1, 10));
     }
-    
+
     @Test
     public void changeIndex() {
         boolean flag1 = blogService.changeIndex(2, (byte) 0);
-        boolean flag2 = blogService.changeState(2, BlogState.NORMAL);
+        boolean flag2 = blogService.changeState(2, BlogState.RELEASE);
         logger.info("Change index :" + flag1);
         logger.info("Change state :" + flag2);
     }

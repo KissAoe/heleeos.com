@@ -7,15 +7,15 @@
             <property name="suppressAllComments" value="true" /><!-- 是否去除自动生成的注释 true：是 ： false:否 -->
         </commentGenerator>
         <jdbcConnection driverClass="com.mysql.jdbc.Driver" connectionURL="jdbc:mysql://127.0.0.1:3306/heleeos_blog" userId="root" password="admin" />
-        
+
         <!-- 生成模型的包名和位置 -->
-        <javaModelGenerator targetPackage="com.heleeos.blog.bean" targetProject="src/main/java" />
+        <javaModelGenerator targetPackage="com.heleeos.blog.dto" targetProject="src/main/java" />
         <!-- 生成的映射文件报名和位置 -->
         <sqlMapGenerator targetPackage="com.heleeos.blog.mapeper" targetProject="src/main/java" />
         <!-- 生成DAO的包名和位置 -->
         <javaClientGenerator targetPackage="com.heleeos.blog.dao" targetProject="src/main/java" type="XMLMAPPER" />
-        
-        <table schema="heleeos_blog" tableName="t_user" domainObjectName="User"
+
+        <table schema="heleeos_blog" tableName="t_blog" domainObjectName="Blog2"
             enableCountByExample="false" enableUpdateByExample="false"
             enableDeleteByExample="false" enableSelectByExample="false"
             selectByExampleQueryId="false">
