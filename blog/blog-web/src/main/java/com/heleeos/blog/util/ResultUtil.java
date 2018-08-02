@@ -80,6 +80,13 @@ public class ResultUtil {
     }
 
     /**
+     * 构建一个带数据的成功返回体
+     */
+    public static <T> Result<T> EMPTY() {
+        return of(200, "数据为空", null);
+    }
+
+    /**
      * 构建一个参数错误的返回体
      * @param message 提示信息
      */
@@ -88,10 +95,17 @@ public class ResultUtil {
     }
 
     /**
-     * 构建一个授权失败的返回体
+     * 构建一个登录失败的返回体
      */
-    public static <T> Result<T> AUTHOR_ERROR() {
+    public static <T> Result<T> TOKEN_ERROR() {
         return of(301, "登录失效", null);
+    }
+
+    /**
+     * 构建一个权限失败的返回体
+     */
+    public static <T> Result<T> AUTH_ERROR() {
+        return of(302, "没有权限", null);
     }
 
     /**

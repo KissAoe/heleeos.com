@@ -1,13 +1,14 @@
 package com.heleeos.blog.service;
 
-import com.heleeos.blog.bean.PageInfo;
 import com.heleeos.blog.dao.NoteMapper;
 import com.heleeos.blog.dto.Note;
-import com.heleeos.blog.exception.ServiceException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.LinkedList;
+import java.util.List;
 
 /**
  * 笔记数据服务层, t_note.
@@ -50,7 +51,14 @@ public class NoteService {
      * @param lastId 最近一条的ID
      * @param rows 显示条数
      */
-    public PageInfo<Note> getList(Integer lastId, Integer rows) throws ServiceException {
-        return null;
+    public List<Note> getList(Integer lastId, Integer rows) {
+        if(lastId == null) lastId = 0;
+        if(rows == null) rows = 10;
+        try {
+            return noteMapper.getNoteList(lastId, rows);
+        } catch (Exception e) {
+            logger.error(String.format("查询[每日笔记]列表异常,原因:%s", e.getMessage()), e);
+            return new LinkedList<>();
+        }
     }
 }

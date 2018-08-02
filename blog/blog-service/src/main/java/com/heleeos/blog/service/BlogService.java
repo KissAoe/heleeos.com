@@ -3,7 +3,6 @@ package com.heleeos.blog.service;
 import java.util.List;
 
 import com.heleeos.blog.bean.PageInfo;
-import com.heleeos.blog.exception.ServiceException;
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -53,7 +52,7 @@ public class BlogService {
      *
      * @param id 文章ID
      */
-    public Blog get(Integer id) throws ServiceException {
+    public Blog get(Integer id) {
         if(id == null || id == 0) return null;
         try {
             Blog blog = new Blog();
@@ -70,7 +69,7 @@ public class BlogService {
      *
      * @param url 文章显示的URL.
      */
-    public Blog getByURL(String url) throws ServiceException {
+    public Blog getByURL(String url) {
         if(StringUtils.trimToNull(url) == null) return null;
         try {
             Blog blog = new Blog();
@@ -91,10 +90,9 @@ public class BlogService {
      * @param page 开始位置
      * @param rows 显示条数
      */
-    public PageInfo<Blog> getList(Integer type, String tags, Byte state, Integer page, Integer rows) throws ServiceException {
+    public List<Blog> getList(Integer type, String tags, Byte state, Integer page, Integer rows) {
         int index = (page - 1) * rows;
         if(index < 0) index = 0;
-        if(rows < 0) rows = 5;
         if(type == null || type == 0) type = null;
         if(StringUtils.trim(tags) == null) tags = null;
         try {
@@ -102,9 +100,7 @@ public class BlogService {
             blog.setBlogType(type);
             blog.setBlogState(state);
             blog.setBlogTags(tags);
-            int count = blogMapper.getCount(blog);
-            List<Blog> blogList = blogMapper.getList(blog, index, rows);
-            return new PageInfo<>(page, rows,count, blogList);
+            return blogMapper.getList(blog, index, rows);
         } catch (Exception e) {
             logger.error(String.format("获取[博客文章列表]异常,原因:%s", e.getMessage()), e);
             return null;

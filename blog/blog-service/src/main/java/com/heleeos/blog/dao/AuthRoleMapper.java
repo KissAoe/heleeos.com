@@ -3,15 +3,22 @@ package com.heleeos.blog.dao;
 import com.heleeos.blog.dto.AuthRole;
 
 public interface AuthRoleMapper {
-    int deleteByPrimaryKey(Integer id);
 
-    int insert(AuthRole record);
+    /**
+     * 获取授权角色
+     * @param id ID
+     */
+    AuthRole get(Integer id);
 
-    int insertSelective(AuthRole record);
+    /**
+     * 新增授权角色
+     * @param authRole 角色
+     */
+    int insert(AuthRole authRole);
 
-    AuthRole selectByPrimaryKey(Integer id);
-
-    int updateByPrimaryKeySelective(AuthRole record);
-
-    int updateByPrimaryKey(AuthRole record);
+    /**
+     * 更新授权角色
+     * @param authRole 角色
+     */
+    int update(AuthRole authRole);
 }

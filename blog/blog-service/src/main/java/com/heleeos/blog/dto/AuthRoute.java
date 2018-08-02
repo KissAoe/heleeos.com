@@ -2,24 +2,32 @@ package com.heleeos.blog.dto;
 
 import java.util.Date;
 
+/**
+ * 权限路由, t_auth_route 表.
+ * Created with Li Yu on 2018/08/01.
+ *
+ * @author liyu
+ * @author kissaoe@gmail.com
+ */
 public class AuthRoute {
+
+    /** 自增ID */
     private Integer id;
-
+    /** 权限名称 */
     private String authName;
-
+    /** 权限路径 */
     private String authPath;
-
+    /** 权限类型, 1-前端、2-后端 */
     private Integer authType;
-
+    /** 创建时间 */
     private Date createTime;
-
+    /** 更新时间 */
     private Date updateTime;
 
     public Integer getId() {
         return id;
     }
 
-    
     public void setId(Integer id) {
         this.id = id;
     }

@@ -17,7 +17,7 @@
                 #{blogSummary,jdbcType=VARCHAR}, CURRENT_TIMESTAMP,               CURRENT_TIMESTAMP,
                 #{managerId,jdbcType=INTEGER},   #{blogType,jdbcType=INTEGER},    #{readCount,jdbcType=INTEGER},
                 #{blogTags,jdbcType=VARCHAR},    #{contentType,jdbcType=TINYINT}, #{blogState,jdbcType=TINYINT},
-                #{sortIndex,jdbcType=TINYINT},   #{blogContent,jdbcType=LONGVARCHAR})
+                #{sortIndex,jdbcType=TINYINT},   #{blogContent,jdbcType=VARCHAR})
     </insert>
     <update id="update" parameterType="com.heleeos.blog.dto.Blog">
         update t_blog
@@ -53,7 +53,7 @@
                 sort_index = #{sortIndex,jdbcType=TINYINT},
             </if>
             <if test="blogContent != null">
-                blog_content = #{blogContent,jdbcType=LONGVARCHAR},
+                blog_content = #{blogContent,jdbcType=VARCHAR},
             </if>
             <if test="true">
                 update_time = CURRENT_TIMESTAMP,

@@ -18,11 +18,6 @@ public class BlogType {
     /** 当前分类的个数 */
     private Integer typeCount;
 
-    public BlogType() {
-        setId(0);
-        setTypeCount(0);
-    }
-
     public Integer getId() {
         return id;
     }

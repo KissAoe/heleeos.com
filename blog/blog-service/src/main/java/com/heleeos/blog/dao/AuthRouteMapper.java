@@ -3,15 +3,10 @@ package com.heleeos.blog.dao;
 import com.heleeos.blog.dto.AuthRoute;
 
 public interface AuthRouteMapper {
-    int deleteByPrimaryKey(Integer id);
 
-    int insert(AuthRoute record);
+    AuthRoute get(Integer id);
 
-    int insertSelective(AuthRoute record);
+    int insert(AuthRoute authRoute);
 
-    AuthRoute selectByPrimaryKey(Integer id);
-
-    int updateByPrimaryKeySelective(AuthRoute record);
-
-    int updateByPrimaryKey(AuthRoute record);
+    int update(AuthRoute authRoute);
 }

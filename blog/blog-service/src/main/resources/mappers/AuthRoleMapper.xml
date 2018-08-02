@@ -1,182 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.heleeos.blog.dao.AuthRoleMapper">
-  <resultMap id="BaseResultMap" type="com.heleeos.blog.dto.AuthRole">
-    <id column="id" jdbcType="INTEGER" property="id" />
-    <result column="role_name" jdbcType="VARCHAR" property="roleName" />
-    <result column="role_routes" jdbcType="VARCHAR" property="roleRoutes" />
-    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
-    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
-  </resultMap>
-  <sql id="Base_Column_List">
-    id, role_name, role_routes, create_time, update_time
-  </sql>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
-    select 
-    <include refid="Base_Column_List" />
-    from t_auth_role
-    where id = #{id,jdbcType=INTEGER}
-  </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-    delete from t_auth_role
-    where id = #{id,jdbcType=INTEGER}
-  </delete>
-  <insert id="insert" parameterType="com.heleeos.blog.dto.AuthRole">
-    insert into t_auth_role (id, role_name, role_routes, 
-      create_time, update_time)
-    values (#{id,jdbcType=INTEGER}, #{roleName,jdbcType=VARCHAR}, #{roleRoutes,jdbcType=VARCHAR}, 
-      #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP})
-  </insert>
-  <insert id="insertSelective" parameterType="com.heleeos.blog.dto.AuthRole">
-    insert into t_auth_role
-    <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="id != null">
-        id,
-      </if>
-      <if test="roleName != null">
-        role_name,
-      </if>
-      <if test="roleRoutes != null">
-        role_routes,
-      </if>
-      <if test="createTime != null">
-        create_time,
-      </if>
-      <if test="updateTime != null">
-        update_time,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="id != null">
-        #{id,jdbcType=INTEGER},
-      </if>
-      <if test="roleName != null">
-        #{roleName,jdbcType=VARCHAR},
-      </if>
-      <if test="roleRoutes != null">
-        #{roleRoutes,jdbcType=VARCHAR},
-      </if>
-      <if test="createTime != null">
-        #{createTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="updateTime != null">
-        #{updateTime,jdbcType=TIMESTAMP},
-      </if>
-    </trim>
-  </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.heleeos.blog.dto.AuthRole">
-    update t_auth_role
-    <set>
-      <if test="roleName != null">
-        role_name = #{roleName,jdbcType=VARCHAR},
-      </if>
-      <if test="roleRoutes != null">
-        role_routes = #{roleRoutes,jdbcType=VARCHAR},
-      </if>
-      <if test="createTime != null">
-        create_time = #{createTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="updateTime != null">
-        update_time = #{updateTime,jdbcType=TIMESTAMP},
-      </if>
-    </set>
-    where id = #{id,jdbcType=INTEGER}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="com.heleeos.blog.dto.AuthRole">
-    update t_auth_role
-    set role_name = #{roleName,jdbcType=VARCHAR},
-      role_routes = #{roleRoutes,jdbcType=VARCHAR},
-      create_time = #{createTime,jdbcType=TIMESTAMP},
-      update_time = #{updateTime,jdbcType=TIMESTAMP}
-    where id = #{id,jdbcType=INTEGER}
-  </update>
-  <resultMap id="BaseResultMap" type="com.heleeos.blog.dto.AuthRole">
-    <id column="id" jdbcType="INTEGER" property="id" />
-    <result column="role_name" jdbcType="VARCHAR" property="roleName" />
-    <result column="role_routes" jdbcType="VARCHAR" property="roleRoutes" />
-    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
-    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
-  </resultMap>
-  <sql id="Base_Column_List">
-    id, role_name, role_routes, create_time, update_time
-  </sql>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
-    select 
-    <include refid="Base_Column_List" />
-    from t_auth_role
-    where id = #{id,jdbcType=INTEGER}
-  </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-    delete from t_auth_role
-    where id = #{id,jdbcType=INTEGER}
-  </delete>
-  <insert id="insert" parameterType="com.heleeos.blog.dto.AuthRole">
-    insert into t_auth_role (id, role_name, role_routes, 
-      create_time, update_time)
-    values (#{id,jdbcType=INTEGER}, #{roleName,jdbcType=VARCHAR}, #{roleRoutes,jdbcType=VARCHAR}, 
-      #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP})
-  </insert>
-  <insert id="insertSelective" parameterType="com.heleeos.blog.dto.AuthRole">
-    insert into t_auth_role
-    <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="id != null">
-        id,
-      </if>
-      <if test="roleName != null">
-        role_name,
-      </if>
-      <if test="roleRoutes != null">
-        role_routes,
-      </if>
-      <if test="createTime != null">
-        create_time,
-      </if>
-      <if test="updateTime != null">
-        update_time,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="id != null">
-        #{id,jdbcType=INTEGER},
-      </if>
-      <if test="roleName != null">
-        #{roleName,jdbcType=VARCHAR},
-      </if>
-      <if test="roleRoutes != null">
-        #{roleRoutes,jdbcType=VARCHAR},
-      </if>
-      <if test="createTime != null">
-        #{createTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="updateTime != null">
-        #{updateTime,jdbcType=TIMESTAMP},
-      </if>
-    </trim>
-  </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.heleeos.blog.dto.AuthRole">
-    update t_auth_role
-    <set>
-      <if test="roleName != null">
-        role_name = #{roleName,jdbcType=VARCHAR},
-      </if>
-      <if test="roleRoutes != null">
-        role_routes = #{roleRoutes,jdbcType=VARCHAR},
-      </if>
-      <if test="createTime != null">
-        create_time = #{createTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="updateTime != null">
-        update_time = #{updateTime,jdbcType=TIMESTAMP},
-      </if>
-    </set>
-    where id = #{id,jdbcType=INTEGER}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="com.heleeos.blog.dto.AuthRole">
-    update t_auth_role
-    set role_name = #{roleName,jdbcType=VARCHAR},
-      role_routes = #{roleRoutes,jdbcType=VARCHAR},
-      create_time = #{createTime,jdbcType=TIMESTAMP},
-      update_time = #{updateTime,jdbcType=TIMESTAMP}
-    where id = #{id,jdbcType=INTEGER}
-  </update>
+
+    <resultMap id="BaseResultMap" type="com.heleeos.blog.dto.AuthRole">
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="role_name" jdbcType="VARCHAR" property="roleName"/>
+        <result column="role_routes" jdbcType="VARCHAR" property="roleRoutes"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+        <result column="update_time" jdbcType="TIMESTAMP" property="updateTime"/>
+    </resultMap>
+
+    <sql id="Base_Column_List"> id, role_name, role_routes, create_time, update_time </sql>
+
+    <select id="get" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select <include refid="Base_Column_List"/> from t_auth_role where id = #{id,jdbcType=INTEGER}
+    </select>
+
+    <insert id="insert" parameterType="com.heleeos.blog.dto.AuthRole">
+        insert into t_auth_role (role_name, role_routes, create_time, update_time)
+        values (#{roleName,jdbcType=VARCHAR}, #{roleRoutes,jdbcType=VARCHAR}, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP )
+    </insert>
+
+    <update id="update" parameterType="com.heleeos.blog.dto.AuthRole">
+        update t_auth_role
+        set role_name = #{roleName,jdbcType=VARCHAR},
+          role_routes = #{roleRoutes,jdbcType=VARCHAR},
+          update_time = CURRENT_TIMESTAMP
+        where id = #{id,jdbcType=INTEGER}
+    </update>
 </mapper>
