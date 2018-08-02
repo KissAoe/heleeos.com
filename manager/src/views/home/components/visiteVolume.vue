@@ -11,6 +11,21 @@ export default {
             //
         };
     },
+    methods: {
+        getVirtulData(year) {
+            var date = +echarts.number.parseDate('2018-01-01');
+            var end = +echarts.number.parseDate('2018-07-12');
+            var dayTime = 3600 * 24 * 1000;
+            var data = [];
+            for (var time = date; time < end; time += dayTime) {
+                data.push([
+                    echarts.format.formatTime('yyyy-MM-dd', time),
+                    Math.floor(Math.random() * 8)
+                ]);
+            }
+            return data;
+        }
+    },
     mounted () {
         this.$nextTick(() => {
             let visiteVolume = echarts.init(document.getElementById('visite_volume_con'));
@@ -25,44 +40,43 @@ export default {
 
             const option = {
                 tooltip: {
-                    trigger: 'axis',
-                    axisPointer: {
-                        type: 'shadow'
+                    position: 'top'
+                },
+                visualMap: {
+                    type: 'continuous',
+                    inRange: {
+                        color: ['#eee', '#c6e48b', '#7bc96f', '#239a3b']
+                    },
+                    min: 0,
+                    max: 10,
+                    orient: 'horizontal',
+                    left: 'center',
+                    top: 'top'
+                },
+
+                 calendar: {
+                    left: 20,
+                    right: 20,
+                    cellSize: ['auto', 'auto'],
+                    range: '2018',
+                    itemStyle: {
+                        normal: {borderWidth: 0.5}
+                    },
+                    yearLabel: {show: false},
+                    monthLabel: {nameMap: 'cn'},
+                    dayLabel: {
+                        firstDay: 1,
+                        nameMap: 'cn'
                     }
                 },
-                grid: {
-                    top: 0,
-                    left: '2%',
-                    right: '4%',
-                    bottom: '3%',
-                    containLabel: true
-                },
-                xAxis: {
-                    type: 'value',
-                    boundaryGap: [0, 0.01]
-                },
-                yAxis: {
-                    type: 'category',
-                    data: ['Mon', 'Tues', 'Wed', 'Thur', 'Fri', 'Sat', 'Sun'],
-                    nameTextStyle: {
-                        color: '#c3c3c3'
-                    }
-                },
-                series: [
-                    {
-                        name: '访问量',
-                        type: 'bar',
-                        data: [
-                            {value: 453682, name: 'Mon', itemStyle: {normal: {color: '#2d8cf0'}}},
-                            {value: 879545, name: 'Tues', itemStyle: {normal: {color: '#2d8cf0'}}},
-                            {value: 2354678, name: 'Wed', itemStyle: {normal: {color: '#2d8cf0'}}},
-                            {value: 1598403, name: 'Thur', itemStyle: {normal: {color: '#2d8cf0'}}},
-                            {value: 543250, name: 'Fri', itemStyle: {normal: {color: '#2d8cf0'}}},
-                            {value: 1305923, name: 'Sat', itemStyle: {normal: {color: '#2d8cf0'}}},
-                            {value: 1103456, name: 'Sun', itemStyle: {normal: {color: '#2d8cf0'}}}
-                        ]
-                    }
-                ]
+
+                series: {
+                    type: 'heatmap',
+                    coordinateSystem: 'calendar',
+                    calendarIndex: 0,
+                    backgroundColor: '#eee',
+                    data: this.getVirtulData(2018),
+                }
             };
 
             visiteVolume.setOption(option);

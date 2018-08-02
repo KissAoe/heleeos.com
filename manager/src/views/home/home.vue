@@ -96,62 +96,59 @@
             </Col>
         </Row>
         <Row :gutter="10" class="margin-top-10">
-            <Col :md="24" :lg="8" :style="{marginBottom: '10px'}">
+            <Col :md="24" :lg="16" :style="{marginBottom: '10px'}">
                 <Card>
                     <p slot="title" class="card-title">
-                        <Icon type="android-map"></Icon>
-                        上周每日来访量统计
+                        <Icon type="android-map"></Icon>活跃日历
+                        
                     </p>
                     <div class="data-source-row">
                         <visite-volume></visite-volume>
                     </div>
                 </Card>
             </Col>
-            <Col :md="24" :lg="8" :style="{marginBottom: '10px'}">
-                <Card>
-                    <p slot="title" class="card-title">
-                        <Icon type="ios-pulse-strong"></Icon>
-                        数据来源统计
-                    </p>
-                    <div class="data-source-row">
-                        <data-source-pie></data-source-pie>
-                    </div>
-                </Card>
-            </Col>
             <Col :md="24" :lg="8">
                 <Card>
                     <p slot="title" class="card-title">
-                        <Icon type="android-wifi"></Icon>
-                        各类用户服务调用变化统计
+                        <Icon type="android-wifi"></Icon>系统指标
                     </p>
                     <div class="data-source-row">
-                        <user-flow></user-flow>
+                        <cpu-memory></cpu-memory>
                     </div>
                 </Card>
             </Col>
+            <!-- <Col :md="24" :lg="8" :style="{marginBottom: '10px'}">
+                <Card>
+                    <p slot="title" class="card-title">
+                        <Icon type="ios-pulse-strong"></Icon>磁盘使用量
+                    </p>
+                    <div class="data-source-row">
+                        <disk-pie></disk-pie>
+                    </div>
+                </Card>
+            </Col> -->
         </Row>
     </div>
 </template>
 
 <script>
-// import cityData from './map-data/get-city-value.js';
-import homeMap from './components/map.vue';
-import dataSourcePie from './components/dataSourcePie.vue';
-import visiteVolume from './components/visiteVolume.vue';
-import serviceRequests from './components/serviceRequests.vue';
-import userFlow from './components/userFlow.vue';
-import countUp from './components/countUp.vue';
-import inforCard from './components/inforCard.vue';
-import mapDataTable from './components/mapDataTable.vue';
-import toDoListItem from './components/toDoListItem.vue';
+import api from '@/libs/api';
 import axios from 'axios';
+import cpuMemory from './components/cpuMemory.vue';
+import diskPie from './components/diskPie.vue';
+
+import visiteVolume from './components/visiteVolume.vue';
+import inforCard from './components/inforCard.vue';
+import toDoListItem from './components/toDoListItem.vue';
 
 export default {
     name: 'home',
     components: {
-        dataSourcePie,
+        cpuMemory,
+        diskPie,
+        
+
         visiteVolume,
-        userFlow,
         inforCard,
         toDoListItem
     },
@@ -261,7 +258,7 @@ export default {
         },
         init() {
             var self = this;
-            axios.get("http://127.0.0.1:8080/ajax/blog/list.json?rows=6&state=20").then((response) => {
+            axios.get(api.getBlogList, {params : {'rows' : 6, 'statue' : 20}}).then(function(response) {
                 var result = response.data;
                 if(result.code == 200) {
                     self.blogData = result.data.beans;

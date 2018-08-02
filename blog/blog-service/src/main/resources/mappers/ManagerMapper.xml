@@ -1,39 +1,82 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.heleeos.blog.dao.ManagerMapper">
-    <sql id="Base_Column_List">
-        id, user_name, pass_word, nick_name, real_name, manager_picture, login_time, manager_state
+
+    <resultMap id="BaseResultMap" type="com.heleeos.blog.dto.Manager">
+        <id column="id" jdbcType="INTEGER" property="id" />
+        <result column="user_name" jdbcType="VARCHAR" property="userName" />
+        <result column="pass_word" jdbcType="VARCHAR" property="passWord" />
+        <result column="manager_state" jdbcType="BIT" property="managerState" />
+        <result column="nick_name" jdbcType="VARCHAR" property="nickName" />
+        <result column="real_name" jdbcType="VARCHAR" property="realName" />
+        <result column="manager_picture" jdbcType="VARCHAR" property="managerPicture" />
+        <result column="host_domain" jdbcType="VARCHAR" property="hostDomain" />
+        <result column="login_token" jdbcType="VARCHAR" property="loginToken" />
+        <result column="login_time" jdbcType="TIMESTAMP" property="loginTime" />
+        <result column="login_ip" jdbcType="VARCHAR" property="loginIp" />
+    </resultMap>
+
+    <sql id="base_column_list">
+        id, user_name, pass_word, manager_state, nick_name, real_name, manager_picture, host_domain,
+        login_token, login_time, login_ip
     </sql>
 
-    <insert id="insert" parameterType="com.heleeos.blog.dto.Manager" keyProperty="id">
-        insert into t_manager (user_name, pass_word, nick_name, real_name, manager_picture, loginTime, manager_state)
-        values (#{userName}, #{passWord}, #{nickName}, #{realName}, #{managerPicture}, #{loginTime}, #{managerState})
-    </insert>
+    <select id="get" resultMap="BaseResultMap">
+        select <include refid="base_column_list" /> from t_manager
+        <where>
+            <if test="id != null">
+                AND id = #{id}
+            </if>
+            <if test="userName != null">
+                AND user_name = #{userName}
+            </if>
+            <if test="passWord != null">
+                AND pass_word = #{passWord}
+            </if>
+            <if test="hostDomain != null">
+                AND host_domain = #{hostDomain}
+            </if>
+            <if test="loginToken != null">
+                AND login_token = #{loginToken}
+            </if>
+        </where> limit 1
+    </select>
 
     <update id="update" parameterType="com.heleeos.blog.dto.Manager">
-        update t_manager set user_name = #{userName}, pass_word = #{passWord}, nick_name = #{nickName},
-        real_name = #{realName}, manager_picture = #{managerPicture}, login_time = #{loginTime}, manager_state = #{managerState}
-        where id = #{id}
-    </update>
-    
-    <update id="updateState">
-        update t_manager set manager_state = #{state} where id = #{id}
-    </update>
-    
-    <update id="updateLoginTime">
-        update t_manager set login_time = now() where id = #{id}
+        update t_manager
+        <set>
+            <if test="userName != null">
+                user_name = #{userName,jdbcType=VARCHAR},
+            </if>
+            <if test="passWord != null">
+                pass_word = #{passWord,jdbcType=VARCHAR},
+            </if>
+            <if test="managerState != null">
+                manager_state = #{managerState,jdbcType=BIT},
+            </if>
+            <if test="nickName != null">
+                nick_name = #{nickName,jdbcType=VARCHAR},
+            </if>
+            <if test="realName != null">
+                real_name = #{realName,jdbcType=VARCHAR},
+            </if>
+            <if test="managerPicture != null">
+                manager_picture = #{managerPicture,jdbcType=VARCHAR},
+            </if>
+            <if test="hostDomain != null">
+                host_domain = #{hostDomain,jdbcType=VARCHAR},
+            </if>
+            <if test="loginToken != null">
+                login_token = #{loginToken,jdbcType=VARCHAR},
+            </if>
+            <if test="loginTime != null">
+                login_time = #{loginTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="loginIp != null">
+                login_ip = #{loginIp,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
     </update>
 
-    <select id="get" resultType="com.heleeos.blog.dto.Manager">
-        select <include refid="Base_Column_List" /> from t_manager where user_name = #{userName} and pass_word = #{passWord} limit 1
-    </select>
-
-    <select id="getByToken" resultType="com.heleeos.blog.dto.Manager">
-        select <include refid="Base_Column_List" /> from t_manager where login_token = #{token} limit 1
-    </select>
-
-    <update id="updateToken">
-        update t_manager set login_token = #{token} where id = #{id}
-    </update>
-    
 </mapper>

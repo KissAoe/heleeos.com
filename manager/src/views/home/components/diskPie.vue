@@ -1,12 +1,12 @@
 <template>
-    <div style="width:100%;height:100%;" id="data_source_con"></div>
+    <div style="width:100%;height:100%;" id="disk_pie"></div>
 </template>
 
 <script>
 import echarts from 'echarts';
 
 export default {
-    name: 'dataSourcePie',
+    name: 'diskPie',
     data () {
         return {
             //
@@ -14,7 +14,7 @@ export default {
     },
     mounted () {
         this.$nextTick(() => {
-            var dataSourcePie = echarts.init(document.getElementById('data_source_con'));
+            var dataSourcePie = echarts.init(document.getElementById('disk_pie'));
             const option = {
                 tooltip: {
                     trigger: 'item',
@@ -27,16 +27,16 @@ export default {
                 },
                 series: [
                     {
-                        name: '访问来源',
+                        name: '磁盘空间',
                         type: 'pie',
                         radius: '66%',
                         center: ['50%', '60%'],
                         data: [
-                            {value: 2103456, name: 'ios', itemStyle: {normal: {color: '#9bd598'}}},
-                            {value: 1305923, name: 'android', itemStyle: {normal: {color: '#ffd58f'}}},
-                            {value: 543250, name: 'pc', itemStyle: {normal: {color: '#abd5f2'}}},
-                            {value: 798403, name: 'web', itemStyle: {normal: {color: '#ab8df2'}}},
-                            {value: 302340, name: 'others', itemStyle: {normal: {color: '#e14f60'}}}
+                            {value: 150, name: '空余', itemStyle: {normal: {color: '#9bd598'}}},
+                            {value: 50, name: '备份', itemStyle: {normal: {color: '#ffd58f'}}},
+                            {value: 80, name: '程序', itemStyle: {normal: {color: '#abd5f2'}}},
+                            {value: 20, name: '系统', itemStyle: {normal: {color: '#ab8df2'}}},
+                            {value: 10, name: '其它', itemStyle: {normal: {color: '#e14f60'}}}
                         ],
                         itemStyle: {
                             emphasis: {

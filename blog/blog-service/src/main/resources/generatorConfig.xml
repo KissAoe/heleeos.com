@@ -15,10 +15,16 @@
         <!-- 生成DAO的包名和位置 -->
         <javaClientGenerator targetPackage="com.heleeos.blog.dao" targetProject="src/main/java" type="XMLMAPPER" />
 
-        <table schema="heleeos_blog" tableName="t_blog" domainObjectName="Blog2"
+        <table schema="heleeos_blog" tableName="t_auth_role" domainObjectName="AuthRole"
             enableCountByExample="false" enableUpdateByExample="false"
             enableDeleteByExample="false" enableSelectByExample="false"
             selectByExampleQueryId="false">
+        </table>
+
+        <table schema="heleeos_blog" tableName="t_auth_route" domainObjectName="AuthRoute"
+               enableCountByExample="false" enableUpdateByExample="false"
+               enableDeleteByExample="false" enableSelectByExample="false"
+               selectByExampleQueryId="false">
         </table>
     </context>
 </generatorConfiguration>

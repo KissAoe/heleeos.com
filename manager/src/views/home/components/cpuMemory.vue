@@ -1,8 +1,10 @@
 <template>
-    <div style="width:100%;height:100%;" id="user_flow"></div>
+    <div style="width:100%;height:100%;" id="cpu_memory"></div>
 </template>
 
 <script>
+import api from '@/libs/api';
+import axios from 'axios';
 import echarts from 'echarts';
 
 const option = {
@@ -11,16 +13,16 @@ const option = {
     },
     series: [
         {
-            name: '入流量',
+            name: 'CPU使用率',
             type: 'gauge',
             min: 0,
-            max: 1000,
+            max: 100,
             detail: {
-                formatter: '{value}Mb+',
+                formatter: '{value}%',
                 fontSize: 18,
                 offsetCenter: [0, '50px']
             },
-            data: [{value: 50, name: '当前入流量'}],
+            data: [{value: 50, name: 'CPU使用率'}],
             center: ['25%', '50%'],
             radius: '80%',
             title: {
@@ -37,16 +39,16 @@ const option = {
             }
         },
         {
-            name: '出流量',
+            name: '内存使用量',
             type: 'gauge',
             min: 0,
-            max: 1000,
+            max: 100,
             detail: {
-                formatter: '{value}Mb+',
+                formatter: '{value}%',
                 fontSize: 18,
                 offsetCenter: [0, '50px']
             },
-            data: [{value: 50, name: '当前出流量'}],
+            data: [{value: 50, name: '内存使用量'}],
             center: ['75%', '50%'],
             radius: '80%',
             title: {
@@ -66,13 +68,24 @@ const option = {
 };
 
 export default {
-    name: 'userFlow',
+    name: 'cpuMemory',
     mounted () {
-        let userFlow = echarts.init(document.getElementById('user_flow'));
-        option.series[0].data[0].value = (Math.random() * 1000).toFixed(2) - 0;
-        option.series[1].data[0].value = (Math.random() * 1000).toFixed(2) - 0;
-        userFlow.setOption(option);
+        let userFlow = echarts.init(document.getElementById('cpu_memory'));
 
+        var self = this;
+        setInterval(function(){
+            axios.get(api.getSystemInfo).then(function(response){
+                var result = response.data;
+                if(result.code == 200) {
+                    option.series[0].data[0].value = result.data.cpuLoad.toFixed(2) - 0;
+                    option.series[1].data[0].value = result.data.memoryUsed.toFixed(2) - 0;
+                } else {
+                    self.$Message.error('加载信息失败,' + result.message);
+                }
+            });
+            userFlow.setOption(option);
+        }, 2000);
+        
         window.addEventListener('resize', function () {
             userFlow.resize();
         });

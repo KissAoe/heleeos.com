@@ -30,7 +30,7 @@ public class ResultUtil {
      * @param code 返回码
      * @param message 返回消息
      */
-    public static Result<Object> of(int code, String message) {
+    public static <T> Result<T> of(int code, String message) {
         return of(code, message, null);
     }
 
@@ -38,7 +38,7 @@ public class ResultUtil {
      * 根据布尔类型构建
      * @param success 是否成功
      */
-    public static Result<Object> of(boolean success) {
+    public static <T> Result<T> of(boolean success) {
         if(success) {
             return SUCCESS();
         } else {
@@ -67,7 +67,7 @@ public class ResultUtil {
     /**
      * 构建一个成功的返回体
      */
-    public static Result<Object> SUCCESS() {
+    public static <T> Result<T> SUCCESS() {
         return of(200, "操作成功", null);
     }
 
@@ -83,35 +83,35 @@ public class ResultUtil {
      * 构建一个参数错误的返回体
      * @param message 提示信息
      */
-    public static Result<Object> PARAMETER_ERROR(String message) {
+    public static <T> Result<T> PARAMETER_ERROR(String message) {
         return of(300, message, null);
     }
 
     /**
      * 构建一个授权失败的返回体
      */
-    public static Result<Object> AUTHOR_ERROR() {
+    public static <T> Result<T> AUTHOR_ERROR() {
         return of(301, "登录失效", null);
     }
 
     /**
      * 构建一个业务错误的返回体
      */
-    public static Result<Object> FAILED() {
+    public static <T> Result<T> FAILED() {
         return of(400, "操作失败", null);
     }
 
     /**
      * 构建一个业务错误的返回体
      */
-    public static Result<Object> FAILED(String message) {
+    public static <T> Result<T> FAILED(String message) {
         return of(400, message, null);
     }
 
     /**
      * 构建一个系统错误的返回体
      */
-    public static Result<Object> ERROR() {
+    public static <T> Result<T> ERROR() {
         return of(500, "系统错误", null);
     }
 }

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.heleeos.blog.dao.Note2Mapper">
+    <resultMap id="BaseResultMap" type="com.heleeos.blog.dto.Note">
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="title" jdbcType="VARCHAR" property="title"/>
+        <result column="status" jdbcType="INTEGER" property="status"/>
+        <result column="manager_id" jdbcType="INTEGER" property="managerId"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+        <result column="update_time" jdbcType="TIMESTAMP" property="updateTime"/>
+    </resultMap>
+
+    <resultMap extends="BaseResultMap" id="AllResultMap" type="com.heleeos.blog.dto.Note">
+        <result column="content" jdbcType="LONGVARCHAR" property="content"/>
+    </resultMap>
+
+    <sql id="note_base_column_list">
+      id, title, status, manager_id, create_time, update_time
+    </sql>
+
+    <sql id="note_all_column_list"><include refid="note_base_column_list"/>, content </sql>
+
+    <select id="get" parameterType="java.lang.Integer" resultMap="AllResultMap">
+        select <include refid="note_all_column_list"/> from t_note where id = #{id,jdbcType=INTEGER}
+    </select>
+
+    <insert id="insert" parameterType="com.heleeos.blog.dto.Note">
+        insert into t_note (id, title, content, status,
+                            manager_id, create_time, update_time)
+        values (#{id,jdbcType=INTEGER}, #{title,jdbcType=VARCHAR},  #{content,jdbcType=LONGVARCHAR}, #{status,jdbcType=INTEGER},
+                #{managerId,jdbcType=INTEGER}, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)
+    </insert>
+
+    <update id="update" parameterType="com.heleeos.blog.dto.Note">
+    update t_note
+    set title = #{title,jdbcType=VARCHAR},
+      status = #{status,jdbcType=INTEGER},
+      manager_id = #{managerId,jdbcType=INTEGER},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      content = #{content,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

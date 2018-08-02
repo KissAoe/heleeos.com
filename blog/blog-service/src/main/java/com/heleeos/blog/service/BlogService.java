@@ -3,6 +3,7 @@ package com.heleeos.blog.service;
 import java.util.List;
 
 import com.heleeos.blog.bean.PageInfo;
+import com.heleeos.blog.exception.ServiceException;
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -53,7 +54,7 @@ public class BlogService {
      *
      * @param id 文章ID
      */
-    public Blog get(Integer id) {
+    public Blog get(Integer id) throws ServiceException {
         if(id == null || id == 0) return null;
         try {
             Blog blog = new Blog();
@@ -70,7 +71,7 @@ public class BlogService {
      *
      * @param url 文章显示的URL.
      */
-    public Blog getByURL(String url) {
+    public Blog getByURL(String url) throws ServiceException {
         if(StringUtils.trimToNull(url) == null) return null;
         try {
             Blog blog = new Blog();
@@ -91,7 +92,7 @@ public class BlogService {
      * @param page 开始位置
      * @param rows 显示条数
      */
-    public PageInfo<Blog> getList(Integer type, String tags, Byte state, Integer page, Integer rows) {
+    public PageInfo<Blog> getList(Integer type, String tags, Byte state, Integer page, Integer rows) throws ServiceException {
         int index = (page - 1) * rows;
         if(index < 0) index = 0;
         if(rows < 0) rows = 5;

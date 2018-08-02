@@ -1,7 +1,5 @@
 package com.heleeos.blog.dto;
 
-import com.heleeos.blog.common.ManagerState;
-
 import java.util.Date;
 
 /**
@@ -31,11 +29,10 @@ public class Manager {
     private byte managerState;
     /** 登录令牌 */
     private String loginToken;
-    
-    public Manager() {
-        setId(0);
-        setManagerState(ManagerState.NORMAL.getState());
-    }
+    /** 所属的域名 */
+    private String hostDomain;
+    /** 上次登录IP */
+    private String loginIp;
 
     public Integer getId() {
         return id;
@@ -107,5 +104,21 @@ public class Manager {
 
     public void setLoginToken(String loginToken) {
         this.loginToken = loginToken;
+    }
+
+    public String getHostDomain() {
+        return hostDomain;
+    }
+
+    public void setHostDomain(String hostDomain) {
+        this.hostDomain = hostDomain;
+    }
+
+    public String getLoginIp() {
+        return loginIp;
+    }
+
+    public void setLoginIp(String loginIp) {
+        this.loginIp = loginIp;
     }
 }

@@ -58,7 +58,7 @@ export default {
         },
         delay: {
             type: Number,
-            default: 500
+            default: 800
         },
         options: {
             type: Object,

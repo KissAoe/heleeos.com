@@ -1,7 +1,6 @@
 package com.heleeos.blog.dao;
 
 import com.heleeos.blog.dto.Manager;
-import org.apache.ibatis.annotations.Param;
 
 /**
  * 管理员表的操作, t_manager.
@@ -13,17 +12,7 @@ import org.apache.ibatis.annotations.Param;
  */
 public interface ManagerMapper {
 
-    int insert(Manager bean) throws Exception;
+    Manager get(Manager manager);
 
-    int update(Manager bean) throws Exception;
-
-    int updateState(@Param("id") Integer id, @Param("state") Byte state) throws Exception;
-
-    int updateLoginTime(Integer id) throws Exception;
-    
-    Manager get(@Param("userName") String username, @Param("passWord") String password) throws Exception;
-
-    Manager getByToken(@Param("token") String token) throws Exception;
-
-    int updateToken(@Param("id") int id, @Param("token") String token) throws Exception;
+    int update(Manager manager);
 }

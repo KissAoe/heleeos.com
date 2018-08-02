@@ -8,9 +8,28 @@ import java.util.Map;
  */
 public class SystemInfo {
 
+    /** 服务器相关信息 */
+    private Map<String, Object> serverInfo;
+
+    /** jvm信息 */
     private Map<String, Object> jvmInfo;
 
-    private Map<String, Object> serverMemory;
+    /** 内存信息 */
+    private Map<String, Object> memoryInfo;
+
+    /** cpu使用率 */
+    private double cpuLoad;
+
+    /** 内存使用率 */
+    private double memoryUsed;
+
+    public Map<String, Object> getServerInfo() {
+        return serverInfo;
+    }
+
+    public void setServerInfo(Map<String, Object> serverInfo) {
+        this.serverInfo = serverInfo;
+    }
 
     public Map<String, Object> getJvmInfo() {
         return jvmInfo;
@@ -20,11 +39,27 @@ public class SystemInfo {
         this.jvmInfo = jvmInfo;
     }
 
-    public Map<String, Object> getServerMemory() {
-        return serverMemory;
+    public Map<String, Object> getMemoryInfo() {
+        return memoryInfo;
     }
 
-    public void setServerMemory(Map<String, Object> serverMemory) {
-        this.serverMemory = serverMemory;
+    public void setMemoryInfo(Map<String, Object> memoryInfo) {
+        this.memoryInfo = memoryInfo;
+    }
+
+    public double getCpuLoad() {
+        return cpuLoad;
+    }
+
+    public void setCpuLoad(double cpuLoad) {
+        this.cpuLoad = cpuLoad;
+    }
+
+    public double getMemoryUsed() {
+        return memoryUsed;
+    }
+
+    public void setMemoryUsed(double memoryUsed) {
+        this.memoryUsed = memoryUsed;
     }
 }

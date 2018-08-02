@@ -51,14 +51,36 @@ export const otherRouter = {
 // 作为Main组件的子页面展示并且在左侧菜单显示的路由写在appRouter里
 export const appRouter = [
     {
+        path: '/system-info',
+        icon: 'information-circled',
+        name: 'system-info',
+        title: '系统信息',
+        component: Main,
+        children: [
+            { path: 'server-info', title: '服务器信息', name: 'server-info', icon: 'social-tux' },
+            { path: 'application-info', title: '应用信息', name: 'application-info', icon: 'android-apps'}
+        ]
+    },
+    {
         path: '/blog-manager',
-        icon: 'paper-airplane',
+        icon: 'document',
         name: 'blog-manager',
         title: '博客管理',
         component: Main,
         children: [
             { path: 'blog-publish', title: '文章发布', name: 'blog-publish', icon: 'compose', component: () => import('@/views/blog-manager/blog-publish.vue') },
             { path: 'blog-flow', title: '博客审核', name: 'blog-flow', icon: 'arrow-swap', component: () => import('@/views/blog-manager/blog-flow.vue') }
+        ]
+    },
+    {
+        path: '/note-manager',
+        icon: 'arrow-graph-up-right',
+        name: 'note-manager',
+        title: '每日进步',
+        component: Main,
+        children: [
+            { path: 'note-square', title: '话题广场', name: 'note-square', icon: 'radio-waves', component: () => import('@/views/note-manager/note-square.vue') },
+            { path: 'note-publish', title: '发布话题', name: 'note-publish', icon: 'ios-cloud-upload-outline', component: () => import('@/views/note-manager/note-publish.vue') }
         ]
     }
 ];

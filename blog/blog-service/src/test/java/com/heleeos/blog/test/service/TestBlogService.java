@@ -1,6 +1,7 @@
 package com.heleeos.blog.test.service;
 
 import com.heleeos.blog.common.BlogState;
+import com.heleeos.blog.exception.ServiceException;
 import com.heleeos.blog.test.TestConfig;
 import org.apache.log4j.Logger;
 import org.junit.Test;
@@ -16,18 +17,18 @@ public class TestBlogService extends TestConfig {
     private BlogService blogService;
 
     @Test
-    public void save() {
+    public void save() throws ServiceException {
         toLogger(logger, blogService.save(blogService.get(1)));
     }
 
     @Test
-    public void getBlog() {
+    public void getBlog() throws ServiceException {
         toLogger(logger, blogService.get(1));
         toLogger(logger, blogService.getByURL("spring-info"));
     }
 
     @Test
-    public void getList() {
+    public void getList() throws ServiceException {
         int count = blogService.getCount(null, null, null);
         logger.info("Count:" + count);
         toLogger(logger, blogService.getList(null, null, null, 1, 10));

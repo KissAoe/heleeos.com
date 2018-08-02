@@ -1,6 +1,5 @@
-package com.heleeos.blog.service;
+package com.heleeos.blog.facede;
 
-import com.heleeos.blog.bean.SystemInfo;
 import com.heleeos.blog.util.TextFormatUtil;
 import com.sun.management.OperatingSystemMXBean;
 import org.springframework.stereotype.Service;
@@ -10,33 +9,33 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * 版本相关的内容
- * Created by liyu on 2017/10/13.
+ * 系统信息相关的操作
+ * Created by liyu on 2018/7/29.
  */
 @Service
-public class SystemService {
+public class SystemInfoFacade {
+
+    private OperatingSystemMXBean osBean = ManagementFactory.getPlatformMXBean(OperatingSystemMXBean.class);
 
     /**
-     * 获取当前项目版本
+     * 获取cpu使用率
      */
-    public String getBeanVersion() {
-        return "1.0.1";
+    public double getCpuLoad() {
+        return osBean.getSystemCpuLoad() * 100;
     }
 
     /**
-     *
+     * 获取内存信息
      */
-    public SystemInfo getSystemInfo() {
-        SystemInfo systemInfo = new SystemInfo();
-        systemInfo.setJvmInfo(getJVMInfo());
-        systemInfo.setServerMemory(getServerMemory());
-        return systemInfo;
+    public double getUsedMemory() {
+        return (osBean.getTotalPhysicalMemorySize() * 1.0 - osBean.getFreePhysicalMemorySize()) / osBean.getTotalPhysicalMemorySize() * 100;
     }
+
 
     /**
      * 获取JVM的信息
      */
-    private Map<String, Object> getJVMInfo() {
+    public Map<String, Object> getJVMInfo() {
         Map<String, Object> jvmMap = new HashMap<>();
 
         Runtime runtime = Runtime.getRuntime();
@@ -54,7 +53,7 @@ public class SystemService {
     /**
      * 获取服务器上的内存信息
      */
-    private Map<String, Object> getServerMemory() {
+    public Map<String, Object> getMemoryInfo() {
         Map<String, Object> systemMap = new HashMap<>();
 
         OperatingSystemMXBean operatingSystemMXBean = (OperatingSystemMXBean) ManagementFactory.getOperatingSystemMXBean();

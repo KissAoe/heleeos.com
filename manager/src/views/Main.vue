@@ -41,7 +41,7 @@
                         <Row type="flex" justify="end" align="middle" class="user-dropdown-innercon">
                             <Dropdown transfer trigger="click" @on-click="handleClickUserDropdown">
                                 <a href="javascript:void(0)">
-                                    <span class="main-user-name">{{ userName }}</span>
+                                    <span class="main-user-name">Kiss</span>
                                     <Icon type="arrow-down-b"></Icon>
                                 </a>
                                 <DropdownMenu slot="list">
