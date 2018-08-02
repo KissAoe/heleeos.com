@@ -6,7 +6,9 @@ package com.heleeos.blog.exception;
  */
 public class ServiceException extends Exception {
 
-    private int code;
+    private static final long serialVersionUID = 1L;
+
+	private int code;
 
     private String message;
 

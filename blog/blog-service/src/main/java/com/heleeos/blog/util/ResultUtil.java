@@ -52,7 +52,7 @@ public class ResultUtil {
      * @param message 返回信息
      * @param keyAndValue map的 key,value 组合
      */
-    public static Result<Map> ofMap(int code, String message, Object...keyAndValue) {
+    public static Result<Map<Object, Object>> ofMap(int code, String message, Object...keyAndValue) {
         Map<Object, Object> map = new HashMap<>();
         if(keyAndValue.length % 2 != 0) {
             return of(code, message, map);

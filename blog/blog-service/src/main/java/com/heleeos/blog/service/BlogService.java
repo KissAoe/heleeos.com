@@ -11,7 +11,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.heleeos.blog.dto.Blog;
-import com.heleeos.blog.common.BlogState;
 import com.heleeos.blog.dao.BlogMapper;
 
 /**
