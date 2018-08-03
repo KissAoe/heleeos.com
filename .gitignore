@@ -48,3 +48,7 @@ work/
 # Idea generated files #
 *.iml
 .idea/
+
+# Visual Studio Code # 
+.vscode/
+
