@@ -2,7 +2,6 @@ package com.heleeos.blog.service;
 
 import java.util.List;
 
-import com.heleeos.blog.bean.PageInfo;
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -31,15 +30,15 @@ public class BlogService {
     /**
      * 保存文章.
      *
-     * @param bean 文章
+     * @param blog 文章
      */
-    public boolean save(Blog bean) {
-        if(bean == null) return false;
+    public boolean save(Blog blog) {
+        if(blog == null) return false;
         try {
-            if(bean.getId() == 0) {
-                return blogMapper.insert(bean) == 1;
+            if(blog.getId() == null || blog.getId() == 0) {
+                return blogMapper.insert(blog) == 1;
             } else {
-                return blogMapper.update(bean) == 1;
+                return blogMapper.update(blog) == 1;
             }
         } catch (Exception e) {
             logger.error(String.format("保存[博客文章]异常,原因:%s", e.getMessage()), e);

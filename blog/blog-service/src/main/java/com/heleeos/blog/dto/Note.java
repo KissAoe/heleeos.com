@@ -10,6 +10,8 @@ public class Note {
 
     /** 自增ID */
     private Integer id;
+    /** 标题 */
+    private String title;
     /** 状态 */
     private Integer status;
     /** 内容 */
@@ -29,12 +31,28 @@ public class Note {
         this.id = id;
     }
 
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
     public Integer getStatus() {
         return status;
     }
 
     public void setStatus(Integer status) {
         this.status = status;
+    }
+
+    public String getContent() {
+        return content;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
     }
 
     public Integer getManagerId() {
@@ -59,13 +77,5 @@ public class Note {
 
     public void setUpdateTime(Date updateTime) {
         this.updateTime = updateTime;
-    }
-
-    public String getContent() {
-        return content;
-    }
-
-    public void setContent(String content) {
-        this.content = content;
     }
 }

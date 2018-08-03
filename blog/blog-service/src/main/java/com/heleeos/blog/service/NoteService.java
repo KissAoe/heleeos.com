@@ -34,7 +34,7 @@ public class NoteService {
     public boolean save(Note note) {
         if(note == null) return false;
         try {
-            if(note.getId() == 0) {
+            if(note.getId() == null || note.getId() == 0) {
                 return noteMapper.insert(note) == 1;
             } else {
                 return noteMapper.update(note) == 1;
