@@ -133,7 +133,6 @@
 
 <script>
 import api from '@/libs/api';
-import axios from 'axios';
 import cpuMemory from './components/cpuMemory.vue';
 import diskPie from './components/diskPie.vue';
 
@@ -258,7 +257,7 @@ export default {
         },
         init() {
             var self = this;
-            axios.get(api.getBlogList, {params : {'rows' : 6, 'statue' : 20}}).then(function(response) {
+            api.ajax(api.getBlogList, {params : {'rows' : 6, 'statue' : 20}}).then(function(response) {
                 var result = response.data;
                 if(result.code == 200) {
                     self.blogData = result.data.beans;

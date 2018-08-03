@@ -4,7 +4,6 @@
 
 <script>
 import api from '@/libs/api';
-import axios from 'axios';
 import echarts from 'echarts';
 
 const option = {
@@ -73,18 +72,18 @@ export default {
         let userFlow = echarts.init(document.getElementById('cpu_memory'));
 
         var self = this;
-        setInterval(function(){
-            axios.get(api.getSystemInfo).then(function(response){
-                var result = response.data;
-                if(result.code == 200) {
-                    option.series[0].data[0].value = result.data.cpuLoad.toFixed(2) - 0;
-                    option.series[1].data[0].value = result.data.memoryUsed.toFixed(2) - 0;
-                } else {
-                    self.$Message.error('加载信息失败,' + result.message);
-                }
-            });
-            userFlow.setOption(option);
-        }, 2000);
+        // setInterval(function(){
+        //     api.ajax(api.getSystemInfo).then(function(response){
+        //         var result = response.data;
+        //         if(result.code == 200) {
+        //             option.series[0].data[0].value = result.data.cpuLoad.toFixed(2) - 0;
+        //             option.series[1].data[0].value = result.data.memoryUsed.toFixed(2) - 0;
+        //         } else {
+        //             self.$Message.error('加载信息失败,' + result.message);
+        //         }
+        //     });
+        //     userFlow.setOption(option);
+        // }, 2000);
         
         window.addEventListener('resize', function () {
             userFlow.resize();

@@ -45,7 +45,7 @@ public class ManagerController {
                 return ResultUtil.FAILED("用户名或密码错误");
             } else {
                 String newToken = TokenUtil.createToken(manager);
-                CookieUtil.saveTokenToCookie(response, newToken);
+//                CookieUtil.saveTokenToCookie(response, newToken);
                 manager.setLoginToken(newToken);
                 managerService.updateToken(manager.getId(), newToken, "");
                 return ResultUtil.SUCCESS(manager);

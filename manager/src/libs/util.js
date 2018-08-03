@@ -1,26 +1,25 @@
-import axios from 'axios';
 import env from '../../build/env';
-import semver from 'semver';
-import packjson from '../../package.json';
 
-let util = {
+let util = {};
 
-};
-util.title = function (title) {
+/**
+ * 设置网站的标题
+ * @param {*} title 
+ */
+util.setTitle = function (title) {
     title = title || '网站管理端';
     window.document.title = title;
 };
 
-const ajaxUrl = env === 'development'
-    ? 'http://127.0.0.1:8888'
-    : env === 'production'
-        ? 'https://www.url.com'
-        : 'https://debug.url.com';
-
-util.ajax = axios.create({
-    baseURL: ajaxUrl,
-    timeout: 30000
-});
+/**
+ * 仅开发环境控制台输出
+ * @param {*} info 
+ */
+util.logger = function (info) {
+    if(env === 'development') {
+        console.log(info);
+    }
+}
 
 util.inOf = function (arr, targetArr) {
     let res = true;
@@ -226,9 +225,7 @@ util.toDefaultPage = function (routers, name, route, next) {
     let notHandle = true;
     while (i < len) {
         if (routers[i].name === name && routers[i].children && routers[i].redirect === undefined) {
-            route.replace({
-                name: routers[i].children[0].name
-            });
+            route.replace({ name: routers[i].children[0].name });
             notHandle = false;
             next();
             break;

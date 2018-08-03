@@ -170,8 +170,8 @@ const app = {
         setCurrentPageName (state, name) {
             state.currentPageName = name;
         },
-        setAvator (state, path) {
-            localStorage.avatorImgPath = path;
+        setManager (state, manager) {
+            localStorage.loginManager = manager;
         },
         switchLang (state, lang) {
             state.lang = lang;

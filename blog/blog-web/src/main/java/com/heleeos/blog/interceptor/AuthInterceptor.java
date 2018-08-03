@@ -26,7 +26,7 @@ public class AuthInterceptor extends HandlerInterceptorAdapter {
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         //1. 检查是否登录
         Result<String> result = ResultUtil.TOKEN_ERROR();
-        String token = CookieUtil.getTokenFromCookie(request);
+        String token = request.getParameter("token");
         if(StringUtils.isBlank(token)) {
             writeAjaxResponse(response, result);
             return false;
