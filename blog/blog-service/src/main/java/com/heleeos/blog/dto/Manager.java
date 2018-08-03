@@ -1,5 +1,7 @@
 package com.heleeos.blog.dto;
 
+import com.heleeos.blog.bean.BaseBean;
+
 import java.util.Date;
 
 /**
@@ -9,14 +11,14 @@ import java.util.Date;
  * @author liyu
  * @author kissaoe@gmail.com
  */
-public class Manager {
+public class Manager extends BaseBean {
 
     /** 自增ID */
-    private Integer id;
+    private transient Integer id;
     /** 用户名 */
-    private String userName;
+    private transient String userName;
     /** 密码 */
-    private String passWord;
+    private transient String passWord;
     /** 昵称 */
     private String nickName;
     /** 真实姓名 */
@@ -26,11 +28,11 @@ public class Manager {
     /** 上次登录时间 */
     private Date loginTime;
     /** 状态 */
-    private byte managerState;
+    private transient byte managerState;
     /** 登录令牌 */
     private String loginToken;
     /** 所属的域名 */
-    private String hostDomain;
+    private transient String hostDomain;
     /** 上次登录IP */
     private String loginIp;
 

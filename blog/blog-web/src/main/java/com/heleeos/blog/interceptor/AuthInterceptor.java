@@ -1,6 +1,5 @@
 package com.heleeos.blog.interceptor;
 
-import com.google.gson.Gson;
 import com.heleeos.blog.bean.Result;
 import com.heleeos.blog.dto.Manager;
 import com.heleeos.blog.service.ManagerService;
@@ -54,7 +53,7 @@ public class AuthInterceptor extends HandlerInterceptorAdapter {
     private void writeAjaxResponse(HttpServletResponse response, Result<String> result) {
         try {
             response.setContentType("application/json;charset=UTF-8");
-            response.getWriter().write(new Gson().toJson(result));
+            response.getWriter().write(result.toString());
         } catch (IOException ignored) {}
     }
 }

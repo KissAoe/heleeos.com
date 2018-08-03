@@ -1,11 +1,10 @@
-package com.heleeos.blog.ajax;
+package com.heleeos.blog.controller;
 
 import com.heleeos.blog.bean.Result;
 import com.heleeos.blog.bean.SystemInfo;
 import com.heleeos.blog.facede.SystemInfoFacade;
 import com.heleeos.blog.util.ResultUtil;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;

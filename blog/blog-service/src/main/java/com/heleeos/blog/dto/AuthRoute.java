@@ -1,5 +1,7 @@
 package com.heleeos.blog.dto;
 
+import com.heleeos.blog.bean.BaseBean;
+
 import java.util.Date;
 
 /**
@@ -9,7 +11,7 @@ import java.util.Date;
  * @author liyu
  * @author kissaoe@gmail.com
  */
-public class AuthRoute {
+public class AuthRoute extends BaseBean {
 
     /** 自增ID */
     private Integer id;

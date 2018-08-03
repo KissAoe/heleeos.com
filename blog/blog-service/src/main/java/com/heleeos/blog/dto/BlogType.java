@@ -1,5 +1,7 @@
 package com.heleeos.blog.dto;
 
+import com.heleeos.blog.bean.BaseBean;
+
 /**
  * 博客文章的分类, t_blog_type 表.
  * Created with Li Yu on 2017/12/16.
@@ -7,7 +9,7 @@ package com.heleeos.blog.dto;
  * @author liyu
  * @author kissaoe@gmail.com
  */
-public class BlogType {
+public class BlogType extends BaseBean {
 
     /** 自增ID */
     private Integer id;

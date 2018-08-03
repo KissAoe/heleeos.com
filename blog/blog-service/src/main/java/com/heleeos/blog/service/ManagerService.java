@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.heleeos.blog.dto.Manager;
 import com.heleeos.blog.dao.ManagerMapper;
+import org.springframework.util.DigestUtils;
 
 /**
  * 管理员信息数据服务层, t_manager.
@@ -34,7 +35,7 @@ public class ManagerService {
         try {
             Manager manager = new Manager();
             manager.setUserName(username);
-            manager.setPassWord(password);
+            manager.setPassWord(DigestUtils.md5DigestAsHex(password.getBytes()));
 
             return managerMapper.get(manager);
         } catch (Exception e) {

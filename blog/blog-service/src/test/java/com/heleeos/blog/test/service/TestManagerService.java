@@ -1,25 +1,25 @@
 package com.heleeos.blog.test.service;
 
+import com.google.gson.Gson;
+import com.heleeos.blog.bean.Result;
+import com.heleeos.blog.dto.Manager;
+import com.heleeos.blog.service.ManagerService;
 import com.heleeos.blog.test.TestConfig;
-import org.apache.log4j.Logger;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.util.DigestUtils;
-import com.heleeos.blog.service.ManagerService;
 
 public class TestManagerService extends TestConfig {
-
-    private Logger logger = Logger.getLogger(getClass());
 
     @Autowired
     private ManagerService managerService;
 
     @Test
     public void login() {
-        try {
-            toLogger(logger, managerService.login("admin", DigestUtils.md5DigestAsHex("li123456".getBytes())));
-        } catch (Exception e) {
-            logger.error("登录失败", e);
-        }
+        Manager manager = managerService.login("admin", "li123456");
+        logger.info(new Gson().toJson(manager));
+        Result<Manager> managerResult = new Result<>();
+
+        managerResult.setData(manager);
+        logger.info(new Gson().toJson(managerResult));
     }
 }

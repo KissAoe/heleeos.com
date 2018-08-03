@@ -1,4 +1,4 @@
-package com.heleeos.blog.ajax;
+package com.heleeos.blog.controller;
 
 import com.heleeos.blog.bean.PageInfo;
 import com.heleeos.blog.bean.Result;

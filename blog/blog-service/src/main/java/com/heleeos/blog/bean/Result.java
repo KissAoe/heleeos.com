@@ -1,6 +1,5 @@
 package com.heleeos.blog.bean;
 
-import java.io.Serializable;
 import com.google.gson.Gson;
 
 /**
@@ -10,15 +9,19 @@ import com.google.gson.Gson;
  * @author liyu
  * @author kissaoe@gmail.com
  */
-public class Result<T> implements Serializable {
+public class Result<T> {
 
-    private static final long serialVersionUID = 4466004470986993081L;
-
-    /** 结果返回码 */
+    /**
+     * 结果返回码
+     */
     private int code;
-    /** 结果返回的消息 */
+    /**
+     * 结果返回的消息
+     */
     private String message;
-    /** 结果返回的数据 */
+    /**
+     * 结果返回的数据
+     */
     private T data;
 
     public int getCode() {

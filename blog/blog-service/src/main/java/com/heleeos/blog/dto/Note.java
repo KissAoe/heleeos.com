@@ -1,12 +1,14 @@
 package com.heleeos.blog.dto;
 
+import com.heleeos.blog.bean.BaseBean;
+
 import java.util.Date;
 
 /**
  * 每日记录
  * Created by liyu on 2018/7/27.
  */
-public class Note {
+public class Note extends BaseBean {
 
     /** 自增ID */
     private Integer id;

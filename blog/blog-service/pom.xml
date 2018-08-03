@@ -67,7 +67,7 @@
             <artifactId>slf4j-log4j12</artifactId>
         </dependency>
 
-        <!-- gson -->
+        <!-- json -->
         <dependency>
             <groupId>com.google.code.gson</groupId>
             <artifactId>gson</artifactId>
