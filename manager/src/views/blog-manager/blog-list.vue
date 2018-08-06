@@ -1,14 +1,28 @@
 <style lang="less">
     @import '../../styles/common.less';
+    @import './blog-list.less';
 </style>
 
 <template>
     <div>
         <Row>
-            <Card>
-                <Table border :columns="blogColumns" :data="blogData" :loading="blogLoading"></Table>
-                list
-            </Card>
+            <Table border :columns="blogColumns" :data="blogData" :loading="blogLoading"></Table>
+        </Row>
+        <Row class="pageDiv">
+            <Select v-model="queryParam.rows" style="width:60px" @on-change="loadBlogList()">
+                <Option v-for="item in rowList" :value="item.value" :key="item.value">{{ item.label }}</Option>
+            </Select>
+            <Button>首页</Button>
+            <Button @click="changePage(-1)">上一页</Button>
+            <ButtonGroup>
+                <Button  v-for="button in buttons"
+                         :key="button"
+                         :type="button == queryParam.page ? 'info' : 'default'">
+                    {{button}}
+                </Button>
+            </ButtonGroup>
+            <Button @click="changePage(1)">下一页</Button>
+            <Button>尾页</Button>
         </Row>
     </div>
 </template>
@@ -21,6 +35,24 @@ export default {
     name: 'workflow',
     data () {
         return {
+            queryParam: {
+                page: 1,
+                rows: 5,
+                count: 0
+            },
+            rowList: [{
+                value: '5',
+                label: '5条'
+            }, {
+                value: '7',
+                label: '7条'
+            }, {
+                value: '10',
+                label: '10条'
+            }, {
+                value: '15',
+                label: '15条'
+            }],
             blogLoading: true,
             blogData: [],
             blogColumns: [{
@@ -86,21 +118,35 @@ export default {
                     }]
         };
     },
+    computed: {
+        buttons: function() {
+            return [1,2,3];
+        }
+    },
     methods: {
         loadBlogList () {
             var self = this;
-            axios.get(api.getBlogList, {params : {'rows' : 6, 'statue' : 20}}).then(function(response) {
+            api.ajax(api.getBlogList, {params : this.queryParam}).then(function(response) {
                 var result = response.data;
                 if(result.code == 200) {
                     self.blogData = result.data.beans;
+                    self.queryParam.count = result.data.count;
                 } else {
                     self.$Message.error('加载列表失败, 原因:' + result.message);
                 }
                 self.blogLoading = false;
             }).catch(function (error) {
-                console.log(error);
+                self.$Message.error('服务器开小差了, 请稍后重试!');
                 self.blogLoading = false;
             });
+        },
+        changePage(change) {
+            this.queryParam.page = this.queryParam.page + change;
+            this.loadBlogList();
+        },
+        setPage(pageNumber) {
+            this.queryParam.page = pageNumber;
+            this.loadBlogList();
         }
     },
     mounted () {
