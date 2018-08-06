@@ -1,41 +1,57 @@
+<style lang="less">
+    @import '../../styles/common.less';
+    @import './note-square.less';
+</style>
+
 <template>
-	<div>
+	<div class="square">
         <Row>
-           <Col span="7">
-	            <Card :bordered="false">
-	            	
-	                <p slot="title">
-	                	<Row>
-	            			<Col span="18">（匿名）读书感</Col>
-	            			<Col span="6">2018-07-29 17:04:37</Col>
-	            		</Row>
-	                </p>
-	                <p>内容</p>
-	                <p>内容</p>
-	                <p>内容</p>
-	            </Card>
-	        </Col>
-	        <Col span="7" offset="1">
-	            <Card :bordered="false">
-	                <p slot="title">标题</p>
-	                <p>内容</p>
-	                <p>内容</p>
-	                <p>内容</p>
-	            </Card>
-	        </Col>
-	        <Col span="7" offset="1">
-	            <Card :bordered="false">
-	                <p slot="title">标题</p>
-	                <p>内容</p>
-	                <p>内容</p>
-	                <p>内容</p>
-	            </Card>
-	        </Col>
+			<Card class="note" :bordered="false" v-for="note in noteList" :key="note.id">
+				<p slot="title">
+					<Row>
+						<span>{{note.title}}</span>
+						<span class="title-time">{{note.createTime}}</span>
+					</Row>
+				</p>
+				<p v-html="note.content"></p>
+			</Card>
         </Row>
+
+		<div>loadMore</div>
     </div>
 </template>
 <script>
-    export default {
-        
+import api from '@/libs/api';
+
+export default {
+    name: 'noteSquare',
+    data () {
+        return {
+            queryParam: {
+                page: 1,
+                rows: 5
+			},
+			noteList: []
+        };
+    },
+    methods: {
+        loadNoteList () {
+            var self = this;
+            api.ajax(api.getNoteList, {params : this.queryParam}).then(function(response) {
+                var result = response.data;
+                if(result.code == 200) {
+					self.noteList = result.data;
+					console.log(result.data)
+                } else {
+                    self.$Message.error('加载列表失败, 原因:' + result.message);
+                }
+            }).catch(function (error) {
+                self.$Message.error('服务器开小差了, 请稍后重试!');
+            });
+        }
+    },
+    mounted () {
+        this.loadNoteList();
     }
+}
 </script>

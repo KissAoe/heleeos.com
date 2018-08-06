@@ -5,10 +5,12 @@ let api = {
 	login: "/ajax/manager/login.json",
 	logout: "ajax/manager/logout.json",
 
-	getBlogList : "/ajax/blog/list.json",
-	getBlogInfo : "/ajax/blog/blog.json",
+	getBlogList: "/ajax/blog/list.json",
+    getBlogInfo: "/ajax/blog/blog.json",
+    
+    getNoteList: "/ajax/note/list.json",
 
-	getSystemInfo : "/ajax/system/getInfo.json",
+	getSystemInfo: "/ajax/system/getInfo.json",
 }
 
 const ajaxUrl = env === 'development' ? 'http://127.0.0.1:8080' : 'http://127.0.0.1:13030';

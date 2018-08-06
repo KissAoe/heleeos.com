@@ -29,7 +29,6 @@
 
 <script>
 import api from '@/libs/api';
-import axios from 'axios';
 
 export default {
     name: 'workflow',
