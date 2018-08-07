@@ -60,7 +60,7 @@ router.beforeEach((to, from, next) => {
                 next({ name: 'login' });
             }
         } else {
-            Util.logger("manager:" + manager);
+            //Util.logger("manager:" + JSON.stringify(manager));
             localStorage.setItem("token", manager.loginToken);
             if(to.name === 'login') {
                 Util.title();

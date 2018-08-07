@@ -17,7 +17,9 @@
             <ButtonGroup>
                 <Button  v-for="button in buttons"
                          :key="button"
-                         :type="button == queryParam.page ? 'info' : 'default'">
+                         :type="button == queryParam.page ? 'info' : 'default'"
+                         @click=""
+                         >
                     {{button}}
                 </Button>
             </ButtonGroup>

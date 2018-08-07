@@ -6,7 +6,7 @@ let api = {
 	logout: "ajax/manager/logout.json",
 
 	getBlogList: "/ajax/blog/list.json",
-    getBlogInfo: "/ajax/blog/blog.json",
+    getBlogInfo: "/ajax/blog/get.json",
     
     getTopicList: "/ajax/topic/list.json",
 
