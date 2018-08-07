@@ -231,7 +231,7 @@ export default {
     },
     computed: {
         avatorPath () {
-            return localStorage.avatorImgPath;
+            return localStorage.getItem("userAvatorPathPath");
         }
     },
     methods: {
@@ -252,7 +252,7 @@ export default {
             }
         },
         cancelAdd () {
-            this.showAddNewTodo = false;
+            this.showAddNewTodo = false;l
             this.newToDoItemValue = '';
         },
         init() {

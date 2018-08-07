@@ -68,17 +68,17 @@
     </div>
 </template>
 <script>
-    import shrinkableMenu from './main-components/shrinkable-menu/shrinkable-menu.vue';
-    import tagsPageOpened from './main-components/tags-page-opened.vue';
-    import breadcrumbNav from './main-components/breadcrumb-nav.vue';
-    import fullScreen from './main-components/fullscreen.vue';
-    import lockScreen from './main-components/lockscreen/lockscreen.vue';
-    import messageTip from './main-components/message-tip.vue';
-    import themeSwitch from './main-components/theme-switch/theme-switch.vue';
+    import shrinkableMenu from './components/shrinkable-menu/shrinkable-menu.vue';
+    import tagsPageOpened from './components/tags-page-opened.vue';
+    import breadcrumbNav from './components/breadcrumb-nav.vue';
+    import fullScreen from './components/fullscreen.vue';
+    import lockScreen from './components/lockscreen/lockscreen.vue';
+    import messageTip from './components/message-tip.vue';
+    import themeSwitch from './components/theme-switch/theme-switch.vue';
+    import scrollBar from '@/views/components/scroll-bar/vue-scroller-bars';
     import Cookies from 'js-cookie';
     import util from '@/libs/util.js';
-    import scrollBar from '@/views/my-components/scroll-bar/vue-scroller-bars';
-    
+   
     export default {
         components: {
             shrinkableMenu,
@@ -109,7 +109,7 @@
                 return this.$store.state.app.currentPath; // 当前面包屑数组
             },
             avatorPath () {
-                return localStorage.avatorImgPath;
+                return localStorage.getItem("userAvatorPathPath");
             },
             cachePage () {
                 return this.$store.state.app.cachePage;

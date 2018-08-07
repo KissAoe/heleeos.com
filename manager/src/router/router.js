@@ -31,7 +31,7 @@ export const page403 = {
 export const locking = {
     path: '/locking',
     name: 'locking',
-    component: () => import('@/views/main-components/lockscreen/components/locking-page.vue')
+    component: () => import('@/views/components/lockscreen/components/locking-page.vue')
 };
 
 // 作为Main组件的子页面展示但是不在左侧菜单显示的路由写在otherRouter里

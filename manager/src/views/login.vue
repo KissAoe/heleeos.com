@@ -66,15 +66,20 @@ export default {
                     var self = this;
                     api.ajax(api.login, {params : this.loginInfo}).then(response => {
                         var result = response.data;
-                        console.log(result);
                         if(result.code == 200) {
-                            localStorage.managerInfo = JSON.stringify(result.data);
-                            // self.$store.commit('setManager', JSON.stringify(result.data));
+                            let managerInfo = result.data;
+                            if(managerInfo.managerPicture != undefined && managerInfo.managerPicture.length > 0) {
+                                localStorage.setItem("userAvatorPathPath", managerInfo.managerPicture);
+                            } else {
+                                localStorage.setItem("userAvatorPathPath", "/dist/images/g.gif")
+                            }
+                            localStorage.setItem("managerInfo", JSON.stringify(result.data));
                             self.$router.push({name: 'home_index'});
                         } else {
                             self.loginInfo.loginTip = result.message;
                         }
                     }).catch(error => {
+                        console.log(error);
                         self.loginInfo.loginTip = "服务器开小差了, 请稍后重试~";
                     });
                 }
