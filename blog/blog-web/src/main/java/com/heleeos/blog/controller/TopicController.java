@@ -2,8 +2,8 @@ package com.heleeos.blog.controller;
 
 import com.heleeos.blog.bean.Result;
 import com.heleeos.blog.dto.Manager;
-import com.heleeos.blog.dto.Note;
-import com.heleeos.blog.facede.NoteFacade;
+import com.heleeos.blog.dto.Topic;
+import com.heleeos.blog.facede.TopicFacade;
 import com.heleeos.blog.util.ResultUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -17,21 +17,21 @@ import java.util.List;
  * Created by liyu on 2018/8/3.
  */
 @RestController
-@RequestMapping("/ajax/note")
-public class NoteController {
+@RequestMapping("/ajax/topic")
+public class TopicController {
 
     private Logger logger = LoggerFactory.getLogger(getClass());
 
     @Autowired
-    private NoteFacade noteFacade;
+    private TopicFacade topicFacade;
 
     /**
      * 查询话题列表
      */
     @GetMapping(value = "list.json")
-    public Result<List<Note>> getList(Integer lastId, Integer count) {
+    public Result<List<Topic>> getList(Integer lastId, Integer count) {
         try {
-            return ResultUtil.SUCCESS(noteFacade.getNoteList(lastId, count));
+            return ResultUtil.SUCCESS(topicFacade.getTopicList(lastId, count));
         } catch (Exception e) {
             logger.error("查询[话题列表]失败, 失败原因:" + e.getMessage(), e);
             return ResultUtil.ERROR();
@@ -42,17 +42,17 @@ public class NoteController {
      * 保存话题
      */
     @PostMapping(value = "save")
-    public Result<Boolean> saveBlog(@RequestBody Note note, @RequestAttribute Manager manager) {
+    public Result<Boolean> saveTopic(@RequestBody Topic topic, @RequestAttribute Manager manager) {
         try {
             //1. 校验参数
-            String errorMessage = noteFacade.checkNote(note);
+            String errorMessage = topicFacade.checkTopic(topic);
             if (errorMessage != null) {
                 return ResultUtil.PARAMETER_ERROR(errorMessage);
             }
-            note.setManagerId(manager.getId());
+            topic.setManagerId(manager.getId());
 
             //2. 保存文章
-            boolean success = noteFacade.saveNote(note);
+            boolean success = topicFacade.saveTopic(topic);
             if (success) {
                 return ResultUtil.SUCCESS();
             } else {

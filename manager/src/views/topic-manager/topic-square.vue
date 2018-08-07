@@ -1,12 +1,12 @@
 <style lang="less">
     @import '../../styles/common.less';
-    @import './note-square.less';
+    @import './topic-square.less';
 </style>
 
 <template>
 	<div class="square">
         <Row>
-			<Card class="note" :bordered="false" v-for="note in noteList" :key="note.id">
+			<Card class="topic" :bordered="false" v-for="note in noteList" :key="note.id">
 				<p slot="title">
 					<Row>
 						<span>{{note.title}}</span>
@@ -24,7 +24,7 @@
 import api from '@/libs/api';
 
 export default {
-    name: 'noteSquare',
+    name: 'topicSquare',
     data () {
         return {
             queryParam: {
@@ -35,9 +35,9 @@ export default {
         };
     },
     methods: {
-        loadNoteList () {
+        loadTopicList () {
             var self = this;
-            api.ajax(api.getNoteList, {params : this.queryParam}).then(function(response) {
+            api.ajax(api.getTopicList, {params : this.queryParam}).then(function(response) {
                 var result = response.data;
                 if(result.code == 200) {
 					self.noteList = result.data;
@@ -51,7 +51,7 @@ export default {
         }
     },
     mounted () {
-        this.loadNoteList();
+        this.loadTopicList();
     }
 }
 </script>

@@ -1,7 +1,7 @@
 package com.heleeos.blog.facede;
 
-import com.heleeos.blog.dto.Note;
-import com.heleeos.blog.service.NoteService;
+import com.heleeos.blog.dto.Topic;
+import com.heleeos.blog.service.TopicService;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,10 +13,10 @@ import java.util.List;
  * Created by liyu on 2018/8/3.
  */
 @Service
-public class NoteFacade {
+public class TopicFacade {
 
     @Autowired
-    private NoteService noteService;
+    private TopicService topicService;
 
     /**
      * 获取话题列表
@@ -24,33 +24,33 @@ public class NoteFacade {
      * @param lastId 上次获取最后一条记录的ID
      * @param count  获取的个数
      */
-    public List<Note> getNoteList(Integer lastId, Integer count) {
+    public List<Topic> getTopicList(Integer lastId, Integer count) {
         if (lastId == null) lastId = 0;
         if (count == null || count <= 0 || count >= 100) count = 10;
-        return noteService.getList(lastId, count);
+        return topicService.getList(lastId, count);
     }
 
     /**
      * 检查话题是否正确
      *
-     * @param note 话题
+     * @param topic 话题
      * @return 错误信息
      */
-    public String checkNote(Note note) {
-        if (note == null) {
+    public String checkTopic(Topic topic) {
+        if (topic == null) {
             return "参数不能为空";
         }
 
-        if(StringUtils.isBlank(note.getTitle())) {
+        if (StringUtils.isBlank(topic.getTitle())) {
             return "话题标题不能为空";
         }
 
-        if(StringUtils.isBlank(note.getContent())) {
+        if (StringUtils.isBlank(topic.getContent())) {
             return "话题内容不能为空";
         }
 
-        if(note.getStatus() == null) {
-            note.setStatus(0);
+        if (topic.getStatus() == null) {
+            topic.setStatus(0);
         }
 
         return null;
@@ -59,9 +59,9 @@ public class NoteFacade {
     /**
      * 保存话题
      *
-     * @param note 话题
+     * @param topic 话题
      */
-    public boolean saveNote(Note note) {
-        return noteService.save(note);
+    public boolean saveTopic(Topic topic) {
+        return topicService.save(topic);
     }
 }

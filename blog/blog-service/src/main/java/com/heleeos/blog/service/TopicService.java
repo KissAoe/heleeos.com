@@ -1,7 +1,7 @@
 package com.heleeos.blog.service;
 
-import com.heleeos.blog.dao.NoteMapper;
-import com.heleeos.blog.dto.Note;
+import com.heleeos.blog.dao.TopicMapper;
+import com.heleeos.blog.dto.Topic;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,7 +11,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 /**
- * 笔记数据服务层, t_note.
+ * 话题数据服务层, t_topic.
  * Created with Li Yu on 2018/08/01.
  *
  * @author liyu
@@ -19,45 +19,45 @@ import java.util.List;
  * @version 1.0.0
  */
 @Service
-public class NoteService {
+public class TopicService {
 
     private Logger logger = LoggerFactory.getLogger(getClass());
 
     @Autowired
-    private NoteMapper noteMapper;
+    private TopicMapper topicMapper;
 
     /**
-     * 保存每日记录.
+     * 保存话题.
      *
-     * @param note 每日记录
+     * @param topic 话题
      */
-    public boolean save(Note note) {
-        if(note == null) return false;
+    public boolean save(Topic topic) {
+        if(topic == null) return false;
         try {
-            if(note.getId() == null || note.getId() == 0) {
-                return noteMapper.insert(note) == 1;
+            if(topic.getId() == null || topic.getId() == 0) {
+                return topicMapper.insert(topic) == 1;
             } else {
-                return noteMapper.update(note) == 1;
+                return topicMapper.update(topic) == 1;
             }
         } catch (Exception e) {
-            logger.error(String.format("保存[每日笔记]异常,原因:%s", e.getMessage()), e);
+            logger.error(String.format("保存[话题]异常,原因:%s", e.getMessage()), e);
             return false;
         }
     }
 
     /**
-     * 查询每日记录列表.
+     * 查询话题列表.
      *
      * @param lastId 最近一条的ID
      * @param rows 显示条数
      */
-    public List<Note> getList(Integer lastId, Integer rows) {
+    public List<Topic> getList(Integer lastId, Integer rows) {
         if(lastId == null) lastId = 0;
         if(rows == null) rows = 10;
         try {
-            return noteMapper.getNoteList(lastId, rows);
+            return topicMapper.getList(lastId, rows);
         } catch (Exception e) {
-            logger.error(String.format("查询[每日笔记]列表异常,原因:%s", e.getMessage()), e);
+            logger.error(String.format("查询[话题]列表异常,原因:%s", e.getMessage()), e);
             return new LinkedList<>();
         }
     }

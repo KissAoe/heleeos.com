@@ -8,7 +8,7 @@ let api = {
 	getBlogList: "/ajax/blog/list.json",
     getBlogInfo: "/ajax/blog/blog.json",
     
-    getNoteList: "/ajax/note/list.json",
+    getTopicList: "/ajax/topic/list.json",
 
 	getSystemInfo: "/ajax/system/getInfo.json",
 }

@@ -8,7 +8,7 @@ import java.util.Date;
  * 每日记录
  * Created by liyu on 2018/7/27.
  */
-public class Note extends BaseBean {
+public class Topic extends BaseBean {
 
     /** 自增ID */
     private Integer id;

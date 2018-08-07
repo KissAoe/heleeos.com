@@ -74,14 +74,14 @@ export const appRouter = [
         ]
     },
     {
-        path: '/note-manager',
+        path: '/topic-manager',
         icon: 'arrow-graph-up-right',
-        name: 'note-manager',
-        title: '每日进步',
+        name: 'topic-manager',
+        title: '话题管理',
         component: Main,
         children: [
-            { path: 'note-square', title: '话题广场', name: 'note-square', icon: 'radio-waves', component: () => import('@/views/note-manager/note-square.vue') },
-            { path: 'note-publish', title: '发布话题', name: 'note-publish', icon: 'ios-cloud-upload-outline', component: () => import('@/views/note-manager/note-publish.vue') }
+            { path: 'topic-square', title: '话题广场', name: 'topic-square', icon: 'radio-waves', component: () => import('@/views/topic-manager/topic-square.vue') },
+            { path: 'topic-publish', title: '发布话题', name: 'topic-publish', icon: 'ios-cloud-upload-outline', component: () => import('@/views/topic-manager/topic-publish.vue') }
         ]
     }
 ];
