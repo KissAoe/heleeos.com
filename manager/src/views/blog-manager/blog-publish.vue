@@ -16,23 +16,10 @@
                         <FormItem label="文章路径">
                             <Input v-model="blog.displayUrl" @on-blur="handleBlogBlur" icon="ios-pulse-strong"/>
                         </FormItem>
-
-                        <FormItem label="内容类型">
-                            <RadioGroup v-model="blog.contentType" type="button" size="large">
-                                <Radio label="0">Html</Radio>
-                                <Radio label="1">MarkDown</Radio>
-                            </RadioGroup>
-                        </FormItem>
                     </Form>
-
-                    <div class="margin-top-20" v-bind:class="{ notDisplay: !showHTML}">
-                        <textarea id="htmlEditor"></textarea>
-                    </div>
-
-                    <div class="markdown-con" v-bind:class="{ notDisplay: showHTML}">
+                    <div class="markdown-con">
                         <textarea id="markdownEditor"></textarea> 
                     </div>
-
                 </Card>
             </Col>
             <Col span="6" class="padding-left-10">
@@ -85,7 +72,6 @@
 
 <script>
 import api from '@/libs/api';
-import tinymce from 'tinymce';
 import SimpleMDE from 'simplemde';
 import './simplemde.min.css';
 
@@ -97,7 +83,6 @@ export default {
                 id: 0,
                 blogTitle: '',
                 displayUrl: '',
-                contentType: '',
                 blogContent: ''
             },
             publishTime: '',
@@ -115,28 +100,6 @@ export default {
     },
     methods: {
         init () {
-            tinymce.init({
-                selector: '#htmlEditor',
-                branding: false,
-                elementpath: false,
-                height: 600,
-                menubar: 'edit insert view format table tools',
-                theme: 'modern',
-                plugins: [
-                    'advlist autolink lists link image charmap print preview hr anchor pagebreak imagetools',
-                    'searchreplace visualblocks visualchars code fullscreen fullpage',
-                    'insertdatetime media nonbreaking save table contextmenu directionality',
-                    'emoticons paste textcolor colorpicker textpattern imagetools codesample'
-                ],
-                toolbar1: ' newnote print fullscreen preview | undo redo | insert | styleselect | forecolor backcolor bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image emoticons media codesample',
-                autosave_interval: '20s',
-                image_advtab: true,
-                table_default_styles: {
-                    width: '100%',
-                    borderCollapse: 'collapse'
-                }
-            });
-
             this.simplemde = new SimpleMDE({
                 element: document.getElementById('markdownEditor'),
                 toolbar: ['bold', 'italic', 'strikethrough', 'heading', 'heading-smaller', 'heading-bigger', 'heading-1', 'heading-2', 'heading-3', '|', 'code', 'quote', 'unordered-list', 'clean-block', '|', 'link', 'image', 'table', 'horizontal-rule', '|', 'preview']
@@ -187,11 +150,7 @@ export default {
             if(obj === undefined) {
                 obj = this.blog;
             }
-            if(this.blog.contentType === 0) {
-                tinymce.activeEditor.setContent(obj.blogContent);
-            } else {
-                this.simplemde.value(obj.blogContent);
-            }
+            this.simplemde.value(obj.blogContent);
         }, 
         handleBlogBlur () {
             if (this.blog.blogTitle.length == 0) {
@@ -204,12 +163,7 @@ export default {
                 return false;
             }
 
-            if(this.contentType == 'HTML') {
-                this.blog.blogContent = tinymce.activeEditor.getContent();
-            } else {
-                this.blog.blogContent = this.simplemde.value();
-            }
-
+            this.blog.blogContent = this.simplemde.value();
             if(this.blog.blogContent.length == 0) {
                 this.$Message.error('文章内容不可为空');
                 return false;
@@ -233,8 +187,12 @@ export default {
         },
         handlePreview () {
             if (this.handleBlogBlur()) {
-                localStorage.blog = JSON.stringify(this.blog);
-                this.$router.push({ name: 'preview' });
+                localStorage.setItem("tempBlog_" + this.blog.id, JSON.stringify(this.blog));
+                let query = {blogId : this.blog.id};
+                this.$router.push({
+                    name: 'preview',
+                    query: query
+                });
             }
         },
         timeSaveCache() {
@@ -274,14 +232,6 @@ export default {
                     });
                 }, 3000);
             }
-        }
-    },
-    computed: {
-        showHTML () {
-            return this.blog.contentType == 0;
-        },
-        showMarkDown() {
-            return this.blog.contentType == 1;
         }
     },
     mounted () {

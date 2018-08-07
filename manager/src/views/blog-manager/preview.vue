@@ -7,9 +7,9 @@
     <div class="preview-main">
         <div>
             <Card>
-                <h1>{{ blog.title }}</h1>
+                <h1>{{ blog.blogTitle }}</h1>
                 <p class="preview-publish-time"><Icon type="android-alarm-clock"></Icon>&nbsp;发布时间：{{ publishTime }}</p>
-                <div class="preview-content" v-html="blog.info"></div>
+                <div class="preview-content" v-html="blog.blogContent"></div>
             </Card>
         </div>
     </div>
@@ -21,18 +21,31 @@ import showdown from 'showdown'
 export default {
     data () {
         return {
-            blog: '',
+            blog: {
+                id: 0,
+                blogTitle: '',
+                displayUrl: '',
+                blogContent: ''
+            },
             publishTime: ''
         };
     },
-    mounted () {
-        this.blog = JSON.parse(localStorage.blog);
-        if(this.blog.type == "MarkDown") {
+    methods: {
+        loadBlog() {
+            let blogId = this.$route.query.blogId;
+            this.blog = JSON.parse(localStorage.getItem("tempBlog_" + blogId));
+            console.log(this.blog);
+
             var converter = new showdown.Converter();
             converter.setFlavor('github'); 
-            this.blog.info = converter.makeHtml(this.blog.info);
+            this.blog.blogContent = converter.makeHtml(this.blog.blogContent);
         }
+    },
+    mounted () {
         this.publishTime = localStorage.publishTime;
-    }
+    },
+    beforeRouteEnter(to,from,next) {
+        next(vm => vm.loadBlog());
+    },
 };
 </script>
