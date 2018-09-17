@@ -2,25 +2,50 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.heleeos.blog.dao.mapper.BlogTypeMapper">
 
-  <sql id="Base_Column_List">id, type_module, type_name, type_count</sql>
+  <sql id="Base_Column_List">id, parent_id, type_name, type_state</sql>
 
   <insert id="insert" parameterType="com.heleeos.blog.dao.dto.BlogType" keyProperty="id">
-    insert into t_blog_type (type_module, type_name, type_count)
-    values (#{typeModule}, #{typeName}, #{typeCount})
+    insert into t_blog_type (parent_id, type_name, type_state, create_time, update_time)
+    values (#{parentId}, #{typeName}, #{typeState}, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)
   </insert>
 
   <update id="update" parameterType="com.heleeos.blog.dao.dto.BlogType">
-    update t_blog_type set type_module = #{typeModule}, type_name   = #{typeName}, type_count  = #{typeCount} where id = #{id}
+    update t_blog_type set parent_id = #{parentId}, type_name = #{typeName}, type_count = #{typeCount}, update_time = CURRENT_TIMESTAMP} where id = #{id}
   </update>
 
   <select id="get" resultType="com.heleeos.blog.dao.dto.BlogType">
-    select  <include refid="Base_Column_List" /> from t_blog_type where id = #{id} limit 1
+    select  <include refid="Base_Column_List" /> from t_blog_type
+    <where>
+      <if test="id != null">
+        AND id = #{id}
+      </if>
+      <if test="parentId != null">
+        AND parent_id = #{parentId}
+      </if>
+      <if test="typeName != null">
+        AND type_name = #{typeName}
+      </if>
+      <if test="typeState != null">
+        AND type_state = #{typeState}
+      </if>
+    </where> limit 1
   </select>
 
   <select id="getList" resultType="com.heleeos.blog.dao.dto.BlogType">
     select  <include refid="Base_Column_List" /> from t_blog_type
-    <if test="filterZero">
-      where type_count > 0 order by type_count desc
-    </if>
+    <where>
+      <if test="id != null">
+        AND id = #{id}
+      </if>
+      <if test="parentId != null">
+        AND parent_id = #{parentId}
+      </if>
+      <if test="typeName != null">
+        AND type_name = #{typeName}
+      </if>
+      <if test="typeState != null">
+        AND type_state = #{typeState}
+      </if>
+    </where> order by id
   </select>
 </mapper>

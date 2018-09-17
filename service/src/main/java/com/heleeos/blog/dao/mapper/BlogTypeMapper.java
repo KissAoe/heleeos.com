@@ -16,25 +16,25 @@ public interface BlogTypeMapper {
 
     /**
      * 新增一个文章分类
-     * @param bean 文章分类
+     * @param blogType 文章分类
      */
-    int insert(BlogType bean) throws Exception;
+    int insert(BlogType blogType);
 
     /**
      * 更新文章分类
-     * @param bean 文章分类
+     * @param blogType 文章分类
      */
-    int update(BlogType bean) throws Exception;
+    int update(BlogType blogType);
 
     /**
      * 获取文章分类
-     * @param id 分类ID
+     * @param blogType 筛选条件
      */
-    BlogType get(Integer id) throws Exception;
+    BlogType get(BlogType blogType);
 
     /**
      * 获取文章分类列表
-     * @param filterZero 是否显示个数为0的
+     * @param blogType 筛选条件
      */
-    List<BlogType> getList(@Param("filterZero") boolean filterZero) throws Exception;
+    List<BlogType> getList(BlogType blogType);
 }

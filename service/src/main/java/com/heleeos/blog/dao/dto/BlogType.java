@@ -13,12 +13,12 @@ public class BlogType extends BaseBean {
 
     /** 自增ID */
     private Integer id;
-    /** 所属模块 */
-    private String typeModule;
+    /** 父类ID */
+    private Integer parentId;
     /** 分类的名字 */
     private String typeName;
     /** 当前分类的个数 */
-    private Integer typeCount;
+    private Integer typeState;
 
     public Integer getId() {
         return id;
@@ -28,12 +28,12 @@ public class BlogType extends BaseBean {
         this.id = id;
     }
 
-    public String getTypeModule() {
-        return typeModule;
+    public Integer getParentId() {
+        return parentId;
     }
 
-    public void setTypeModule(String typeModule) {
-        this.typeModule = typeModule;
+    public void setParentId(Integer parentId) {
+        this.parentId = parentId;
     }
 
     public String getTypeName() {
@@ -44,11 +44,11 @@ public class BlogType extends BaseBean {
         this.typeName = typeName;
     }
 
-    public Integer getTypeCount() {
-        return typeCount;
+    public Integer getTypeState() {
+        return typeState;
     }
 
-    public void setTypeCount(Integer typeCount) {
-        this.typeCount = typeCount;
+    public void setTypeState(Integer typeState) {
+        this.typeState = typeState;
     }
 }

@@ -28,15 +28,15 @@ public class BlogTypeService {
 
     /**
      * 保存博客分类
-     * @param bean 博客分类
+     * @param blogType 博客分类
      */
-    public boolean save(BlogType bean) {
-        if(bean == null) return false;
+    public boolean save(BlogType blogType) {
+        if(blogType == null) return false;
         try {
-            if(bean.getId() == null || bean.getId() == 0) {
-                return blogTypeMapper.insert(bean) == 1;
+            if(blogType.getId() == null || blogType.getId() == 0) {
+                return blogTypeMapper.insert(blogType) == 1;
             } else {
-                return blogTypeMapper.update(bean) == 1;
+                return blogTypeMapper.update(blogType) == 1;
             }
         } catch (Exception e) {
             logger.error(String.format("保存[博客分类]异常,原因:%s", e.getMessage()), e);
@@ -51,7 +51,9 @@ public class BlogTypeService {
     public BlogType get(Integer id) {
         if(id == null || id == 0) return null;
         try {
-            return blogTypeMapper.get(id);
+            BlogType blogType = new BlogType();
+            blogType.setId(id);
+            return blogTypeMapper.get(blogType);
         } catch (Exception e) {
             logger.error(String.format("获取[博客分类]异常,原因:%s", e.getMessage()), e);
             return null;
@@ -59,19 +61,14 @@ public class BlogTypeService {
     }
 
     /**
-     * 获取博客分类列表, 个数为0的不展示
-     */
-    public List<BlogType> getList() {
-        return getList(true);
-    }
-
-    /**
      * 获取分类列表
-     * @param filterZero 是否过滤数量为0
+     * @param parentId 父类ID
      */
-    public List<BlogType> getList(boolean filterZero) {
+    public List<BlogType> getList(int parentId) {
         try {
-            return blogTypeMapper.getList(filterZero);
+            BlogType blogType = new BlogType();
+            blogType.setParentId(parentId);
+            return blogTypeMapper.getList(blogType);
         } catch (Exception e) {
             logger.error(String.format("获取[博客分类列表]异常,原因:%s", e.getMessage()), e);
             return null;

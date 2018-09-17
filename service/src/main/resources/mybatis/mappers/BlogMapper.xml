@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.heleeos.blog.dao.mapper.BlogMapper">
     <sql id="blog_base_column_list">
-        id, blog_title, display_url, blog_summary, create_time, update_time, manager_id, blog_type, read_count, blog_tags, content_type, blog_state, sort_index
+        id, blog_title, display_url, blog_summary, create_time, update_time, manager_id, blog_type, read_count, blog_tags, blog_state, sort_index
     </sql>
     <sql id="blog_all_column_list">
         <include refid="blog_base_column_list"/>, blog_content
@@ -11,12 +11,12 @@
         insert into t_blog (id,           blog_title,   display_url,
                             blog_summary, create_time,  update_time,
                             manager_id,   blog_type,    read_count,
-                            blog_tags,    content_type, blog_state,
+                            blog_tags,    blog_state,
                             sort_index,   blog_content)
         values (#{id,jdbcType=INTEGER},          #{blogTitle,jdbcType=VARCHAR},   #{displayUrl,jdbcType=VARCHAR},
                 #{blogSummary,jdbcType=VARCHAR}, CURRENT_TIMESTAMP,               CURRENT_TIMESTAMP,
                 #{managerId,jdbcType=INTEGER},   #{blogType,jdbcType=INTEGER},    #{readCount,jdbcType=INTEGER},
-                #{blogTags,jdbcType=VARCHAR},    #{contentType,jdbcType=TINYINT}, #{blogState,jdbcType=TINYINT},
+                #{blogTags,jdbcType=VARCHAR},    #{blogState,jdbcType=TINYINT},
                 #{sortIndex,jdbcType=TINYINT},   #{blogContent,jdbcType=VARCHAR})
     </insert>
     <update id="update" parameterType="com.heleeos.blog.dao.dto.Blog">
@@ -42,9 +42,6 @@
             </if>
             <if test="blogTags != null">
                 blog_tags = #{blogTags,jdbcType=VARCHAR},
-            </if>
-            <if test="contentType != null">
-                content_type = #{contentType,jdbcType=TINYINT},
             </if>
             <if test="blogState != null">
                 blog_state = #{blogState,jdbcType=TINYINT},

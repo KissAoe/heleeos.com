@@ -1,4 +1,4 @@
-server:
+server: &server
     address: 127.0.0.1
     port: 8888
 
@@ -11,9 +11,13 @@ spring:
 
 mybatis:
     type-aliases-package: com.heleeos.blog.dao.dto
-    configLocation: classpath:mybatis/mybatis-config.xml
+    #configLocation: classpath:mybatis/mybatis-config.xml
     mapper-locations: classpath:mybatis/mappers/*Mapper.xml
+    configuration:
+        map-underscore-to-camel-case: true
+        cache-enabled: true
 
 env:
     debug: true
     skip-auth: true
+    cros-origin: http://127.0.0.1:5050

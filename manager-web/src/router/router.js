@@ -68,6 +68,7 @@ export const appRouter = [
         title: '博客管理',
         component: Main,
         children: [
+            { path: 'blog-type', title: '文章分类', name: 'blog-type', icon: 'ios-folder-outline', component: () => import('@/views/blog-manager/blog-type.vue') },
             { path: 'blog-publish', title: '文章发布', name: 'blog-publish', icon: 'compose', component: () => import('@/views/blog-manager/blog-publish.vue') },
             { path: 'blog-list', title: '文章列表', name: 'blog-list', icon: 'ios-list', component: () => import('@/views/blog-manager/blog-list.vue') },
             { path: 'blog-flow', title: '文章审核', name: 'blog-flow', icon: 'arrow-swap', component: () => import('@/views/blog-manager/blog-flow.vue') }

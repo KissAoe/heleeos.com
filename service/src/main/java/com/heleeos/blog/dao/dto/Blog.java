@@ -33,8 +33,6 @@ public class Blog extends BaseBean {
     private Integer readCount;
     /** 标签 */
     private String blogTags;
-    /** 内容类型 */
-    private Byte contentType;
     /** 博客内容 */
     private String blogContent;
     /** 博客状态 */
@@ -120,14 +118,6 @@ public class Blog extends BaseBean {
 
     public void setBlogTags(String blogTags) {
         this.blogTags = blogTags;
-    }
-
-    public Byte getContentType() {
-        return contentType;
-    }
-
-    public void setContentType(Byte contentType) {
-        this.contentType = contentType;
     }
 
     public String getBlogContent() {

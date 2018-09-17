@@ -10,11 +10,15 @@
                 <Card>
                     <Form :label-width="80">
                         <FormItem label="文章标题">
-                            <Input v-model="blog.blogTitle" @on-blur="handleBlogBlur" icon="android-list"/>
+                            <Input v-model="blog.blogTitle" @on-blur="handleBlogBlur"/>
                         </FormItem>
 
                         <FormItem label="文章路径">
-                            <Input v-model="blog.displayUrl" @on-blur="handleBlogBlur" icon="ios-pulse-strong"/>
+                            <Input v-model="blog.displayUrl" @on-blur="handleBlogBlur"/>
+                        </FormItem>
+
+                        <FormItem label="文章简介">
+                            <Input v-model="blog.blogSummary" @on-blur="handleBlogBlur" type="textarea" :autosize="{minRows: 1,maxRows: 5}"/>
                         </FormItem>
                     </Form>
                     <div class="markdown-con">
@@ -96,7 +100,8 @@ export default {
                     return date && date.valueOf() < Date.now();
                 }
             },
-            progress: 0
+            progress: 0,
+            blogTypes: []
         };
     },
     methods: {
@@ -118,6 +123,7 @@ export default {
                     if(result.code == 200) {
                         self.blog = result.data;
                         self.loadContent();
+                        console.log(self.blog);
                         //self.loadlocalStore(loadId);
                     } else {
                         self.$Message.error('加载文章失败' + result.message);
@@ -128,6 +134,27 @@ export default {
             } else {
                 this.loadlocalStore(this.blog.id);
             }
+        },
+        loadBlogType(item, callback) {
+            setTimeout(() => {
+                const data = [
+                    {
+                        title: 'children',
+                        loading: false,
+                        children: []
+                    },
+                    {
+                        title: 'children',
+                        loading: false,
+                        children: []
+                    }
+                ];
+                callback(data);
+            }, 1000);
+        },
+        changeBlogType(context) {
+            console.log(context);
+            console.log(context.getSelectedNodes());
         },
         loadlocalStore(loadId) {
             var tempBlog = localStorage.getItem("tempBlog_" + loadId);
@@ -233,22 +260,35 @@ export default {
         },
         handleDeleteCache () {
             localStorage.blog = "";
-            this.$Notice.success({
-                title: '缓存删除成功',
-                desc: '缓存删除成功'
-            });
+            this.$Notice.success({ title: '缓存删除成功', desc: '缓存删除成功' });
         },
         handlePublish () {
             if (this.handleBlogBlur()) {
                 this.publishLoading = true;
-                //TODO 修改
-                setTimeout(() => {
+                let self = this;
+                api.ajax.post(api.saveBlogInfo, this.blog).then(response => {
+                    var result = response.data;
+                    console.log(result);
+                    if(result.code == 200) {
+                       self.blog.id = result.data;
+                       this.$Notice.success({ title: '文章发布成功', desc: '文章《' + self.blog.blogTitle + '》发布成功' });
+                    } else {
+                        self.$Notice.error({ title: '文章发布失败', desc: result.message });
+                    }
                     this.publishLoading = false;
-                    this.$Notice.success({
-                        title: '保存成功',
-                        desc: '文章《' + this.blog.title + '》保存成功'
-                    });
-                }, 3000);
+                }).catch(error => {
+                    console.log(error);
+                    self.$Notice.error({ title: '文章发布失败', desc: "服务器开小差了, 请稍后重试~" });
+                    this.publishLoading = false;
+                });
+                // TODO 修改
+                // setTimeout(() => {
+                //     this.publishLoading = false;
+                //     this.$Notice.success({
+                //         title: '保存成功',
+                //         desc: '文章《' + this.blog.title + '》保存成功'
+                //     });
+                // }, 3000);
             }
         }
     },

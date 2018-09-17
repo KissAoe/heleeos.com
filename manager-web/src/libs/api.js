@@ -7,6 +7,9 @@ let api = {
 
 	getBlogList: "/ajax/blog/list.json",
     getBlogInfo: "/ajax/blog/get.json",
+    saveBlogInfo: "/ajax/blog/save",
+
+    getBlogTypeList: "ajax/blog/type/list.json",
     
     getTopicList: "/ajax/topic/list.json",
 
@@ -17,21 +20,24 @@ const ajaxUrl = env === 'development' ? 'http://127.0.0.1:8888' : 'http://127.0.
 
 api.ajax = axios.create({
     baseURL: ajaxUrl,
-    timeout: 10000
+    timeout: 5000,
+    headers: {
+        "Content-Type" : "application/json;charset=UTF-8",
+        "Authorization" : localStorage.getItem('token')
+    }
 });
 
-api.ajax.interceptors.request.use(function (config) {
-    const token = localStorage.getItem('token');
-    if(config.method === 'post') {
-        let data = JSON.parse(config.data)
-        config.data = JSON.stringify({ token: token, ...data });
-    } else if(config.method === 'get') {
-        config.params = { token: token, ...config.params }
-    }
-    return config;
-}, function (error) {
-    return Promise.reject(error);
-})
+// api.ajax.interceptors.request.use(function (config) {
+//     const token = localStorage.getItem('token');
+//     if(config.method === 'post') {
+//         config.params = { token: token}
+//     } else if(config.method === 'get') {
+//         config.params = { token: token, ...config.params }
+//     }
+//     return config;
+// }, function (error) {
+//     return Promise.reject(error);
+// });
 
 // /* 过滤请求 */
 // axiosWrap.interceptors.request.use((config) => {

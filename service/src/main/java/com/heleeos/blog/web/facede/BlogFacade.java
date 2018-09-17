@@ -91,10 +91,6 @@ public class BlogFacade {
             return "简介不能为空";
         }
 
-        if(blog.getContentType() == null) {
-            return "内容类型不能为空";
-        }
-
         if(blog.getBlogType() == null) {
             return "文章类型不能为空";
         }
