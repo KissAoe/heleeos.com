@@ -1,36 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.heleeos.blog.dao.mapper.AuthRouteMapper">
-
-    <resultMap id="BaseResultMap" type="com.heleeos.blog.dao.dto.AuthRoute">
-        <id column="id" jdbcType="INTEGER" property="id"/>
-        <result column="auth_name" jdbcType="VARCHAR" property="authName"/>
-        <result column="auth_path" jdbcType="VARCHAR" property="authPath"/>
-        <result column="auth_type" jdbcType="INTEGER" property="authType"/>
-        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
-        <result column="update_time" jdbcType="TIMESTAMP" property="updateTime"/>
-    </resultMap>
-
-    <sql id="Base_Column_List">id, auth_name, auth_path, auth_type, create_time, update_time</sql>
-
-    <select id="get" parameterType="java.lang.Integer" resultMap="BaseResultMap">
-        select
-        <include refid="Base_Column_List"/>
-        from t_auth_route
-        where id = #{id,jdbcType=INTEGER}
-    </select>
-
-    <insert id="insert" parameterType="com.heleeos.blog.dao.dto.AuthRoute">
-        insert into t_auth_route (auth_name, auth_path, auth_type, create_time, update_time)
-        values (#{authName,jdbcType=VARCHAR}, #{authPath,jdbcType=VARCHAR}, #{authType,jdbcType=INTEGER}, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)
-    </insert>
-
-    <update id="update" parameterType="com.heleeos.blog.dao.dto.AuthRoute">
-        update t_auth_route
-        set auth_name = #{authName,jdbcType=VARCHAR},
-          auth_path   = #{authPath,jdbcType=VARCHAR},
-          auth_type   = #{authType,jdbcType=INTEGER},
-          update_time = CURRENT_TIMESTAMP
-        where id = #{id,jdbcType=INTEGER}
-    </update>
+  <resultMap id="BaseResultMap" type="com.heleeos.blog.dao.domain.AuthRoute">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="auth_name" jdbcType="VARCHAR" property="authName" />
+    <result column="auth_path" jdbcType="VARCHAR" property="authPath" />
+    <result column="auth_type" jdbcType="INTEGER" property="authType" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, auth_name, auth_path, auth_type, create_time, update_time
+  </sql>
+  <select id="selectByDomain" parameterType="com.heleeos.blog.dao.domain.AuthRoute" resultMap="BaseResultMap" />
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_auth_route
+    where id = #{id,jdbcType=INTEGER}
+  </select>
 </mapper>

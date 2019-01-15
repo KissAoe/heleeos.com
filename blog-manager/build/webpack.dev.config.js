@@ -20,7 +20,7 @@ module.exports = merge(webpackBaseConfig, {
         chunkFilename: '[name].chunk.js'
     },
     devServer: {
-        port: 5050
+        port: 7002
     },
     plugins: [
         new ExtractTextPlugin({

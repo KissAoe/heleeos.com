@@ -1,7 +1,7 @@
 package com.heleeos.blog.util;
 
 import com.heleeos.blog.common.ConstantKey;
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;

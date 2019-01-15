@@ -1,12 +1,6 @@
 package com.heleeos.blog.dao.mapper;
 
-import com.heleeos.blog.dao.dto.AuthRoute;
+import com.heleeos.blog.dao.BaseMapper;
 
-public interface AuthRouteMapper {
-
-    AuthRoute get(Integer id);
-
-    int insert(AuthRoute authRoute);
-
-    int update(AuthRoute authRoute);
+public interface AuthRouteMapper extends BaseMapper<com.heleeos.blog.dao.domain.AuthRoute> {
 }

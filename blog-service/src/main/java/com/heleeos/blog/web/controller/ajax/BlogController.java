@@ -1,13 +1,11 @@
 package com.heleeos.blog.web.controller.ajax;
 
+import com.heleeos.blog.dao.domain.Blog;
 import com.heleeos.blog.web.bean.PageInfo;
 import com.heleeos.blog.web.bean.Result;
-import com.heleeos.blog.dao.dto.Blog;
 import com.heleeos.blog.web.facede.BlogFacade;
 import com.heleeos.blog.web.request.QueryBlogRequest;
 import com.heleeos.blog.util.ResultUtil;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 

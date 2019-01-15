@@ -1,28 +1,28 @@
-package com.heleeos.blog.dao.dto;
-
-import com.heleeos.blog.web.bean.BaseBean;
+package com.heleeos.blog.dao.domain;
 
 import java.util.Date;
 
 /**
- * 权限路由, t_auth_route 表.
- * Created with Li Yu on 2018/08/01.
+ * 
  *
- * @author liyu
- * @author kissaoe@gmail.com
+ * Created by liyu on 
  */
-public class AuthRoute extends BaseBean {
-
+public class AuthRoute {
     /** 自增ID */
     private Integer id;
-    /** 权限名称 */
+
+    /** 规则名称 */
     private String authName;
-    /** 权限路径 */
+
+    /** 请求的路径，前端地址或后端接口 */
     private String authPath;
-    /** 权限类型, 1-前端、2-后端 */
+
+    /** 前端还是后端, 1 - 前端, 2 - 后端 */
     private Integer authType;
+
     /** 创建时间 */
     private Date createTime;
+
     /** 更新时间 */
     private Date updateTime;
 
@@ -39,7 +39,7 @@ public class AuthRoute extends BaseBean {
     }
 
     public void setAuthName(String authName) {
-        this.authName = authName;
+        this.authName = authName == null ? null : authName.trim();
     }
 
     public String getAuthPath() {
@@ -47,7 +47,7 @@ public class AuthRoute extends BaseBean {
     }
 
     public void setAuthPath(String authPath) {
-        this.authPath = authPath;
+        this.authPath = authPath == null ? null : authPath.trim();
     }
 
     public Integer getAuthType() {

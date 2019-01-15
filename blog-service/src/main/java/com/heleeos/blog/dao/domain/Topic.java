@@ -1,29 +1,33 @@
-package com.heleeos.blog.dao.dto;
-
-import com.heleeos.blog.web.bean.BaseBean;
+package com.heleeos.blog.dao.domain;
 
 import java.util.Date;
 
 /**
- * 每日记录
- * Created by liyu on 2018/7/27.
+ * 
+ *
+ * Created by liyu on 
  */
-public class Topic extends BaseBean {
-
+public class Topic {
     /** 自增ID */
     private Integer id;
+
     /** 标题 */
     private String title;
+
     /** 状态 */
     private Integer status;
-    /** 内容 */
-    private String content;
-    /** 管理员ID */
+
+    /**  */
     private Integer managerId;
+
     /** 创建时间 */
     private Date createTime;
+
     /** 更新时间 */
     private Date updateTime;
+
+    /** 内容 */
+    private String content;
 
     public Integer getId() {
         return id;
@@ -38,7 +42,7 @@ public class Topic extends BaseBean {
     }
 
     public void setTitle(String title) {
-        this.title = title;
+        this.title = title == null ? null : title.trim();
     }
 
     public Integer getStatus() {
@@ -47,14 +51,6 @@ public class Topic extends BaseBean {
 
     public void setStatus(Integer status) {
         this.status = status;
-    }
-
-    public String getContent() {
-        return content;
-    }
-
-    public void setContent(String content) {
-        this.content = content;
     }
 
     public Integer getManagerId() {
@@ -79,5 +75,13 @@ public class Topic extends BaseBean {
 
     public void setUpdateTime(Date updateTime) {
         this.updateTime = updateTime;
+    }
+
+    public String getContent() {
+        return content;
+    }
+
+    public void setContent(String content) {
+        this.content = content == null ? null : content.trim();
     }
 }

@@ -1,13 +1,12 @@
 package com.heleeos.blog.web.bean;
 
-import java.io.Serializable;
 import java.util.List;
 
 /**
  * 分页
  * Created by liyu on 2018/4/22.
  */
-public class PageInfo<T extends Serializable> extends BaseBean {
+public class PageInfo<T> {
 
     /** 当前页码 */
     private int page;

@@ -6,7 +6,7 @@ import java.util.Map;
  * 系统信息
  * Created by liyu on 17/12/2017.
  */
-public class SystemInfo extends BaseBean {
+public class SystemInfo {
 
     /** 服务器相关信息 */
     private Map<String, Object> serverInfo;

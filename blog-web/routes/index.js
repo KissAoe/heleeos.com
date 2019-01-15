@@ -13,8 +13,9 @@ require("./hbs-helper.js");
 
 //博客列表
 router.get('(/page/:page)?', function(req, res) {
-    var url = baseUrl + "list.json?page=" + req.params.page;
+    var url = baseUrl + "/ajax/blog/list.json?page=" + req.params.page;
     request(url, function (error, response, body) {
+        console.log(body);
         if(body == undefined){
             res.render('error', { message: "服务器连接错误!" });
         } else {

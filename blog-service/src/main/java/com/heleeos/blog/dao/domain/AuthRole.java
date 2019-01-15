@@ -1,27 +1,26 @@
-package com.heleeos.blog.dao.dto;
-
-import com.heleeos.blog.web.bean.BaseBean;
+package com.heleeos.blog.dao.domain;
 
 import java.util.Date;
 
 /**
- * 权限角色, t_auth_role 表.
- * Created with Li Yu on 2018/08/01.
+ * 
  *
- * @author liyu
- * @author kissaoe@gmail.com
+ * Created by liyu on 
  */
-public class AuthRole extends BaseBean {
-
-    /** 自增ID */
+public class AuthRole {
+    /**  */
     private Integer id;
-    /** 角色名称 */
+
+    /**  */
     private String roleName;
-    /** 角色路由 */
+
+    /**  */
     private String roleRoutes;
-    /** 创建时间 */
+
+    /**  */
     private Date createTime;
-    /** 更新时间 */
+
+    /**  */
     private Date updateTime;
 
     public Integer getId() {
@@ -37,7 +36,7 @@ public class AuthRole extends BaseBean {
     }
 
     public void setRoleName(String roleName) {
-        this.roleName = roleName;
+        this.roleName = roleName == null ? null : roleName.trim();
     }
 
     public String getRoleRoutes() {
@@ -45,7 +44,7 @@ public class AuthRole extends BaseBean {
     }
 
     public void setRoleRoutes(String roleRoutes) {
-        this.roleRoutes = roleRoutes;
+        this.roleRoutes = roleRoutes == null ? null : roleRoutes.trim();
     }
 
     public Date getCreateTime() {

@@ -11,8 +11,8 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
  */
 @SpringBootApplication
 @MapperScan("com.heleeos.blog.dao.mapper")
-public class Application implements WebMvcConfigurer {
+public class BlogServiceApplication implements WebMvcConfigurer {
     public static void main(String[] args) {
-        SpringApplication.run(Application.class, args);
+        SpringApplication.run(BlogServiceApplication.class, args);
     }
 }

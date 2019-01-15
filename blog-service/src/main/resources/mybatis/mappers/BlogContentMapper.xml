@@ -1,27 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.heleeos.blog.dao.mapper.TopicMapper">
-  <resultMap id="BaseResultMap" type="com.heleeos.blog.dao.domain.Topic">
+<mapper namespace="com.heleeos.blog.dao.mapper.BlogContentMapper">
+  <resultMap id="BaseResultMap" type="com.heleeos.blog.dao.domain.BlogContent">
     <id column="id" jdbcType="INTEGER" property="id" />
-    <result column="title" jdbcType="VARCHAR" property="title" />
-    <result column="status" jdbcType="INTEGER" property="status" />
-    <result column="manager_id" jdbcType="INTEGER" property="managerId" />
+    <result column="blog_id" jdbcType="INTEGER" property="blogId" />
+    <result column="blog_title" jdbcType="VARCHAR" property="blogTitle" />
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
     <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
   </resultMap>
   <sql id="Base_Column_List">
-    id, title, status, manager_id, create_time, update_time
+    id, blog_id, blog_title, create_time, update_time
   </sql>
   <sql id="Blob_Column_List">
-    content
+    blog_content
   </sql>
-  <select id="selectByDomain" parameterType="com.heleeos.blog.dao.domain.Topic" resultMap="BaseResultMap" />
+  <select id="selectByDomain" parameterType="com.heleeos.blog.dao.domain.BlogContent" resultMap="BaseResultMap" />
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
     select 
     <include refid="Base_Column_List" />
     ,
     <include refid="Blob_Column_List" />
-    from t_topic
+    from t_blog_content
     where id = #{id,jdbcType=INTEGER}
   </select>
 </mapper>

@@ -16,7 +16,7 @@ let api = {
 	getSystemInfo: "/ajax/system/getInfo.json",
 }
 
-const ajaxUrl = env === 'development' ? 'http://127.0.0.1:8888' : 'http://127.0.0.1:8888';
+const ajaxUrl = env === 'development' ? 'http://127.0.0.1:8001' : 'http://127.0.0.1:8001';
 
 api.ajax = axios.create({
     baseURL: ajaxUrl,
