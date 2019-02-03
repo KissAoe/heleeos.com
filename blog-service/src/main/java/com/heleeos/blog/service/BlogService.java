@@ -2,7 +2,6 @@ package com.heleeos.blog.service;
 
 import com.github.pagehelper.PageHelper;
 import com.heleeos.blog.dao.domain.Blog;
-import com.heleeos.blog.dao.domain.BlogExample;
 import com.heleeos.blog.dao.mapper.BlogMapper;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -40,7 +39,7 @@ public class BlogService {
             if (blog.getId() == null || blog.getId() == 0) {
                 return blogMapper.insert(blog) == 1;
             } else {
-                return blogMapper.updateByPrimaryKey(blog) == 1;
+                return blogMapper.update(blog) == 1;
             }
         } catch (Exception e) {
             logger.error(String.format("保存[博客文章]异常,原因:%s", e.getMessage()), e);
@@ -56,7 +55,7 @@ public class BlogService {
     public Blog get(Integer id) {
         if (id == null || id == 0) return null;
         try {
-            return blogMapper.selectByPrimaryKey(id);
+            return blogMapper.selectById(id);
         } catch (Exception e) {
             logger.error(String.format("获取[博客文章]异常,原因:%s", e.getMessage()), e);
             return null;
@@ -71,12 +70,9 @@ public class BlogService {
     public Blog getByURL(String url) {
         if (StringUtils.trimToNull(url) == null) return null;
         try {
-            BlogExample blogExample = new BlogExample();
-            blogExample.createCriteria().andDisplayUrlEqualTo(url);
-
             Blog blog = new Blog();
             blog.setDisplayUrl(url);
-            List<Blog> blogList = blogMapper.selectByExample(blogExample);
+            List<Blog> blogList = blogMapper.selectByDomain(blog);
             if (CollectionUtils.isNotEmpty(blogList)) {
                 return blogList.get(0);
             }
@@ -98,17 +94,17 @@ public class BlogService {
      * @param rows  显示条数
      */
     public List<Blog> getList(Integer type, String tags, Byte state, Integer page, Integer rows) {
-        int index = (page - 1) * rows;
-        if (index < 0) index = 0;
         if (type == null || type == 0) type = null;
         if (StringUtils.trim(tags) == null) tags = null;
+        if (page == null) page = 1;
+        if (rows == null) rows = 10;
         try {
             PageHelper.startPage(page, rows);
-            BlogExample blogExample = new BlogExample();
-            blogExample.createCriteria()
-                    .andBlogTypeEqualTo(type)
-                    .andBlogStateEqualTo(state);
-            return blogMapper.selectByExample(blogExample);
+            Blog blog = new Blog();
+            blog.setBlogType(type);
+            blog.setBlogTags(tags);
+            blog.setBlogState(state);
+            return blogMapper.selectByDomain(blog);
         } catch (Exception e) {
             logger.error(String.format("获取[博客文章列表]异常,原因:%s", e.getMessage()), e);
             return null;
@@ -126,11 +122,11 @@ public class BlogService {
         if (type == null || type == 0) type = null;
         if (StringUtils.trim(tags) == null) tags = null;
         try {
-            BlogExample blogExample = new BlogExample();
-            blogExample.createCriteria()
-                    .andBlogTypeEqualTo(type)
-                    .andBlogStateEqualTo(state);
-            return blogMapper.countByExample(blogExample);
+            Blog blog = new Blog();
+            blog.setBlogType(type);
+            blog.setBlogTags(tags);
+            blog.setBlogState(state);
+            return blogMapper.countByDomain(blog);
         } catch (Exception e) {
             logger.error(String.format("获取[博客文章个数]异常,原因:%s", e.getMessage()), e);
             return 0;
@@ -148,42 +144,10 @@ public class BlogService {
             Blog blog = new Blog();
             blog.setId(id);
             blog.setSortIndex(newIndex);
-            return blogMapper.updateByPrimaryKeySelective(blog) > 0;
+            return blogMapper.update(blog) > 0;
         } catch (Exception e) {
             logger.error(String.format("修改[博客显示顺序]异常,原因:%s", e.getMessage()), e);
             return false;
         }
     }
-//
-//    /**
-//     * 修改文章的状态.
-//     *
-//     * @param id 文章ID
-//     */
-//    public boolean changeState(Integer id, byte newState) {
-//        if (id == null || id == 0) return false;
-//        try {
-//            Blog blog = new Blog();
-//            blog.setId(id);
-//            blog.setBlogState(newState);
-//            return blogMapper.update(blog) > 0;
-//        } catch (Exception e) {
-//            logger.error(String.format("删除[博客文章]异常,原因:%s", e.getMessage()), e);
-//            return false;
-//        }
-//    }
-//
-//    /**
-//     * 新增阅读次数.
-//     *
-//     * @param url 博客的显示URL
-//     */
-//    public boolean addCountByUrl(String url) {
-//        try {
-//            return blogMapper.addCountByUrl(url) == 1;
-//        } catch (Exception e) {
-//            logger.error(String.format("增加[博客阅读次数]异常,原因:%s", e.getMessage()), e);
-//            return false;
-//        }
-//    }
 }

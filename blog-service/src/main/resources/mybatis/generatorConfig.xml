@@ -45,41 +45,5 @@
         <table schema="heleeos_blog" tableName="t_blog_type" domainObjectName="BlogType" />
         <table schema="heleeos_blog" tableName="t_manager" domainObjectName="Manager" />
         <table schema="heleeos_blog" tableName="t_topic" domainObjectName="Topic" />
-
-        <!--<table schema="heleeos_blog" tableName="t_auth_role" domainObjectName="AuthRole"-->
-               <!--enableCountByExample="false" enableUpdateByExample="false"-->
-               <!--enableDeleteByExample="false" enableSelectByExample="false"-->
-               <!--selectByExampleQueryId="false"/>-->
-
-        <!--<table schema="heleeos_blog" tableName="t_auth_route" domainObjectName="AuthRoute"-->
-               <!--enableCountByExample="false" enableUpdateByExample="false"-->
-               <!--enableDeleteByExample="false" enableSelectByExample="false"-->
-               <!--selectByExampleQueryId="false"/>-->
-
-        <!--<table schema="heleeos_blog" tableName="t_blog" domainObjectName="Blog"-->
-               <!--enableCountByExample="false" enableUpdateByExample="false"-->
-               <!--enableDeleteByExample="false" enableSelectByExample="false"-->
-               <!--selectByExampleQueryId="false"/>-->
-
-        <!--<table schema="heleeos_blog" tableName="t_blog_content" domainObjectName="BlogContent"-->
-               <!--enableCountByExample="false" enableUpdateByExample="false"-->
-               <!--enableDeleteByExample="false" enableSelectByExample="false"-->
-               <!--selectByExampleQueryId="false"/>-->
-
-        <!--<table schema="heleeos_blog" tableName="t_blog_type" domainObjectName="BlogType"-->
-               <!--enableCountByExample="false" enableUpdateByExample="false"-->
-               <!--enableDeleteByExample="false" enableSelectByExample="false"-->
-               <!--selectByExampleQueryId="false"/>-->
-
-        <!--<table schema="heleeos_blog" tableName="t_manager" domainObjectName="Manager"-->
-               <!--enableCountByExample="false" enableUpdateByExample="false"-->
-               <!--enableDeleteByExample="false" enableSelectByExample="false"-->
-               <!--selectByExampleQueryId="false"/>-->
-
-        <!--<table schema="heleeos_blog" tableName="t_topic" domainObjectName="Topic"-->
-               <!--enableCountByExample="false" enableUpdateByExample="false"-->
-               <!--enableDeleteByExample="false" enableSelectByExample="false"-->
-               <!--selectByExampleQueryId="false"/>-->
-
     </context>
 </generatorConfiguration>

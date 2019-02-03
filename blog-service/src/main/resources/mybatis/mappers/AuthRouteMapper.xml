@@ -12,11 +12,120 @@
   <sql id="Base_Column_List">
     id, auth_name, auth_path, auth_type, create_time, update_time
   </sql>
-  <select id="selectByDomain" parameterType="com.heleeos.blog.dao.domain.AuthRoute" resultMap="BaseResultMap" />
-  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
-    select 
-    <include refid="Base_Column_List" />
-    from t_auth_route
-    where id = #{id,jdbcType=INTEGER}
+  <select id="selectById" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select <include refid="Base_Column_List"/> from t_auth_route where id = #{id,jdbcType=INTEGER}
   </select>
+  <select id="selectByDomain" parameterType="com.heleeos.blog.dao.domain.AuthRoute" resultMap="BaseResultMap">
+    select <include refid="Base_Column_List"/> from t_auth_route
+    <where>
+      <if test="id != null">
+        and id = id
+      </if>
+      <if test="authName != null">
+        and auth_name = authName
+      </if>
+      <if test="authPath != null">
+        and auth_path = authPath
+      </if>
+      <if test="authType != null">
+        and auth_type = authType
+      </if>
+      <if test="createTime != null">
+        and create_time = createTime
+      </if>
+      <if test="updateTime != null">
+        and update_time = updateTime
+      </if>
+    </where>
+  </select>
+  <select id="countByDomain" resultType="int">
+    select count(0) from t_auth_route
+    <where>
+      <if test="id != null">
+        and id = id
+      </if>
+      <if test="authName != null">
+        and auth_name = authName
+      </if>
+      <if test="authPath != null">
+        and auth_path = authPath
+      </if>
+      <if test="authType != null">
+        and auth_type = authType
+      </if>
+      <if test="createTime != null">
+        and create_time = createTime
+      </if>
+      <if test="updateTime != null">
+        and update_time = updateTime
+      </if>
+    </where>
+  </select>
+  <insert id="insert" parameterType="com.heleeos.blog.dao.domain.AuthRoute">
+    insert into t_auth_route
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="authName != null">
+        auth_name,
+      </if>
+      <if test="authPath != null">
+        auth_path,
+      </if>
+      <if test="authType != null">
+        auth_type,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="authName != null">
+        #{authName,jdbcType=VARCHAR},
+      </if>
+      <if test="authPath != null">
+        #{authPath,jdbcType=VARCHAR},
+      </if>
+      <if test="authType != null">
+        #{authType,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="update" parameterType="com.heleeos.blog.dao.domain.AuthRoute">
+    update t_auth_route
+    <set>
+      <if test="authName != null">
+        auth_name = #{authName,jdbcType=VARCHAR},
+      </if>
+      <if test="authPath != null">
+        auth_path = #{authPath,jdbcType=VARCHAR},
+      </if>
+      <if test="authType != null">
+        auth_type = #{authType,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <delete id="delete">
+    delete from t_auth_route where id = #{id,jdbcType=INTEGER}
+  </delete>
 </mapper>

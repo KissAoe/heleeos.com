@@ -12,16 +12,135 @@
   <sql id="Base_Column_List">
     id, title, status, manager_id, create_time, update_time
   </sql>
-  <sql id="Blob_Column_List">
-    content
-  </sql>
-  <select id="selectByDomain" parameterType="com.heleeos.blog.dao.domain.Topic" resultMap="BaseResultMap" />
-  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
-    select 
-    <include refid="Base_Column_List" />
-    ,
-    <include refid="Blob_Column_List" />
-    from t_topic
-    where id = #{id,jdbcType=INTEGER}
+  <select id="selectById" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select <include refid="Base_Column_List"/> from t_topic where id = #{id,jdbcType=INTEGER}
   </select>
+  <select id="selectByDomain" parameterType="com.heleeos.blog.dao.domain.Topic" resultMap="BaseResultMap">
+    select <include refid="Base_Column_List"/> from t_topic
+    <where>
+      <if test="id != null">
+        and id = id
+      </if>
+      <if test="title != null">
+        and title = title
+      </if>
+      <if test="status != null">
+        and status = status
+      </if>
+      <if test="managerId != null">
+        and manager_id = managerId
+      </if>
+      <if test="createTime != null">
+        and create_time = createTime
+      </if>
+      <if test="updateTime != null">
+        and update_time = updateTime
+      </if>
+      <if test="content != null">
+        and content = content
+      </if>
+    </where>
+  </select>
+  <select id="countByDomain" resultType="int">
+    select count(0) from t_topic
+    <where>
+      <if test="id != null">
+        and id = id
+      </if>
+      <if test="title != null">
+        and title = title
+      </if>
+      <if test="status != null">
+        and status = status
+      </if>
+      <if test="managerId != null">
+        and manager_id = managerId
+      </if>
+      <if test="createTime != null">
+        and create_time = createTime
+      </if>
+      <if test="updateTime != null">
+        and update_time = updateTime
+      </if>
+      <if test="content != null">
+        and content = content
+      </if>
+    </where>
+  </select>
+  <insert id="insert" parameterType="com.heleeos.blog.dao.domain.Topic">
+    insert into t_topic
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="title != null">
+        title,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="managerId != null">
+        manager_id,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+      <if test="content != null">
+        content,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="title != null">
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="managerId != null">
+        #{managerId,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="content != null">
+        #{content,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="update" parameterType="com.heleeos.blog.dao.domain.Topic">
+    update t_topic
+    <set>
+      <if test="title != null">
+        title = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="managerId != null">
+        manager_id = #{managerId,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="content != null">
+        content = #{content,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <delete id="delete">
+    delete from t_topic where id = #{id,jdbcType=INTEGER}
+  </delete>
 </mapper>

@@ -19,11 +19,210 @@
     id, blog_title, display_url, blog_summary, blog_tags, blog_type, blog_state, manager_id, 
     read_count, sort_index, create_time, update_time
   </sql>
-  <select id="selectByDomain" parameterType="com.heleeos.blog.dao.domain.Blog" resultMap="BaseResultMap" />
-  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
-    select 
-    <include refid="Base_Column_List" />
-    from t_blog
-    where id = #{id,jdbcType=INTEGER}
+  <select id="selectById" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select <include refid="Base_Column_List"/> from t_blog where id = #{id,jdbcType=INTEGER}
   </select>
+  <select id="selectByDomain" parameterType="com.heleeos.blog.dao.domain.Blog" resultMap="BaseResultMap">
+    select <include refid="Base_Column_List"/> from t_blog
+    <where>
+      <if test="id != null">
+        and id = id
+      </if>
+      <if test="blogTitle != null">
+        and blog_title = blogTitle
+      </if>
+      <if test="displayUrl != null">
+        and display_url = displayUrl
+      </if>
+      <if test="blogSummary != null">
+        and blog_summary = blogSummary
+      </if>
+      <if test="blogTags != null">
+        and blog_tags = blogTags
+      </if>
+      <if test="blogType != null">
+        and blog_type = blogType
+      </if>
+      <if test="blogState != null">
+        and blog_state = blogState
+      </if>
+      <if test="managerId != null">
+        and manager_id = managerId
+      </if>
+      <if test="readCount != null">
+        and read_count = readCount
+      </if>
+      <if test="sortIndex != null">
+        and sort_index = sortIndex
+      </if>
+      <if test="createTime != null">
+        and create_time = createTime
+      </if>
+      <if test="updateTime != null">
+        and update_time = updateTime
+      </if>
+    </where>
+  </select>
+  <select id="countByDomain" resultType="int">
+    select count(0) from t_blog
+    <where>
+      <if test="id != null">
+        and id = id
+      </if>
+      <if test="blogTitle != null">
+        and blog_title = blogTitle
+      </if>
+      <if test="displayUrl != null">
+        and display_url = displayUrl
+      </if>
+      <if test="blogSummary != null">
+        and blog_summary = blogSummary
+      </if>
+      <if test="blogTags != null">
+        and blog_tags = blogTags
+      </if>
+      <if test="blogType != null">
+        and blog_type = blogType
+      </if>
+      <if test="blogState != null">
+        and blog_state = blogState
+      </if>
+      <if test="managerId != null">
+        and manager_id = managerId
+      </if>
+      <if test="readCount != null">
+        and read_count = readCount
+      </if>
+      <if test="sortIndex != null">
+        and sort_index = sortIndex
+      </if>
+      <if test="createTime != null">
+        and create_time = createTime
+      </if>
+      <if test="updateTime != null">
+        and update_time = updateTime
+      </if>
+    </where>
+  </select>
+  <insert id="insert" parameterType="com.heleeos.blog.dao.domain.Blog">
+    insert into t_blog
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="blogTitle != null">
+        blog_title,
+      </if>
+      <if test="displayUrl != null">
+        display_url,
+      </if>
+      <if test="blogSummary != null">
+        blog_summary,
+      </if>
+      <if test="blogTags != null">
+        blog_tags,
+      </if>
+      <if test="blogType != null">
+        blog_type,
+      </if>
+      <if test="blogState != null">
+        blog_state,
+      </if>
+      <if test="managerId != null">
+        manager_id,
+      </if>
+      <if test="readCount != null">
+        read_count,
+      </if>
+      <if test="sortIndex != null">
+        sort_index,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="blogTitle != null">
+        #{blogTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="displayUrl != null">
+        #{displayUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="blogSummary != null">
+        #{blogSummary,jdbcType=VARCHAR},
+      </if>
+      <if test="blogTags != null">
+        #{blogTags,jdbcType=VARCHAR},
+      </if>
+      <if test="blogType != null">
+        #{blogType,jdbcType=INTEGER},
+      </if>
+      <if test="blogState != null">
+        #{blogState,jdbcType=TINYINT},
+      </if>
+      <if test="managerId != null">
+        #{managerId,jdbcType=INTEGER},
+      </if>
+      <if test="readCount != null">
+        #{readCount,jdbcType=INTEGER},
+      </if>
+      <if test="sortIndex != null">
+        #{sortIndex,jdbcType=TINYINT},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="update" parameterType="com.heleeos.blog.dao.domain.Blog">
+    update t_blog
+    <set>
+      <if test="blogTitle != null">
+        blog_title = #{blogTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="displayUrl != null">
+        display_url = #{displayUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="blogSummary != null">
+        blog_summary = #{blogSummary,jdbcType=VARCHAR},
+      </if>
+      <if test="blogTags != null">
+        blog_tags = #{blogTags,jdbcType=VARCHAR},
+      </if>
+      <if test="blogType != null">
+        blog_type = #{blogType,jdbcType=INTEGER},
+      </if>
+      <if test="blogState != null">
+        blog_state = #{blogState,jdbcType=TINYINT},
+      </if>
+      <if test="managerId != null">
+        manager_id = #{managerId,jdbcType=INTEGER},
+      </if>
+      <if test="readCount != null">
+        read_count = #{readCount,jdbcType=INTEGER},
+      </if>
+      <if test="sortIndex != null">
+        sort_index = #{sortIndex,jdbcType=TINYINT},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <delete id="delete">
+    delete from t_blog where id = #{id,jdbcType=INTEGER}
+  </delete>
 </mapper>

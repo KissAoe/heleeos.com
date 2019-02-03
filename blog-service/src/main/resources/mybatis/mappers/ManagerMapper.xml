@@ -19,11 +19,210 @@
     id, user_name, pass_word, manager_state, nick_name, real_name, role_ids, manager_picture, 
     host_domain, login_token, login_time, login_ip
   </sql>
-  <select id="selectByDomain" parameterType="com.heleeos.blog.dao.domain.Manager" resultMap="BaseResultMap" />
-  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
-    select 
-    <include refid="Base_Column_List" />
-    from t_manager
-    where id = #{id,jdbcType=INTEGER}
+  <select id="selectById" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select <include refid="Base_Column_List"/> from t_manager where id = #{id,jdbcType=INTEGER}
   </select>
+  <select id="selectByDomain" parameterType="com.heleeos.blog.dao.domain.Manager" resultMap="BaseResultMap">
+    select <include refid="Base_Column_List"/> from t_manager
+    <where>
+      <if test="id != null">
+        and id = id
+      </if>
+      <if test="userName != null">
+        and user_name = userName
+      </if>
+      <if test="passWord != null">
+        and pass_word = passWord
+      </if>
+      <if test="managerState != null">
+        and manager_state = managerState
+      </if>
+      <if test="nickName != null">
+        and nick_name = nickName
+      </if>
+      <if test="realName != null">
+        and real_name = realName
+      </if>
+      <if test="roleIds != null">
+        and role_ids = roleIds
+      </if>
+      <if test="managerPicture != null">
+        and manager_picture = managerPicture
+      </if>
+      <if test="hostDomain != null">
+        and host_domain = hostDomain
+      </if>
+      <if test="loginToken != null">
+        and login_token = loginToken
+      </if>
+      <if test="loginTime != null">
+        and login_time = loginTime
+      </if>
+      <if test="loginIp != null">
+        and login_ip = loginIp
+      </if>
+    </where>
+  </select>
+  <select id="countByDomain" resultType="int">
+    select count(0) from t_manager
+    <where>
+      <if test="id != null">
+        and id = id
+      </if>
+      <if test="userName != null">
+        and user_name = userName
+      </if>
+      <if test="passWord != null">
+        and pass_word = passWord
+      </if>
+      <if test="managerState != null">
+        and manager_state = managerState
+      </if>
+      <if test="nickName != null">
+        and nick_name = nickName
+      </if>
+      <if test="realName != null">
+        and real_name = realName
+      </if>
+      <if test="roleIds != null">
+        and role_ids = roleIds
+      </if>
+      <if test="managerPicture != null">
+        and manager_picture = managerPicture
+      </if>
+      <if test="hostDomain != null">
+        and host_domain = hostDomain
+      </if>
+      <if test="loginToken != null">
+        and login_token = loginToken
+      </if>
+      <if test="loginTime != null">
+        and login_time = loginTime
+      </if>
+      <if test="loginIp != null">
+        and login_ip = loginIp
+      </if>
+    </where>
+  </select>
+  <insert id="insert" parameterType="com.heleeos.blog.dao.domain.Manager">
+    insert into t_manager
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="userName != null">
+        user_name,
+      </if>
+      <if test="passWord != null">
+        pass_word,
+      </if>
+      <if test="managerState != null">
+        manager_state,
+      </if>
+      <if test="nickName != null">
+        nick_name,
+      </if>
+      <if test="realName != null">
+        real_name,
+      </if>
+      <if test="roleIds != null">
+        role_ids,
+      </if>
+      <if test="managerPicture != null">
+        manager_picture,
+      </if>
+      <if test="hostDomain != null">
+        host_domain,
+      </if>
+      <if test="loginToken != null">
+        login_token,
+      </if>
+      <if test="loginTime != null">
+        login_time,
+      </if>
+      <if test="loginIp != null">
+        login_ip,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="userName != null">
+        #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="passWord != null">
+        #{passWord,jdbcType=VARCHAR},
+      </if>
+      <if test="managerState != null">
+        #{managerState,jdbcType=BIT},
+      </if>
+      <if test="nickName != null">
+        #{nickName,jdbcType=VARCHAR},
+      </if>
+      <if test="realName != null">
+        #{realName,jdbcType=VARCHAR},
+      </if>
+      <if test="roleIds != null">
+        #{roleIds,jdbcType=VARCHAR},
+      </if>
+      <if test="managerPicture != null">
+        #{managerPicture,jdbcType=VARCHAR},
+      </if>
+      <if test="hostDomain != null">
+        #{hostDomain,jdbcType=VARCHAR},
+      </if>
+      <if test="loginToken != null">
+        #{loginToken,jdbcType=VARCHAR},
+      </if>
+      <if test="loginTime != null">
+        #{loginTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="loginIp != null">
+        #{loginIp,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="update" parameterType="com.heleeos.blog.dao.domain.Manager">
+    update t_manager
+    <set>
+      <if test="userName != null">
+        user_name = #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="passWord != null">
+        pass_word = #{passWord,jdbcType=VARCHAR},
+      </if>
+      <if test="managerState != null">
+        manager_state = #{managerState,jdbcType=BIT},
+      </if>
+      <if test="nickName != null">
+        nick_name = #{nickName,jdbcType=VARCHAR},
+      </if>
+      <if test="realName != null">
+        real_name = #{realName,jdbcType=VARCHAR},
+      </if>
+      <if test="roleIds != null">
+        role_ids = #{roleIds,jdbcType=VARCHAR},
+      </if>
+      <if test="managerPicture != null">
+        manager_picture = #{managerPicture,jdbcType=VARCHAR},
+      </if>
+      <if test="hostDomain != null">
+        host_domain = #{hostDomain,jdbcType=VARCHAR},
+      </if>
+      <if test="loginToken != null">
+        login_token = #{loginToken,jdbcType=VARCHAR},
+      </if>
+      <if test="loginTime != null">
+        login_time = #{loginTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="loginIp != null">
+        login_ip = #{loginIp,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <delete id="delete">
+    delete from t_manager where id = #{id,jdbcType=INTEGER}
+  </delete>
 </mapper>

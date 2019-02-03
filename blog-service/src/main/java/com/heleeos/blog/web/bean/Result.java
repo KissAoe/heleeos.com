@@ -1,6 +1,7 @@
 package com.heleeos.blog.web.bean;
 
 import com.google.gson.Gson;
+import lombok.Data;
 
 /**
  * 前后端交互的结果集.
@@ -9,6 +10,7 @@ import com.google.gson.Gson;
  * @author liyu
  * @author kissaoe@gmail.com
  */
+@Data
 public class Result<T> {
 
     /**
@@ -23,30 +25,6 @@ public class Result<T> {
      * 结果返回的数据
      */
     private T data;
-
-    public int getCode() {
-        return code;
-    }
-
-    public void setCode(int code) {
-        this.code = code;
-    }
-
-    public String getMessage() {
-        return message;
-    }
-
-    public void setMessage(String message) {
-        this.message = message;
-    }
-
-    public T getData() {
-        return data;
-    }
-
-    public void setData(T data) {
-        this.data = data;
-    }
 
     @Override
     public String toString() {

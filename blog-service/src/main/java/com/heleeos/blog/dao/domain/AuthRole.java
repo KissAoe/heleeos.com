@@ -4,8 +4,7 @@ import java.util.Date;
 
 /**
  * 
- *
- * Created by liyu on 
+ * Created by liyu on 2019/2/3
  */
 public class AuthRole {
     /**  */

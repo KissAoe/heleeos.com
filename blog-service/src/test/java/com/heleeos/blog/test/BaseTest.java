@@ -10,6 +10,4 @@ import org.springframework.test.context.junit4.SpringRunner;
  */
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes={BlogServiceApplication.class})
-public class BaseTest {
-
-}
+public class BaseTest {}
