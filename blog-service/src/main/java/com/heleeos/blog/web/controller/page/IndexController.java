@@ -58,7 +58,8 @@ public class IndexController {
         return modelAndView;
     }
 
-    public void writeStaticFile(ModelAndView modelAndView, String fileName) {
+    // todo 修改为拦截器实现
+    private void writeStaticFile(ModelAndView modelAndView, String fileName) {
         try {
             File resources = new File(ResourceUtils.getURL("classpath:").getPath());
             File file = new File(resources, fileName);
