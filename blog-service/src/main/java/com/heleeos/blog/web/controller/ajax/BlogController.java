@@ -20,11 +20,11 @@ public class BlogController {
     @Autowired
     private BlogFacade blogFacade;
 
-    @GetMapping(value = "list.json")
-    public Result<PageInfo<Blog>> getList(QueryBlogRequest queryBlogListRequest) {
-        PageInfo<Blog> pageInfo = blogFacade.getList(queryBlogListRequest);
-        return ResultUtil.success(pageInfo);
-    }
+//    @GetMapping(value = "list.json")
+//    public Result<PageInfo<Blog>> getList(QueryBlogRequest queryBlogListRequest) {
+//        PageInfo<Blog> pageInfo = blogFacade.getList(queryBlogListRequest);
+//        return ResultUtil.success(pageInfo);
+//    }
 
     /**
      * 根据ID或URL查询文章

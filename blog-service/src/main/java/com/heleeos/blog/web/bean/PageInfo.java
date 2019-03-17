@@ -15,7 +15,7 @@ public class PageInfo<T> {
     /** 当前个数 */
     private int rows;
     /** 总的个数 */
-    private int count;
+    private long count;
     /** 展示对象 */
     private List<T> beans;
 }

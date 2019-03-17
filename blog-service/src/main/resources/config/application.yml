@@ -1,6 +1,6 @@
-server: &server
+server:
     address: 127.0.0.1
-    port: 8001
+    port: 8080
 
 spring:
     datasource:
@@ -16,8 +16,3 @@ mybatis:
     configuration:
         map-underscore-to-camel-case: true
         cache-enabled: true
-
-env:
-    debug: true
-    skip-auth: true
-    cros-origin: http://127.0.0.1:7001

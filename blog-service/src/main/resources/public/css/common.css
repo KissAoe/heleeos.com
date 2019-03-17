@@ -1,0 +1,22 @@
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td {margin: 0;padding: 0;border: 0;outline: 0;font-weight: inherit;font-style: inherit;font-family: inherit;font-size: 100%;vertical-align: baseline;}
+html,body{height: 100%;cursor: default;}
+body {line-height: 1;width: 100%;color: #565a5f;background: #f5f8f9;font: 16px "open sans", "Helvetica Neue", "Microsoft Yahei", Helvetica, Arial, sans-serif;-webkit-text-size-adjust: 100%;min-width: 380px;}
+body:before,body:after {content: "";display: table;}
+body:after {clear: both;}
+ol,ul {list-style: none;}
+table {border-collapse: separate;border-spacing: 0;vertical-align: middle;}
+caption,th,td {text-align: left;font-weight: normal;vertical-align: middle;}
+input,button {margin: 0;padding: 0;}
+input::-moz-focus-inner,button::-moz-focus-inner {border: 0;padding: 0;}
+a {color: #6898ed;text-decoration: none;}
+a:hover {color: #95b6f2;text-decoration: none;}
+a:visited {color: #68a4f1;text-decoration: none;}
+a:focus{text-decoration: none;}
+a img {border: none;}
+
+::-webkit-scrollbar{width:5px;height:5px}
+::-webkit-scrollbar-button:vertical{display:none}
+::-webkit-scrollbar-corner,::-webkit-scrollbar-track{background-color:#f5f8f9}
+::-webkit-scrollbar-thumb{border-radius:20px;background-color:rgba(104, 152, 237, 0.5)}
+::-webkit-scrollbar-thumb:vertical:hover{background-color:rgba(104, 152, 237, 0.8)}
+::-webkit-scrollbar-thumb:vertical:active{background-color:rgba(104, 152, 237, 1)}

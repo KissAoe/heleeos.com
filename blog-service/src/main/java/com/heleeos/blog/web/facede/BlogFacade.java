@@ -21,35 +21,6 @@ public class BlogFacade {
     @Autowired
     private BlogService blogService;
 
-    /**
-     * 获取文章列表
-     *
-     * @param queryBlogListRequest 请求
-     */
-    public PageInfo<Blog> getList(QueryBlogRequest queryBlogListRequest) {
-        Integer page = NullUtil.getNotNull(queryBlogListRequest.getPage(), 1);
-        Integer rows = NullUtil.getNotNull(queryBlogListRequest.getRows(), 5);
-        Integer type = queryBlogListRequest.getType();
-        Byte state = queryBlogListRequest.getState();
-        String tags = queryBlogListRequest.getTags();
-
-        long count = blogService.getCount(type, tags, state);
-        long max = count / rows + (count % rows == 0 ? 0 : 1);//余数不为0,要加一
-
-        //合法验证
-        if (rows < 0) rows = 5;
-        if (page > max) page = (int) max;
-        if (page < 1) page = 1;
-
-        List<Blog> blogList = blogService.getList(type, tags, state, page, rows);
-
-        PageInfo<Blog> pageInfo = new PageInfo<>();
-        pageInfo.setPage(page);
-        pageInfo.setRows(rows);
-        pageInfo.setBeans(blogList);
-//        pageInfo.setCount(count);
-        return pageInfo;
-    }
 
     /**
      * 获取文章
