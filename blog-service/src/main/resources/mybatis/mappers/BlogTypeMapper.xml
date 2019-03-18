@@ -19,45 +19,45 @@
     select <include refid="Base_Column_List"/> from t_blog_type
     <where>
       <if test="id != null">
-        and id = id
+        and id = #{id}
       </if>
       <if test="parentId != null">
-        and parent_id = parentId
+        and parent_id = #{parentId}
       </if>
       <if test="typeName != null">
-        and type_name = typeName
+        and type_name = #{typeName}
       </if>
       <if test="typeState != null">
-        and type_state = typeState
+        and type_state = #{typeState}
       </if>
       <if test="createTime != null">
-        and create_time = createTime
+        and create_time = #{createTime}
       </if>
       <if test="updateTime != null">
-        and update_time = updateTime
+        and update_time = #{updateTime}
       </if>
     </where>
   </select>
-  <select id="countByDomain" resultType="int">
+  <select id="countByDomain" resultType="long">
     select count(0) from t_blog_type
     <where>
       <if test="id != null">
-        and id = id
+        and id = #{id}
       </if>
       <if test="parentId != null">
-        and parent_id = parentId
+        and parent_id = #{parentId}
       </if>
       <if test="typeName != null">
-        and type_name = typeName
+        and type_name = #{typeName}
       </if>
       <if test="typeState != null">
-        and type_state = typeState
+        and type_state = #{typeState}
       </if>
       <if test="createTime != null">
-        and create_time = createTime
+        and create_time = #{createTime}
       </if>
       <if test="updateTime != null">
-        and update_time = updateTime
+        and update_time = #{updateTime}
       </if>
     </where>
   </select>

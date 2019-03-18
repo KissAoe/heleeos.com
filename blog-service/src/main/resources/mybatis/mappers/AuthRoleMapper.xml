@@ -18,39 +18,39 @@
     select <include refid="Base_Column_List"/> from t_auth_role
     <where>
       <if test="id != null">
-        and id = id
+        and id = #{id}
       </if>
       <if test="roleName != null">
-        and role_name = roleName
+        and role_name = #{roleName}
       </if>
       <if test="roleRoutes != null">
-        and role_routes = roleRoutes
+        and role_routes = #{roleRoutes}
       </if>
       <if test="createTime != null">
-        and create_time = createTime
+        and create_time = #{createTime}
       </if>
       <if test="updateTime != null">
-        and update_time = updateTime
+        and update_time = #{updateTime}
       </if>
     </where>
   </select>
-  <select id="countByDomain" resultType="int">
+  <select id="countByDomain" resultType="long">
     select count(0) from t_auth_role
     <where>
       <if test="id != null">
-        and id = id
+        and id = #{id}
       </if>
       <if test="roleName != null">
-        and role_name = roleName
+        and role_name = #{roleName}
       </if>
       <if test="roleRoutes != null">
-        and role_routes = roleRoutes
+        and role_routes = #{roleRoutes}
       </if>
       <if test="createTime != null">
-        and create_time = createTime
+        and create_time = #{createTime}
       </if>
       <if test="updateTime != null">
-        and update_time = updateTime
+        and update_time = #{updateTime}
       </if>
     </where>
   </select>

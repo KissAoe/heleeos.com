@@ -26,82 +26,81 @@
     select <include refid="Base_Column_List"/> from t_blog
     <where>
       <if test="id != null">
-        and id = id
+        and id = #{id}
       </if>
       <if test="blogTitle != null">
-        and blog_title = blogTitle
+        and blog_title = #{blogTitle}
       </if>
       <if test="displayUrl != null">
-        and display_url = displayUrl
+        and display_url = #{displayUrl}
       </if>
       <if test="blogSummary != null">
-        and blog_summary = blogSummary
+        and blog_summary = #{blogSummary}
       </if>
       <if test="blogTags != null">
-        and blog_tags = blogTags
+        and blog_tags = #{blogTags}
       </if>
       <if test="blogType != null">
-        and blog_type = blogType
+        and blog_type = #{blogType}
       </if>
       <if test="blogState != null">
-        and blog_state = blogState
+        and blog_state = #{blogState}
       </if>
       <if test="managerId != null">
-        and manager_id = managerId
+        and manager_id = #{managerId}
       </if>
       <if test="readCount != null">
-        and read_count = readCount
+        and read_count = #{readCount}
       </if>
       <if test="sortIndex != null">
-        and sort_index = sortIndex
+        and sort_index = #{sortIndex}
       </if>
       <if test="createTime != null">
-        and create_time = createTime
+        and create_time = #{createTime}
       </if>
       <if test="updateTime != null">
-        and update_time = updateTime
+        and update_time = #{updateTime}
       </if>
     </where>
-    order by sort_index desc, create_time desc
   </select>
   <select id="countByDomain" resultType="long">
     select count(0) from t_blog
     <where>
       <if test="id != null">
-        and id = id
+        and id = #{id}
       </if>
       <if test="blogTitle != null">
-        and blog_title = blogTitle
+        and blog_title = #{blogTitle}
       </if>
       <if test="displayUrl != null">
-        and display_url = displayUrl
+        and display_url = #{displayUrl}
       </if>
       <if test="blogSummary != null">
-        and blog_summary = blogSummary
+        and blog_summary = #{blogSummary}
       </if>
       <if test="blogTags != null">
-        and blog_tags = blogTags
+        and blog_tags = #{blogTags}
       </if>
       <if test="blogType != null">
-        and blog_type = blogType
+        and blog_type = #{blogType}
       </if>
       <if test="blogState != null">
-        and blog_state = blogState
+        and blog_state = #{blogState}
       </if>
       <if test="managerId != null">
-        and manager_id = managerId
+        and manager_id = #{managerId}
       </if>
       <if test="readCount != null">
-        and read_count = readCount
+        and read_count = #{readCount}
       </if>
       <if test="sortIndex != null">
-        and sort_index = sortIndex
+        and sort_index = #{sortIndex}
       </if>
       <if test="createTime != null">
-        and create_time = createTime
+        and create_time = #{createTime}
       </if>
       <if test="updateTime != null">
-        and update_time = updateTime
+        and update_time = #{updateTime}
       </if>
     </where>
   </select>

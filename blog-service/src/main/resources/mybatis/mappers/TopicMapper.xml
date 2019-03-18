@@ -19,51 +19,51 @@
     select <include refid="Base_Column_List"/> from t_topic
     <where>
       <if test="id != null">
-        and id = id
+        and id = #{id}
       </if>
       <if test="title != null">
-        and title = title
+        and title = #{title}
       </if>
       <if test="status != null">
-        and status = status
+        and status = #{status}
       </if>
       <if test="managerId != null">
-        and manager_id = managerId
+        and manager_id = #{managerId}
       </if>
       <if test="createTime != null">
-        and create_time = createTime
+        and create_time = #{createTime}
       </if>
       <if test="updateTime != null">
-        and update_time = updateTime
+        and update_time = #{updateTime}
       </if>
       <if test="content != null">
-        and content = content
+        and content = #{content}
       </if>
     </where>
   </select>
-  <select id="countByDomain" resultType="int">
+  <select id="countByDomain" resultType="long">
     select count(0) from t_topic
     <where>
       <if test="id != null">
-        and id = id
+        and id = #{id}
       </if>
       <if test="title != null">
-        and title = title
+        and title = #{title}
       </if>
       <if test="status != null">
-        and status = status
+        and status = #{status}
       </if>
       <if test="managerId != null">
-        and manager_id = managerId
+        and manager_id = #{managerId}
       </if>
       <if test="createTime != null">
-        and create_time = createTime
+        and create_time = #{createTime}
       </if>
       <if test="updateTime != null">
-        and update_time = updateTime
+        and update_time = #{updateTime}
       </if>
       <if test="content != null">
-        and content = content
+        and content = #{content}
       </if>
     </where>
   </select>

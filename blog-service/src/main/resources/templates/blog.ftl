@@ -13,6 +13,7 @@
     <link rel="stylesheet" type="text/css" href="/lib/font-awesome-4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" type="text/css" href="/css/common.css">
     <link rel="stylesheet" type="text/css" href="/css/style.css">
+    <link rel="stylesheet" type="text/css" href="/css/blog.css">
     <link rel="shortcut icon" href="https://heleeos.com/favicon.ico"/>
 </head>
 <body>
@@ -35,28 +36,28 @@
         </nav>
     </div>
     <div class="container-fluid">
-        <div class="left visible-lg-inline-block col-lg-3">
+        <div class="main col-xs-12 col-sm-9 col-md-9 col-lg-10">
             <div class="card">
-                <img class="profile-image" src="https://static.heleeos.com/blog-web/image/profile.jpg">
-                <p class="profile-name">李瑜</p>
-                <p class="profile-info">爱生活，爱学习，更爱写代码<br>爱折腾的全栈开发工程师<br>前端，后台，运维</p>
-                <p class="profile-location"><i class="fa fa-map-marker"></i>中国 - 上海</p>
-                <a class="profile-button btn" href="https://github.com/greenfit" target="_blank">Follow</a>
-                <div class="profile-other">
-                    <a href="https://git.oschina.net/IP" target="_blank"><i class="fa fa-git"></i></a>
-                    <a href="https://codepen.io/greenfit/" target="_blank"><i class="fa fa-codepen"></i></a>
-                    <a href="https://www.freecodecamp.com/greenfit" target="_blank"><i class="fa fa-free-code-camp"></i></a>
-                    <a href="mailto:kissaoe@gmail.com?subject=I Love You~" target="_blank"><i
-                                class="fa fa-envelope"></i></a>
-                    <a href="https://www.facebook.com/profile.php?id=100010520951879" target="_blank"><i
-                                class="fa fa-facebook"></i></a>
+                <h1 class="title"><a>{{blog.blogTime}}</a></h1>
+                <div class="meta">
+                    <div class="time"><i class="fa fa-calendar"></i>{{datetime blog.createTime}}</div>
+                    <div class="type"><i class="fa fa-folder"></i>{{blog.blogType}}</div>
+                    <div class="count"><i class="fa fa-bookmark"></i>{{blog.readCount}} 次</div>
+                    <div class="tag"><i class="fa fa-tags"></i>{{{splitTags blog.blogTags}}}</div>
+                </div>
+                <div class="info">摘要:{{blog.blogSummary}}</div>
+                <hr>
+                <div class="blog-body">
+                    ${blogBody}
+                </div>
+                <div class="blog-copy-info">
+                    <p>以上内容是在下的一点愚见，有任何不对的地方，欢迎指出。</p>
+                    <p>欢迎任何形式的转载，但请务必注明出处。</p>
+                    <p>转载请注明：文章转载自 黑老李的博客[<a href="https://heleeos.com/blog/{{blog.dispUrl}}.html">https://heleeos.com</a>]</p>
+                    <p>本文标题：{{blog.blogTitle}}</p>
+                    <p>本文地址：https://heleeos.com/blog/{{blog.dispUrl}}.html</p>
                 </div>
             </div>
-            <h3>微信订阅号</h3>
-            <img src="https://static.heleeos.com/blog-web/image/qrcode.jpg">
-        </div>
-        <div class="main col-xs-12 col-sm-9 col-md-9 col-lg-7">
-            {{{ body }}}
         </div>
         <div class="right hidden-xs col-sm-3 col-md-3 col-lg-2">
             <h3>公告</h3>
