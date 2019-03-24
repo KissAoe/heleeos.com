@@ -16,7 +16,7 @@
                     <div class="tags"><i class="fa fa-tag"></i>${blog.blogTags}</div>
                     <div class="readCount"><i class="fa fa-bookmark"></i>${blog.readCount}次</div>
                     <#if (blog.sortIndex > 0) >
-                        <img class="tj" src="https://static.heleeos.com/blog-web/image/tj.png">
+                        <img class="tj" src="/image/tj.png">
                     </#if>
                 </div>
             </#list>

@@ -34,7 +34,7 @@
         <!--<a class="main-nav-link" href="https://heleeos.com/profile/index.html">关于我</a>-->
     </nav>
     <nav class="profile-nav hidden-lg">
-        <img class="profile-image" src="https://static.heleeos.com/blog-web/image/profile.jpg">
+        <img class="profile-image" src="/image/profile.jpg">
         <a href="javascript:"><i class="fa fa-caret-down"></i></a>
     </nav>
 </div>

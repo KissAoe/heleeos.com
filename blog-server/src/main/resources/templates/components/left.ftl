@@ -1,6 +1,6 @@
 <div class="left visible-lg-inline-block col-lg-3">
     <div class="card">
-        <img class="profile-image" src="https://static.heleeos.com/blog-web/image/profile.jpg">
+        <img class="profile-image" src="/image/profile.jpg">
         <p class="profile-name">李瑜</p>
         <p class="profile-info">爱生活，爱学习，更爱写代码<br>爱折腾的全栈开发工程师<br>前端，后台，运维</p>
         <p class="profile-location"><i class="fa fa-map-marker"></i>中国 - 上海</p>
@@ -14,5 +14,5 @@
         </div>
     </div>
     <h3>微信订阅号</h3>
-    <img src="https://static.heleeos.com/blog-web/image/qrcode.jpg">
+    <img src="/image/qrcode.jpg">
 </div>

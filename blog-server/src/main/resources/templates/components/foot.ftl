@@ -4,7 +4,7 @@
                                                  target="_blank">kissaoe@gmail.com</a></p>
         <a class="beian-link" target="_blank"
            href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=41072102000352">
-            <img style="float: left;" src="https://static.heleeos.com/blog-web/image/beian.png"/>
+            <img style="float: left;" src="/image/beian.png"/>
             <p class="beian-title">豫公网安备 41072102000352 号</p>
         </a>
     </div>
