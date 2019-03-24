@@ -103,8 +103,8 @@ buildDockerImage(){
 runDockerImage(){
     # run image
     echo "\033[1;35m 1、执行镜像 \033[0m"
-    echo "#> docker run -it -d -p 5000:80 blog.heleeos.com java -jar /app/heleeos-service.jar > docker.cid"
-    docker run -it -d -p 5000:80 blog.heleeos.com java -jar /app/heleeos-service.jar > docker.cid
+    echo "#> docker run -it -d -p 5000:80 blog.heleeos.com > docker.cid"
+    docker run -it -d -p 5000:80 blog.heleeos.com > docker.cid
 }
 
 # 删除代码
@@ -137,7 +137,7 @@ done
 stopContainer
 downloadCode
 buildServer
-buildManager
+# buildManager
 buildDockerImage
 runDockerImage
 deleteCode
