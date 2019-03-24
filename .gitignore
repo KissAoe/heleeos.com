@@ -37,6 +37,7 @@ ehthumbs.db
 Thumbs.db
 
 # Eclipse generated files #
+######################
 .classpath
 .project
 .settings/
@@ -46,9 +47,15 @@ target/
 work/
 
 # Idea generated files #
+######################
 *.iml
 .idea/
 
-# Visual Studio Code # 
+# Visual Studio Code #
+######################
 .vscode/
 
+# process files #
+######################
+*.pid
+*.cid
