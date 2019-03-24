@@ -62,6 +62,7 @@
         and update_time = #{updateTime}
       </if>
     </where>
+    order by sort_index desc, create_time desc
   </select>
   <select id="countByDomain" resultType="long">
     select count(0) from t_blog

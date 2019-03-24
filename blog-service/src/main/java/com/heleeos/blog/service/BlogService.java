@@ -2,6 +2,8 @@ package com.heleeos.blog.service;
 
 import com.github.pagehelper.PageHelper;
 import com.heleeos.blog.dao.domain.Blog;
+import com.heleeos.blog.dao.domain.BlogContent;
+import com.heleeos.blog.dao.mapper.BlogContentMapper;
 import com.heleeos.blog.dao.mapper.BlogMapper;
 import com.heleeos.blog.util.NullUtil;
 import com.heleeos.blog.web.bean.PageInfo;
@@ -9,8 +11,6 @@ import com.heleeos.blog.web.request.QueryBlogRequest;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -30,6 +30,9 @@ public class BlogService {
 
     @Autowired
     private BlogMapper blogMapper;
+
+    @Autowired
+    private BlogContentMapper blogContentMapper;
 
 
     /**
@@ -116,6 +119,22 @@ public class BlogService {
             log.error(String.format("获取[博客文章(URL)]异常,原因:%s", e.getMessage()), e);
             return null;
         }
+    }
+
+    /**
+     * 获取文章内容
+     * @param blogId 博客ID
+     * @return 文章内容
+     */
+    public BlogContent getBlogContent(Integer blogId) {
+        BlogContent blogContent = new BlogContent();
+        blogContent.setBlogId(blogId);
+        List<BlogContent> blogContentList = blogContentMapper.selectByDomain(blogContent);
+        if (CollectionUtils.isNotEmpty(blogContentList)) {
+            return blogContentList.get(0);
+        }
+
+        return null;
     }
 
     /**
