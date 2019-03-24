@@ -50,13 +50,14 @@ downloadCode(){
     echo ""
 }
 
-# 部署服务层代码
-buildService(){
-    serviceDir="$workDir/blog-service"
-    if [ -a $serviceDir ]; then
+# 部署代码
+buildServer(){
+    serverDir="$workDir/blog-server"
+    console.log($serverDir)
+    if [ -a $serverDir ]; then
         echo "\033[1;35m 1、切换到工作目录 \033[0m"
-        echo "\033[1;34m #> cd $serviceDir \033[0m"
-        cd $serviceDir
+        echo "\033[1;34m #> cd $serverDir \033[0m"
+        cd $serverDir
         echo ""
 
         echo "\033[1;35m 2、打包服务代码 \033[0m"
@@ -86,10 +87,6 @@ buildManager(){
         echo ""
     fi
 }
-
-# buildWeb(){
-
-# }
 
 # 打包 docker 镜像文件
 buildDockerImage(){
@@ -140,7 +137,7 @@ done
 
 stopContainer
 downloadCode
-buildService
+buildServer
 buildManager
 buildDockerImage
 runDockerImage
