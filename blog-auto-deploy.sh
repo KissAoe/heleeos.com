@@ -53,7 +53,6 @@ downloadCode(){
 # 部署代码
 buildServer(){
     serverDir="$workDir/blog-server"
-    console.log($serverDir)
     if [ -a $serverDir ]; then
         echo "\033[1;35m 1、切换到工作目录 \033[0m"
         echo "\033[1;34m #> cd $serverDir \033[0m"
