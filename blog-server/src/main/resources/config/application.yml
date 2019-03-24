@@ -4,7 +4,7 @@ server:
 
 spring:
     datasource:
-        url: jdbc:mysql://127.0.0.1:3306/heleeos?useUnicode=true&characterEncoding=utf8
+        url: jdbc:mysql://localhost:3306/heleeos?useUnicode=true&characterEncoding=utf8
         username: blog
         password: blog123
         driver-class-name: com.mysql.jdbc.Driver
