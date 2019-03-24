@@ -26,7 +26,7 @@ public class BlogTitleInterceptor extends HandlerInterceptorAdapter {
 
     @Override
     public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView) {
-        if(Objects.equals(modelAndView.getViewName(), "blog")) {
+        if(modelAndView != null && Objects.equals(modelAndView.getViewName(), "blog")) {
             Blog blog = (Blog) modelAndView.getModel().get("blog");
             modelAndView.addObject("title", blog.getBlogTitle());
         }

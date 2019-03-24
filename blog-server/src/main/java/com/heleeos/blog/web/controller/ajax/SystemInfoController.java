@@ -27,6 +27,8 @@ public class SystemInfoController {
         systemInfo.setMemoryUsed(systemInfoFacade.getUsedMemory());
         systemInfo.setJvmInfo(systemInfoFacade.getJVMInfo());
         systemInfo.setMemoryInfo(systemInfoFacade.getMemoryInfo());
+        systemInfo.setEnv(System.getenv());
+        systemInfo.setPropertyNames(System.getProperties().stringPropertyNames());
         return ResultUtil.success(systemInfo);
     }
 }

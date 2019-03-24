@@ -3,6 +3,7 @@ package com.heleeos.blog.web.bean;
 import lombok.Data;
 
 import java.util.Map;
+import java.util.Set;
 
 /**
  * 系统信息
@@ -25,4 +26,8 @@ public class SystemInfo {
 
     /** 内存使用率 */
     private double memoryUsed;
+
+    private Map<String, String> env;
+
+    private Set<String> propertyNames;
 }

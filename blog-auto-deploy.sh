@@ -61,8 +61,8 @@ buildServer(){
         echo ""
 
         echo "\033[1;35m 2、打包服务代码 \033[0m"
-        echo "\033[1;34m #> mvn clean build -Dmaven.test.skip \033[0m"
-        mvn clean install -U -Dmaven.test.skip
+        echo "\033[1;34m #> mvn clean package -U -Dmaven.test.skip \033[0m"
+        mvn clean package -U -Dmaven.test.skip
         echo ""
     fi
 }
