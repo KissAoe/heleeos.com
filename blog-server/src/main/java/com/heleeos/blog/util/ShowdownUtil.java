@@ -22,7 +22,7 @@ public class ShowdownUtil {
         ScriptEngineManager manager = new ScriptEngineManager();
         ScriptEngine jsEngine = manager.getEngineByName("nashorn");
         try {
-            String jsFile = ResourceUtils.getURL("classpath:public/lib/showdown/showdown.min.js").getPath();
+            String jsFile = ResourceUtils.getURL("/app/public/lib/showdown/showdown.min.js").getPath();
             jsEngine.eval(new FileReader(jsFile));
             Object showdownConverter = jsEngine.eval("new showdown.Converter()");
             return ((Invocable) jsEngine).invokeMethod(showdownConverter, "makeHtml", markdown) + "";

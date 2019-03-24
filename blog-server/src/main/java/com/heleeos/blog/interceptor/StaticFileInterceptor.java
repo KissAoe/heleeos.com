@@ -30,9 +30,8 @@ public class StaticFileInterceptor extends HandlerInterceptorAdapter {
         String path = request.getServletPath();
         if(path.endsWith(".html")) {
             try {
-                File resources = new File(ResourceUtils.getURL("classpath:").getPath());
-                File file = new File(resources + "/static", path);
-                file.getParentFile().mkdirs();
+//                File resources = new File(ResourceUtils.getURL("classpath:").getPath());
+                File file = new File("/app/blog/static", path);
                 log.info("保存静态文件:{}", file.getAbsolutePath());
                 try (FileWriter fileWriter = new FileWriter(file)) {
                     Template template = configuration.getTemplate(modelAndView.getViewName() + ".ftl");
