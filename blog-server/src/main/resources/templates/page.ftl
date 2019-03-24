@@ -2,23 +2,27 @@
 <div class="container-fluid">
     <#include "components/left.ftl" />
     <div class="main col-xs-12 col-sm-9 col-md-9 col-lg-7">
-        <#list blogList as blog>
-            <div class="card">
-                <h1 class="title"><a href="/blog/${blog.displayUrl}.html">${blog.blogTitle}</a></h1>
-                <div class="meta">
-                    <div class="time"><i class="fa fa-calendar"></i>${blog.createTime?string('yyyy-MM-dd hh:mm:ss')}
+        <#if blogList??>
+            <#list blogList as blog>
+                <div class="card">
+                    <h1 class="title"><a href="/blog/${blog.displayUrl}.html">${blog.blogTitle}</a></h1>
+                    <div class="meta">
+                        <div class="time"><i class="fa fa-calendar"></i>${blog.createTime?string('yyyy-MM-dd hh:mm:ss')}
+                        </div>
+                        <div class="type" style="float:none"><i class="fa fa-folder"></i>${blog.blogType}</div>
                     </div>
-                    <div class="type" style="float:none"><i class="fa fa-folder"></i>${blog.blogType}</div>
+                    <div class="info">${blog.blogSummary}</div>
+                    <hr>
+                    <div class="tags"><i class="fa fa-tag"></i>${blog.blogTags}</div>
+                    <div class="readCount"><i class="fa fa-bookmark"></i>${blog.readCount}次</div>
+                    <#if (blog.sortIndex > 0) >
+                        <img class="tj" src="https://static.heleeos.com/blog-web/image/tj.png">
+                    </#if>
                 </div>
-                <div class="info">${blog.blogSummary}</div>
-                <hr>
-                <div class="tags"><i class="fa fa-tag"></i>${blog.blogTags}</div>
-                <div class="readCount"><i class="fa fa-bookmark"></i>${blog.readCount}次</div>
-                <#if (blog.sortIndex > 0) >
-                    <img class="tj" src="https://static.heleeos.com/blog-web/image/tj.png">
-                </#if>
-            </div>
-        </#list>
+            </#list>
+            <#else>
+                <p>内容为空</p>
+        </#if>
         <div class="page-nav">
             <#if (page > 1)>
                 <a class="page-number" href="/page/${page - 1}.html">« 上一页</a>
