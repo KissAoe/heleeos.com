@@ -1,7 +1,10 @@
 const path = require('path')
 const CleanWebpackPlugin = require('clean-webpack-plugin')
+const CopyWebpackPlugin = require('copy-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
-const Markdown2HtmlPlugin = require('./markdown2html.plugin.js')
+
+console.log(__dirname)
+console.log(path.resolve(__dirname, '../dist'))
 
 module.exports = {
   entry: {
@@ -9,15 +12,17 @@ module.exports = {
   },
   plugins: [
     new CleanWebpackPlugin(),
-    new HtmlWebpackPlugin({
-      title: '个人网站'
-    }),
-    new Markdown2HtmlPlugin()
+    new CopyWebpackPlugin([
+      { from: `assets/`, to: `static/` },
+      { from: `src/img`, to: `public/` }
+    ]),
+    new HtmlWebpackPlugin()
   ],
   output: {
     filename: '[name].bundle.js',
     chunkFilename: '[name].bundle.js',
     path: path.resolve(__dirname, '../dist')
+    // publicPath: 'https://image.heleeos.com/blog/'
   },
   resolve: {
     extensions: ['.tsx', '.ts', '.js']
