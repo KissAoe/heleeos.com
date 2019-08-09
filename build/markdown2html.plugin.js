@@ -1,7 +1,6 @@
 // const pluginName = 'MarkdownToHtmlPlugin'
 
 class MarkdownToHtmlPlugin {
-  options = {}
   constructor (options) {
     this.options = options
   }
