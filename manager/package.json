@@ -27,7 +27,7 @@
     "iview-area": "^1.5.16",
     "js-cookie": "^2.2.0",
     "rasterizehtml": "^1.2.4",
-    "showdown": "^1.8.6",
+    "showdown": "^1.9.1",
     "simplemde": "^1.11.2",
     "sortablejs": "^1.7.0",
     "tinymce": "^4.7.4",
